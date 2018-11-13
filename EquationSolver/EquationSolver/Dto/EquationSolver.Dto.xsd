@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Common"
+    targetNamespace="http://tempuri.org/Common.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Common.xsd"
+    xmlns:mstns="http://tempuri.org/Common.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="EquationProject">
+    <xs:annotation>
+      <xs:documentation>The container for an equation project, encapsulates all the equations and variables</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Title" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>The logical title of the Equation Project</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Settings" type="SolverSettings">
+          <xs:annotation>
+            <xs:documentation>The settings to use for solving settings</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Audit" type="AuditInfo" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Audit information to track changes to this object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Variables">
+          <xs:annotation>
+            <xs:documentation>Collection of Variables</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Variable" type="Variable" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Equations">
+          <xs:annotation>
+            <xs:documentation>Collection of Equations</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Equation" type="Equation" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Variable">
+    <xs:annotation>
+      <xs:documentation>Value object to use in equations</xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="StringValue" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Equation">
+    <xs:annotation>
+      <xs:documentation>An aggregation of objects that comprise an equation and how it is executed</xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="UseExpression" type="xs:string"/>
+      <xs:element name="Expression" type="xs:string"/>
+      <xs:element name="Target" type="xs:string"/>
+      <xs:element name="MoreEquations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Equation" type="Equation" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="SolverSettings">
+    <xs:annotation>
+      <xs:documentation>Settings used in solving equations</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="AuditInfo">
+    <xs:all>
+      <xs:element name="CreatedOn" type="xs:dateTime"/>
+      <xs:element name="CreatedBy" type="xs:string"/>
+      <xs:element name="ModifiedOn" type="xs:dateTime"/>
+      <xs:element name="ModifiedBy" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="VariableTypes">
+    <xs:annotation>
+      <xs:documentation>Types of variables to be used in the Equation Solver</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NONE">
+        <xs:annotation>
+          <xs:documentation>The variable cannot be recognized as any type</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TEXT">
+        <xs:annotation>
+          <xs:documentation>The variable is a string (text)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BOOL">
+        <xs:annotation>
+          <xs:documentation>The variable is a boolean</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NUMBER">
+        <xs:annotation>
+          <xs:documentation>The variable is a Number</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DATE">
+        <xs:annotation>
+          <xs:documentation>Date type.  Either long date or short date format.  Current Culture is used.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
