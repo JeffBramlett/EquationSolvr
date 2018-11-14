@@ -132,6 +132,7 @@ namespace EquationSolver
         #endregion
 
         #region Number munging
+     
         /// <summary>
         /// Outputs the integer equivalent of the string
         /// </summary>

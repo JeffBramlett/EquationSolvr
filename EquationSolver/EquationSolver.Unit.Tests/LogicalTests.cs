@@ -57,6 +57,41 @@ namespace EquationSolver.Unit.Tests
             Assert.IsTrue(solver.Variables["T3"].BoolValue);
             Assert.IsFalse(solver.Variables["T4"].BoolValue);
         }
+        [TestMethod]
+        public void StringComparisonTest()
+        {
+            EquationProject project = new EquationProject()
+            {
+                Title = "Unit Project",
+                Variables = new List<Variable>()
+                {
+                    new Variable(){ Name = "One", StringValue = "Test1"},
+                    new Variable(){ Name = "Two", StringValue = "Test2"},
+                },
+                Equations = new List<Equation>()
+                {
+                    new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "One = Two",
+                        Target = "T1"
+                    },
+                    new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "One != Two",
+                        Target = "T2"
+                    }
+                }
+            };
+
+            IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
+            solver.SolveEquations();
+
+            Assert.IsFalse(solver.Variables["T1"].BoolValue);
+            Assert.IsFalse(solver.Variables["T2"].BoolValue);
+        }
+
 
         [TestMethod]
         public void CombinedComparisonAndLogicalTest()
