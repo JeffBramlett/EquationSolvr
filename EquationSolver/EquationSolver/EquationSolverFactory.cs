@@ -33,6 +33,11 @@ namespace EquationSolver
         #region Publics
         public IEquationSolver CreateEquationSolver(EquationProject equationProject, VariableProvider varProvider = null)
         {
+            if(varProvider == null)
+            {
+                varProvider = new VariableProvider();
+            }
+
             foreach(Variable vr in equationProject.Variables)
             {
                 varProvider.SetVariable(vr.Name, vr.StringValue);

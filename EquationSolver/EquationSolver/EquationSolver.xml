@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EquationSolver</name>
+    </assembly>
+    <members>
+        <member name="T:EquationSolver.Dto.EquationProject">
+            <summary>
+            The container for an equation project, encapsulates all the equations and variables
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.EquationProject.#ctor">
+            <summary>
+            EquationProject class constructor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.Equation.#ctor">
+            <summary>
+            Equation class constructor
+            </summary>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.NONE">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.TEXT">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.BOOL">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.NUMBER">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.DATE">
+            <remarks/>
+        </member>
+        <member name="T:EquationSolver.ExpressionSolver.ResultType">
+            <summary>
+            Enumeration of Result Types
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ExpressionSolver.ResultType.NONE">
+            <summary>
+            Default enum value
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ExpressionSolver.ResultType.BOOL">
+            <summary>
+            ResultType as Boolean
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ExpressionSolver.ResultType.NUMBER">
+            <summary>
+            ResultType as Number
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ExpressionSolver.ResultType.STRING">
+            <summary>
+            ResultType as String
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ExpressionSolver.resType">
+            <summary>
+            The Result type of the expression.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.ExpressionSolver.TypeOfResult">
+            <summary>
+            The enumeration type of the result.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.ExpressionSolver.Errors">
+            <summary>
+            Any parsing errors that may have occurred.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.ExpressionSolver.Result">
+            <summary>
+            The result as a double
+            </summary>
+        </member>
+        <member name="P:EquationSolver.ExpressionSolver.BoolResult">
+            <summary>
+            The boolean result of the expression
+            </summary>
+        </member>
+        <member name="P:EquationSolver.ExpressionSolver.StringResult">
+            <summary>
+            The string of the result of the expression.
+            </summary>
+            <remarks>More need here .... </remarks>
+        </member>
+        <member name="M:EquationSolver.ExpressionSolver.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.ExpressionSolver.Resolve(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            This is the method to call to run the expression machine.
+            </summary>
+            <param name="input">the string that is the expression</param>
+            <param name="variableProvider">the variable engine to get variables from</param>
+        </member>
+        <member name="M:EquationSolver.ExpressionSolver.Compare(System.String)">
+            <summary>
+            Loads and resolves a comparison string
+            </summary>
+            <param name="input">the expression as a string</param>
+            <returns>the result of the comparison (true or false)</returns>
+        </member>
+        <member name="F:EquationSolver.Utilities.d1">
+            <summary>
+            For debug timing tests
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Utilities.#ctor">
+            <summary>
+            Useless constructor.
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Utilities.RelativeToAbsolutePath(System.String@,System.String,System.String)">
+            <summary>
+            Outputs the relative path supplied as an absolute path using the basepath supplied.
+            </summary>
+            <param name="sPath">The path to output</param>
+            <param name="sBasepath">the base path to compare to</param>
+            <param name="sRelpath">the relative path</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.AbsPathMunge(System.String@,System.String,System.String)">
+            <summary>
+            Ouputs the relative path from the absolute path supplied
+            </summary>
+            <param name="sPath">the output path</param>
+            <param name="sAbsPath">the absolute path</param>
+            <param name="sBasepath">the base path to compare to</param>
+            <returns>true is successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.MakeDateFromString(System.DateTime@,System.String)">
+            <summary>
+            Ouputs a DateTime object from the string supplied.
+            </summary>
+            <param name="oDateTime">the DateTime object ouput</param>
+            <param name="sDate">the string of the date</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.StringToInteger(System.String,System.Int32@)">
+            <summary>
+            Outputs the integer equivalent of the string
+            </summary>
+            <param name="strI">the Integer string</param>
+            <param name="iNumber">the int output</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.StringToDouble(System.String,System.Double@)">
+            <summary>
+            Outputs the double value of the string supplied
+            </summary>
+            <param name="str">the string of the double</param>
+            <param name="dNumber">the double ouput</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.StringToDecimal(System.String,System.Decimal@)">
+            <summary>
+            Outputs the double value of the string supplied
+            </summary>
+            <param name="str">the string of the double</param>
+            <param name="dNumber">the double ouput</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsANumber(System.String)">
+            <summary>
+            Verifies that the string is composed of digits and signs exclusively.
+            </summary>
+            <param name="str">string to check</param>
+            <returns>True if it is a number, false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsPositiveWholeNumber(System.String)">
+            <summary>
+            Determines if the string is a representation of a whole number greater than zero
+            </summary>
+            <param name="str">the string of the number</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.NormalizeXML(System.String)">
+            <summary>
+            Converts characters reserved for XML syntax to equvalent values that can be used by XML.
+            </summary>
+            <example>
+            Utilities.NormalizeXML("<SomeXmlNode expression="5&lt;6"></SomeXmlNode><br/>
+            Outputs<br/>
+            5&lt;6<br/>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.MakeAppropriateCDATA(System.String)">
+            <summary>
+            Checks for characters reserved for XML Syntax and encloses the string in a CDATA section.
+            </summary>
+            <param name="sString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.CopyLocation(System.String,System.String)">
+            <summary>
+            Copies file and folders from the source location to the destination location.
+            </summary>
+            <param name="src">the source location</param>
+            <param name="dest">the destination location</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.CopyDirectory(System.String,System.String)">
+            <summary>
+            Copies the directory contents from the source directory to the destination directory.
+            </summary>
+            <param name="srcDir">the source directory</param>
+            <param name="destDir">the destination directory</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.CopySubDirectories(System.String,System.String)">
+            <summary>
+            Copies all subdirectories from the source directory to the destination directory
+            </summary>
+            <param name="srcParentDir">the "Parent" directory</param>
+            <param name="destDir">the destination directory</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsStringBoolean(System.Boolean@,System.String)">
+            <summary>
+            Determines if the supplied string corresponds to a word that means true or false.
+            </summary>
+            <param name="bIsTrue">Ouput of boolean resolved from the string</param>
+            <param name="str">string to examine</param>
+            <returns>true if successful and false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsStringTrue(System.String)">
+            <summary>
+            Determines if the supplied string represents a True boolean
+            </summary>
+            <param name="str">the string of the boolean</param>
+            <returns>true if the string is correct for true and false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.SetTimeStart">
+            <summary>
+            Sets a starting TimeDate object.              
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Utilities.GetElaspedTime">
+            <summary>
+            returns the elasped time since the SetTimeStart() has been called.
+            </summary>
+            <returns>the elasped time in milliseconds</returns>
+        </member>
+    </members>
+</doc>

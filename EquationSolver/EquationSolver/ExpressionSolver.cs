@@ -16,13 +16,6 @@ namespace EquationSolver
         const int DEL = 2;
         const int NUM = 3;
 
-        public enum CalculationModes
-        {
-            ByDecimal,
-            ByDouble
-        }
-
-
         /// <summary>
         /// Enumeration of Result Types
         /// </summary>
@@ -37,9 +30,9 @@ namespace EquationSolver
             /// </summary>
             BOOL,
             /// <summary>
-            /// ResultType as Double
+            /// ResultType as Number
             /// </summary>
-            DOUBLE,
+            NUMBER,
             /// <summary>
             /// ResultType as String
             /// </summary>
@@ -55,15 +48,13 @@ namespace EquationSolver
         int _pos = 0;
         char[] _token;
 
-        double _resultAsDouble;
+        double _resultXXXAsDouble;
         decimal _resultAsDecimal;
         bool _bResult;
         string _strResult;
 
         bool _isStringCompare = false;
         bool _noOperator = false;
-
-        CalculationModes _calculationMode = CalculationModes.ByDecimal;
 
         /// <summary>
         /// The Result type of the expression.
@@ -74,11 +65,6 @@ namespace EquationSolver
         #endregion
         
         #region Properties
-        public CalculationModes CalculationMode
-        {
-            get { return _calculationMode; }
-            set { _calculationMode = value; }
-        }
         /// <summary>
         /// The enumeration type of the result.
         /// </summary>
@@ -104,7 +90,7 @@ namespace EquationSolver
         /// <summary>
         /// The result as a double
         /// </summary>
-        public double Result
+        public decimal Result
         {
             get
             {
@@ -119,9 +105,9 @@ namespace EquationSolver
                         return 1;
                     }
                 }
-                else if (resType == ResultType.DOUBLE)
+                else if (resType == ResultType.NUMBER)
                 {
-                    return _resultAsDouble;
+                    return _resultAsDecimal;
                 }
                 else if (resType == ResultType.STRING)
                 {
@@ -145,9 +131,9 @@ namespace EquationSolver
                 {
                     return _bResult;
                 }
-                else if (resType == ResultType.DOUBLE)
+                else if (resType == ResultType.NUMBER)
                 {
-                    if (_resultAsDouble > 0)
+                    if (_resultAsDecimal > 0)
                     {
                         return true;
                     }
@@ -186,9 +172,9 @@ namespace EquationSolver
                 {
                     return "" + _bResult;
                 }
-                else if (resType == ResultType.DOUBLE)
+                else if (resType == ResultType.NUMBER)
                 {
-                    return "" + _resultAsDouble;
+                    return "" + _resultAsDecimal;
                 }
                 else if (resType == ResultType.STRING)
                 {
@@ -208,7 +194,7 @@ namespace EquationSolver
         /// </summary>
         public ExpressionSolver()
         {
-            _resultAsDouble = 0;
+            _resultAsDecimal = 0;
             _bResult = false;
             _strResult = "";
         }
@@ -291,13 +277,13 @@ namespace EquationSolver
         #endregion
 
         #region Math functions
-        private double ToDegrees(double x)
+        private decimal ToDegrees(double x)
         {
-            return (180.0 / Math.PI) * x;
+            return Convert.ToDecimal((180.0 / Math.PI) * x);
         }
-        private double ToRadians(double x)
+        private decimal ToRadians(double x)
         {
-            return (Math.PI / 180.0) * x;
+            return Convert.ToDecimal((Math.PI / 180.0) * x);
         }
         #endregion
 
@@ -333,14 +319,14 @@ namespace EquationSolver
             }
             else if (HasOperator(sCompCheck))
             {
-                resType = ResultType.DOUBLE;
+                resType = ResultType.NUMBER;
             }
             else
             {
                 double d;
                 if (Utilities.StringToDouble(input, out d))
                 {
-                    resType = ResultType.DOUBLE;
+                    resType = ResultType.NUMBER;
                 }
                 else
                 {
@@ -355,7 +341,7 @@ namespace EquationSolver
         {
             try
             {
-                _resultAsDouble = 0;
+                _resultAsDecimal = 0;
                 _pos = 0;
                 _strResult = "";
                 _bResult = false;
@@ -385,9 +371,9 @@ namespace EquationSolver
                         Parse();
                         if (_type == NUM && Utilities.IsANumber(e))
                         {
-                            _resultAsDouble = double.Parse(e);
-                            _strResult = "" + _resultAsDouble;
-                            if (_resultAsDouble < 0)
+                            _resultAsDecimal = decimal.Parse(e);
+                            _strResult = "" + _resultAsDecimal;
+                            if (_resultAsDecimal < 0)
                             {
                                 _bResult = false;
                             }
@@ -399,7 +385,7 @@ namespace EquationSolver
                         else
                         {
                             _strResult = e;
-                            _resultAsDouble = 0;
+                            _resultAsDecimal = 0;
                             if (_strResult.Length > 0)
                             {
                                 _bResult = true;
@@ -415,14 +401,14 @@ namespace EquationSolver
                         if (var.VariableType == VariableTypes.TEXT)
                         {
                             _isStringCompare = true;
-                            _resultAsDouble = var.DoubleValue;
+                            _resultAsDecimal = var.DecimalValue;
                             _bResult = var.BoolValue;
                             _strResult = var.StringValue;
                         }
                         else
                         {
                             _isStringCompare = false;
-                            _resultAsDouble = var.DoubleValue;
+                            _resultAsDecimal = var.DecimalValue;
                             _bResult = var.BoolValue;
                             _strResult = var.StringValue;
                         }
@@ -434,12 +420,12 @@ namespace EquationSolver
                     _noOperator = false;
                     if (ProcessComparison(e))
                     {
-                        _resultAsDouble = 1;
+                        _resultAsDecimal = 1;
                         _bResult = true;
                     }
                     else
                     {
-                        _resultAsDouble = 0;
+                        _resultAsDecimal = 0;
                         _bResult = false;
                     }
                 }
@@ -449,12 +435,12 @@ namespace EquationSolver
                     _noOperator = false;
                     if (Compare(e))
                     {
-                        _resultAsDouble = 1;
+                        _resultAsDecimal = 1;
                         _bResult = true;
                     }
                     else
                     {
-                        _resultAsDouble = 0;
+                        _resultAsDecimal = 0;
                         _bResult = false;
                     }
                 }
@@ -472,7 +458,7 @@ namespace EquationSolver
                         while (_pos < _expr.Length - 1)
                         {
                             Parse();
-                            Assignment(ref _resultAsDouble);
+                            Assignment(ref _resultAsDecimal);
                         }
                     }
                 }
@@ -514,10 +500,10 @@ namespace EquationSolver
                     string rstr = input.Substring(ndx + 2);
 
                     Evaluate(lstr);
-                    double lval = _resultAsDouble;
+                    decimal lval = _resultAsDecimal;
 
                     Evaluate(rstr);
-                    double rval = _resultAsDouble;
+                    decimal rval = _resultAsDecimal;
 
                     if (lval <= rval)
                     {
@@ -535,10 +521,10 @@ namespace EquationSolver
                     string rstr = input.Substring(ndx + 2);
 
                     Evaluate(lstr);
-                    double lval = _resultAsDouble;
+                    decimal lval = _resultAsDecimal;
 
                     Evaluate(rstr);
-                    double rval = _resultAsDouble;
+                    decimal rval = _resultAsDecimal;
 
                     if (lval >= rval)
                     {
@@ -573,10 +559,10 @@ namespace EquationSolver
                     else
                     {
                         Evaluate(lstr);
-                        double lval = _resultAsDouble;
+                        decimal lval = _resultAsDecimal;
 
                         Evaluate(rstr);
-                        double rval = _resultAsDouble;
+                        decimal rval = _resultAsDecimal;
 
                         if (lval != rval)
                         {
@@ -595,10 +581,10 @@ namespace EquationSolver
                     string rstr = input.Substring(ndx + 1);
 
                     Evaluate(lstr);
-                    double lval = _resultAsDouble;
+                    decimal lval = _resultAsDecimal;
 
                     Evaluate(rstr);
-                    double rval = _resultAsDouble;
+                    decimal rval = _resultAsDecimal;
 
                     if (lval < rval)
                     {
@@ -616,10 +602,10 @@ namespace EquationSolver
                     string rstr = input.Substring(ndx + 1);
 
                     Evaluate(lstr.Trim());
-                    double lval = _resultAsDouble;
+                    decimal lval = _resultAsDecimal;
 
                     Evaluate(rstr.Trim());
-                    double rval = _resultAsDouble;
+                    decimal rval = _resultAsDecimal;
 
                     if (lval > rval)
                     {
@@ -680,7 +666,7 @@ namespace EquationSolver
                     {
 
                         Evaluate(lstr);
-                        double lval = _resultAsDouble;
+                        decimal lval = _resultAsDecimal;
                         if (_isStringCompare)
                         {
                             if (var.StringValue.CompareTo(rstr) == 0)
@@ -695,7 +681,7 @@ namespace EquationSolver
                         else
                         {
                             Evaluate(rstr);
-                            double rval = _resultAsDouble;
+                            decimal rval = _resultAsDecimal;
 
                             if (lval == rval)
                             {
@@ -885,7 +871,7 @@ namespace EquationSolver
             }
         }
 
-        private void Assignment(ref double r)
+        private void Assignment(ref decimal r)
         {
             try
             {
@@ -897,12 +883,12 @@ namespace EquationSolver
             }
         }
 
-        private void AddOrSubtract(ref double r)
+        private void AddOrSubtract(ref decimal r)
         {
             try
             {
                 char o;
-                double d = 0;
+                decimal d = 0;
 
                 MultiplyDivideOrMod(ref r);
                 while ((o = _token[0]) == '+' || o == '-')
@@ -922,12 +908,12 @@ namespace EquationSolver
             }
         }
 
-        private void MultiplyDivideOrMod(ref double r)
+        private void MultiplyDivideOrMod(ref decimal r)
         {
             try
             {
                 char o;
-                double d = 0;
+                decimal d = 0;
 
                 PowerUp(ref r);
                 while ((o = _token[0]) == '*' || o == '/' || o == '%')
@@ -938,14 +924,10 @@ namespace EquationSolver
                         r = r * d;
                     else if (o == '/')
                     {
-                        //if( t == 0 )
-                        //ERR( E_DIVZERO );
                         r = r / d;
                     }
                     else if (o == '%')
                     {
-                        //if( t == 0 )
-                        //ERR( E_DIVZERO );
                         r = r % d;
                     }
                 }
@@ -956,18 +938,20 @@ namespace EquationSolver
             }
         }
 
-        private void PowerUp(ref double r)
+        private void PowerUp(ref decimal r)
         {
             try
             {
-                double d = 0;
+                decimal d = 0;
 
                 PlusOrMinus(ref r);
                 if (_token[0] == '^')
                 {
                     Parse();
                     PlusOrMinus(ref d);
-                    r = Math.Pow(r, d);
+                    double dr = Convert.ToDouble(r);
+                    double dd = Convert.ToDouble(d);
+                    r = Convert.ToDecimal(Math.Pow(dr, dd));
                 }
             }
             catch (Exception e)
@@ -976,7 +960,7 @@ namespace EquationSolver
             }
         }
 
-        private void PlusOrMinus(ref double r)
+        private void PlusOrMinus(ref decimal r)
         {
             try
             {
@@ -997,7 +981,7 @@ namespace EquationSolver
             }
         }
 
-        private void Literal(ref double r)
+        private void Literal(ref decimal r)
         {
             try
             {
@@ -1012,7 +996,7 @@ namespace EquationSolver
                     if (_type == NUM)
                     {
                         string p = new String(_token);
-                        r = double.Parse(p);
+                        r = decimal.Parse(p);
                         Parse();
                     }
                     else if (_type == VAR)
@@ -1025,9 +1009,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Sin(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Sin(ds));
                                     Parse();
                                     break;
                                 }
@@ -1035,9 +1020,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Cos(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Cos(ds));
                                     Parse();
                                     break;
                                 }
@@ -1045,9 +1031,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Tan(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Tan(ds));
                                     Parse();
                                     break;
                                 }
@@ -1055,9 +1042,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Asin(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Asin(ds));
                                     Parse();
                                     break;
                                 }
@@ -1065,9 +1053,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Acos(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Acos(ds));
                                     Parse();
                                     break;
                                 }
@@ -1075,9 +1064,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Atan(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Atan(ds));
                                     Parse();
                                     break;
                                 }
@@ -1085,9 +1075,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Sinh(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Sinh(ds));
                                     Parse();
                                     break;
                                 }
@@ -1095,9 +1086,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Cosh(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Cosh(ds));
                                     Parse();
                                     break;
                                 }
@@ -1105,9 +1097,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Tanh(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Tanh(ds));
                                     Parse();
                                     break;
                                 }
@@ -1115,9 +1108,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Exp(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Exp(ds));
                                     Parse();
                                     break;
                                 }
@@ -1125,9 +1119,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Log(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Log(ds));
                                     Parse();
                                     break;
                                 }
@@ -1135,9 +1130,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Log10(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Log10(ds));
                                     Parse();
                                     break;
                                 }
@@ -1145,9 +1141,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Sqrt(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Sqrt(ds));
                                     Parse();
                                     break;
                                 }
@@ -1155,9 +1152,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Floor(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Floor(ds));
                                     Parse();
                                     break;
                                 }
@@ -1165,9 +1163,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Ceiling(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Ceiling(ds));
                                     Parse();
                                     break;
                                 }
@@ -1175,9 +1174,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = Math.Abs(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = Convert.ToDecimal(Math.Abs(ds));
                                     Parse();
                                     break;
                                 }
@@ -1186,9 +1186,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = ToDegrees(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = ToDegrees(ds);
                                     Parse();
                                     break;
                                 }
@@ -1196,9 +1197,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s = 0;
+                                    decimal s = 0;
                                     Assignment(ref s);
-                                    r = ToRadians(s);
+                                    double ds = Convert.ToDouble(s);
+                                    r = ToRadians(ds);
                                     Parse();
                                     break;
                                 }
@@ -1206,10 +1208,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s1 = 0;
+                                    decimal s1 = 0;
                                     Assignment(ref s1);
                                     Parse();
-                                    double s2 = 0;
+                                    decimal s2 = 0;
                                     Assignment(ref s2);
                                     Parse();
                                     r = Math.Min(s1, s2);
@@ -1219,10 +1221,10 @@ namespace EquationSolver
                                 {
                                     Parse();
                                     Parse();
-                                    double s1 = 0;
+                                    decimal s1 = 0;
                                     Assignment(ref s1);
                                     Parse();
-                                    double s2 = 0;
+                                    decimal s2 = 0;
                                     Assignment(ref s2);
                                     Parse();
                                     r = Math.Max(s1, s2);
@@ -1231,7 +1233,7 @@ namespace EquationSolver
                             default:
                                 {
                                     string v = new String(_token);
-                                    r = _varProvider[v].DoubleValue;
+                                    r = _varProvider[v].DecimalValue;
                                     break;
                                 }
                         }
