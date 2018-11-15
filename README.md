@@ -1,14 +1,17 @@
 # EquationSolvr
-Solve Equations Expressed as strings, branch equations for custom evaluations.  Equations can be mathmatical, boolean/comparison, with logical ANDs and ORs.  The libray is built with .Net Standard.  It uses a forward only parser for expressions so it is ver fast and since it is small too it is well suited to mobile applications that get the equations from a service the application applying values to variables in the equation.
+Solve Equations Expressed as strings, branch equations for custom evaluations.  Equations can be mathmatical, boolean/comparison, with logical ANDs and ORs. 
+
+The libray is built with .Net Standard.  It uses a forward only parser for expressions so it is very fast and since it is small it is well suited to mobile applications that get the equations from a service the application applying values to variables in the equation.
 
 Calculation in Expressions follow the common order of operations (PEMDAS) (see: https://study.com/academy/lesson/order-of-operations.html)
 
 Note:  This library supports parentheses and nested parentheses
 
 To use:
-1. Create/load and EquationProject
+1. Create/load an EquationProject
 2. Use EquationSolverFactory to build and return the IEquationSolver
-3. Use/review Variables by name
+3. Solve the equations
+4. Use/review Variables by name
 
 ## Parts of an Equation
 *UseExpression* - a string expression that must evaluate to a true or false.  If this UseExpression evaluates to true then the equation and the inner equations are executed.
