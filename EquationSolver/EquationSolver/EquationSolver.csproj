@@ -11,6 +11,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>This is a reworked project from my original at: https://www.codeproject.com/Articles/15395/Use-Rules-In-Your-Applications.</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
