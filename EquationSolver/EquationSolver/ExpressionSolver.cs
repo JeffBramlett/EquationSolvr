@@ -1230,6 +1230,20 @@ namespace EquationSolver
                                     r = Math.Max(s1, s2);
                                     break;
                                 }
+                            case "round":
+                                {
+                                    Parse();
+                                    Parse();
+                                    decimal s1 = 0;
+                                    Assignment(ref s1);
+                                    Parse();
+                                    decimal s2 = 0;
+                                    Assignment(ref s2);
+                                    Parse();
+                                    int d2 = Convert.ToInt32(Math.Round(s2));
+                                    r = Math.Round(s1, d2);
+                                    break;
+                                }
                             default:
                                 {
                                     string v = new String(_token);

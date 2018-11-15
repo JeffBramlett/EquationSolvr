@@ -4,16 +4,17 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RepositoryUrl>https://github.com/JeffBramlett/EquationSolvr</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>equations,expressions,math,library</PackageTags>
+    <PackageTags>equations,formulas,expressions,math,library</PackageTags>
     <Description>.NET Standard Library to solve equations expressed as strings with variables, including boolean branching and nested equation trees using forward-only parsing (very fast).  Functions include common math, trigonometry and common functions. Extremely easy to use.</Description>
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>This is a reworked project from my original at: https://www.codeproject.com/Articles/15395/Use-Rules-In-Your-Applications.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added math function round(n, d) where n = the number to round and d is the number of decimal places.</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

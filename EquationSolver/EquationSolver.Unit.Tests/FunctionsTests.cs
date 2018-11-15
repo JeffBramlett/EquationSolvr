@@ -9,47 +9,26 @@ namespace EquationSolver.Unit.Tests
     public class FunctionsTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void RoundingTest()
         {
             EquationProject project = new EquationProject()
             {
-                Title = "Mulitply Divide Project",
+                Title = "Project",
                 Equations = new List<Equation>()
                 {
                     new Equation()
                     {
                         UseExpression = "true",
-                        Expression = "2 * 1",
+                        Expression = "round(123.456789, 2)",
                         Target = "T1"
                     },
-                    new Equation()
-                    {
-                        UseExpression = "true",
-                        Expression = "4 / 2",
-                        Target = "T2"
-                    },
-                    new Equation()
-                    {
-                        UseExpression = "true",
-                        Expression = "(2 * 2) - (4 / 2)",
-                        Target = "T3"
-                    },
-                    new Equation()
-                    {
-                        UseExpression = "true",
-                        Expression = "(2 * 4) / (2 * 2)",
-                        Target = "T4"
-                    }
                 }
             };
 
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(2, solver.Variables["T1"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T2"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T3"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T4"].DecimalValue);
+            Assert.AreEqual(123.46, solver.Variables["T1"].DoubleValue);
         }
     }
 }
