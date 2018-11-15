@@ -9,41 +9,40 @@ To use:
 
 
 Example:
-'''
-EquationProject project = new EquationProject()
-{
-    Title = "Mulitply Divide Project",
-    Equations = new List<Equation>()
+
+    EquationProject project = new EquationProject()
     {
-        new Equation()
+        Title = "Mulitply Divide Project",
+        Equations = new List<Equation>()
         {
-            UseExpression = "true",
-            Expression = "2 * 1",
-            Target = "T1"
-        },
-        new Equation()
-        {
-            UseExpression = "true",
-            Expression = "4 / 2",
-            Target = "T2"
-        },
-        new Equation()
-        {
-            UseExpression = "true",
-            Expression = "(2 * 2) - (4 / 2)",
-            Target = "T3"
-        },
-        new Equation()
-        {
-            UseExpression = "true",
-            Expression = "(2 * 4) / (2 * 2)",
-            Target = "T4"
+            new Equation()
+            {
+                UseExpression = "true",
+                Expression = "2 * 1",
+                Target = "T1"
+            },
+            new Equation()
+            {
+                UseExpression = "true",
+                Expression = "4 / 2",
+                Target = "T2"
+            },
+            new Equation()
+            {
+                UseExpression = "true",
+                Expression = "(2 * 2) - (4 / 2)",
+                Target = "T3"
+            },
+            new Equation()
+            {
+                UseExpression = "true",
+                Expression = "(2 * 4) / (2 * 2)",
+                Target = "T4"
+            }
         }
-    }
-};
+    };
 
-IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
-solver.SolveEquations();
+    IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
+    solver.SolveEquations();
 
-var myCalculatedDecimal = solver.Variables["T1"].DecimalValue
-'''
+    var myCalculatedDecimal = solver.Variables["T1"].DecimalValue
