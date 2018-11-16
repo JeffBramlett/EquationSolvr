@@ -146,5 +146,42 @@ namespace EquationSolver.Unit.Tests
             Assert.AreEqual(2, solver.Variables["T4"].DecimalValue);
         }
 
+        [TestMethod]
+        public void QuadraticEquationTest()
+        {
+            EquationProject additionProject = new EquationProject()
+            {
+                Title = "Unit Project",
+                Variables = new List<Variable>()
+                {
+                    new Variable(){ Name = "a", StringValue = "1"},
+                    new Variable(){ Name = "b", StringValue = "3"},
+                    new Variable(){ Name = "c", StringValue = "-4"}
+                },
+                Equations = new List<Equation>()
+                {
+                    new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "((b*-1) - sqrt(b^2 - 4*a*c))/(2*a)",
+                        Target = "X1"
+                    },
+                    new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "((b*-1) + sqrt(b^2 - 4*a*c))/(2*a)",
+                        Target = "X2"
+                    }
+
+                }
+            };
+
+            IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(additionProject);
+            solver.SolveEquations();
+
+            Assert.AreEqual(-4, solver.Variables["X1"].DecimalValue);
+            Assert.AreEqual(1, solver.Variables["X2"].DecimalValue);
+        }
+
     }
 }

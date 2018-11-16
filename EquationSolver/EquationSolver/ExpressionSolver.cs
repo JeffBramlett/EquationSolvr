@@ -895,7 +895,6 @@ namespace EquationSolver
                 {
                     Parse();
                     MultiplyDivideOrMod(ref d);
-
                     if (o == '+')
                         r = r + d;
                     else if (o == '-')
@@ -973,7 +972,9 @@ namespace EquationSolver
                 }
                 Literal(ref r);
                 if (o == '-')
+                {
                     r = -r;
+                }
             }
             catch (Exception e)
             {
@@ -1013,7 +1014,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Sin(ds));
-                                    Parse();
                                     break;
                                 }
                             case "cos":
@@ -1024,7 +1024,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Cos(ds));
-                                    Parse();
                                     break;
                                 }
                             case "tan":
@@ -1035,7 +1034,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Tan(ds));
-                                    Parse();
                                     break;
                                 }
                             case "asin":
@@ -1046,7 +1044,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Asin(ds));
-                                    Parse();
                                     break;
                                 }
                             case "acos":
@@ -1057,7 +1054,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Acos(ds));
-                                    Parse();
                                     break;
                                 }
                             case "atan":
@@ -1068,7 +1064,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Atan(ds));
-                                    Parse();
                                     break;
                                 }
                             case "sinh":
@@ -1079,7 +1074,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Sinh(ds));
-                                    Parse();
                                     break;
                                 }
                             case "cosh":
@@ -1090,7 +1084,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Cosh(ds));
-                                    Parse();
                                     break;
                                 }
                             case "tanh":
@@ -1101,7 +1094,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Tanh(ds));
-                                    Parse();
                                     break;
                                 }
                             case "exp":
@@ -1112,7 +1104,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Exp(ds));
-                                    Parse();
                                     break;
                                 }
                             case "log":
@@ -1123,7 +1114,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Log(ds));
-                                    Parse();
                                     break;
                                 }
                             case "log10":
@@ -1134,7 +1124,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Log10(ds));
-                                    Parse();
                                     break;
                                 }
                             case "sqrt":
@@ -1145,7 +1134,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Sqrt(ds));
-                                    Parse();
                                     break;
                                 }
                             case "floor":
@@ -1156,7 +1144,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Floor(ds));
-                                    Parse();
                                     break;
                                 }
                             case "ceil":
@@ -1167,7 +1154,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Ceiling(ds));
-                                    Parse();
                                     break;
                                 }
                             case "abs":
@@ -1178,7 +1164,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = Convert.ToDecimal(Math.Abs(ds));
-                                    Parse();
                                     break;
                                 }
 
@@ -1190,7 +1175,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = ToDegrees(ds);
-                                    Parse();
                                     break;
                                 }
                             case "rad":
@@ -1201,7 +1185,6 @@ namespace EquationSolver
                                     Assignment(ref s);
                                     double ds = Convert.ToDouble(s);
                                     r = ToRadians(ds);
-                                    Parse();
                                     break;
                                 }
                             case "min":
@@ -1213,7 +1196,6 @@ namespace EquationSolver
                                     Parse();
                                     decimal s2 = 0;
                                     Assignment(ref s2);
-                                    Parse();
                                     r = Math.Min(s1, s2);
                                     break;
                                 }
@@ -1226,7 +1208,6 @@ namespace EquationSolver
                                     Parse();
                                     decimal s2 = 0;
                                     Assignment(ref s2);
-                                    Parse();
                                     r = Math.Max(s1, s2);
                                     break;
                                 }
@@ -1239,7 +1220,6 @@ namespace EquationSolver
                                     Parse();
                                     decimal s2 = 0;
                                     Assignment(ref s2);
-                                    Parse();
                                     int d2 = Convert.ToInt32(Math.Round(s2));
                                     r = Math.Round(s1, d2);
                                     break;
