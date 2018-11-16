@@ -5,6 +5,8 @@ The libray is built with .Net Standard.  It uses a forward only parser for expre
 
 Calculation in Expressions follow the common order of operations (PEMDAS) (see: https://study.com/academy/lesson/order-of-operations.html)
 
+Example (the Quadratic formula): ((b*-1) - sqrt(b^2 - 4*a*c))/(2*a)
+
 Note:  This library supports parentheses and nested parentheses
 
 To use:
