@@ -33,6 +33,14 @@ namespace EquationSolver
         #region Publics
         public IEquationSolver CreateEquationSolver(EquationProject equationProject, VariableProvider varProvider = null)
         {
+            foreach(var eq in equationProject.Equations)
+            {
+                if(!ValidateEquation(eq))
+                {
+                    throw new ArgumentException("Equation(s) are not valid in the project");
+                }
+            }
+
             if(varProvider == null)
             {
                 varProvider = new VariableProvider();
@@ -54,6 +62,33 @@ namespace EquationSolver
         #endregion
 
         #region Privates
+        private bool ValidateEquation(Equation equation)
+        {
+            if (!ValidateExpression(equation.UseExpression))
+                return false;
+            if (!ValidateExpression(equation.Expression))
+                return false;
+
+            foreach(var eq in equation.MoreEquations)
+            {
+                if (!ValidateEquation(eq))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidateExpression(string expression)
+        {
+            if (string.IsNullOrEmpty(expression.Trim()))
+                return false;
+
+            int openCnt = expression.Count(c => c == '(');
+            int closedCnt = expression.Count(c => c == ')');
+
+            return openCnt == closedCnt;
+        }
+
         private List<Equation> SortEquations(List<Equation> listToSort)
         {
             List<Equation> sortedList = new List<Equation>();

@@ -149,38 +149,38 @@ namespace EquationSolver.Unit.Tests
         [TestMethod]
         public void QuadraticEquationTest()
         {
-            EquationProject additionProject = new EquationProject()
-            {
-                Title = "Unit Project",
-                Variables = new List<Variable>()
-                {
-                    new Variable(){ Name = "a", StringValue = "1"},
-                    new Variable(){ Name = "b", StringValue = "3"},
-                    new Variable(){ Name = "c", StringValue = "-4"}
-                },
-                Equations = new List<Equation>()
-                {
-                    new Equation()
-                    {
-                        UseExpression = "true",
-                        Expression = "((b*-1) - sqrt(b^2 - 4*a*c))/(2*a)",
-                        Target = "X1"
-                    },
-                    new Equation()
-                    {
-                        UseExpression = "true",
-                        Expression = "((b*-1) + sqrt(b^2 - 4*a*c))/(2*a)",
-                        Target = "X2"
-                    }
+            VariableProvider localVariables = new VariableProvider();
+            localVariables.SetVariable("a", 1);
+            localVariables.SetVariable("b", 3);
+            localVariables.SetVariable("c", -4);
 
-                }
+            EquationProject quadraticProject = new EquationProject()
+            {
+                Title = "Quadratic Equations",
             };
 
-            IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(additionProject);
+            var negativeXquation = new Equation()
+            {
+                UseExpression = "true",
+                Expression = "((b*-1) - sqrt(b^2 - 4*a*c))/(2*a)",
+                Target = "X1"
+            };
+
+            var positiveXEquation = new Equation()
+            {
+                UseExpression = "true",
+                Expression = "((b*-1) + sqrt(b^2 - 4*a*c))/(2*a)",
+                Target = "X2"
+            };
+
+            quadraticProject.Equations.Add(negativeXquation);
+            quadraticProject.Equations.Add(positiveXEquation);
+
+            IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(quadraticProject, localVariables);
             solver.SolveEquations();
 
-            Assert.AreEqual(-4, solver.Variables["X1"].DecimalValue);
-            Assert.AreEqual(1, solver.Variables["X2"].DecimalValue);
+            Assert.AreEqual(-4, localVariables["X1"].DecimalValue);
+            Assert.AreEqual(1, localVariables["X2"].DecimalValue);
         }
 
     }

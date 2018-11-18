@@ -352,20 +352,20 @@ namespace EquationSolver
                 if (!HasOperator(e))
                 {
                     _noOperator = true;
-                    Variable var = null;
+                    Variable variable = null;
                     string sVarAttr = string.Empty;
                     if (e.IndexOf(".") > 0)
                     {
                         int iNdx = e.IndexOf(".");
                         string sVarName = e.Substring(0, iNdx);
                         sVarAttr = e.Substring(iNdx + 1);
-                        var = _varProvider[sVarName];
+                        variable = _varProvider[sVarName];
                     }
                     else
                     {
-                        var = _varProvider[e];
+                        variable = _varProvider[e];
                     }
-                    if (var == null)
+                    if (variable == null)
                     {
                         _expr = e.ToCharArray();
                         Parse();
@@ -398,19 +398,19 @@ namespace EquationSolver
                     }
                     else
                     {
-                        if (var.VariableType == VariableTypes.TEXT)
+                        if (variable.VariableType == VariableTypes.TEXT)
                         {
                             _isStringCompare = true;
-                            _resultAsDecimal = var.DecimalValue;
-                            _bResult = var.BoolValue;
-                            _strResult = var.StringValue;
+                            _resultAsDecimal = variable.DecimalValue;
+                            _bResult = variable.BoolValue;
+                            _strResult = variable.StringValue;
                         }
                         else
                         {
                             _isStringCompare = false;
-                            _resultAsDecimal = var.DecimalValue;
-                            _bResult = var.BoolValue;
-                            _strResult = var.StringValue;
+                            _resultAsDecimal = variable.DecimalValue;
+                            _bResult = variable.BoolValue;
+                            _strResult = variable.StringValue;
                         }
                     }
                 }
@@ -1222,6 +1222,42 @@ namespace EquationSolver
                                     Assignment(ref s2);
                                     int d2 = Convert.ToInt32(Math.Round(s2));
                                     r = Math.Round(s1, d2);
+                                    break;
+                                }
+                            case "sum":
+                                {
+                                    decimal sum = 0;
+                                    Parse();
+                                    Parse();
+                                    while(true)
+                                    {
+                                        decimal s1 = 0;
+                                        Assignment(ref s1);
+                                        sum += s1;
+                                        if (_token[0] == ')')
+                                            break;
+                                        Parse();
+                                    }
+                                    r = sum;
+                                    break;
+                                }
+                            case "avg":
+                                {
+                                    decimal sum = 0;
+                                    decimal cnt = 0;
+                                    Parse();
+                                    Parse();
+                                    while (true)
+                                    {
+                                        cnt++;
+                                        decimal s1 = 0;
+                                        Assignment(ref s1);
+                                        sum += s1;
+                                        if (_token[0] == ')')
+                                            break;
+                                        Parse();
+                                    }
+                                    r = sum/cnt;
                                     break;
                                 }
                             default:
