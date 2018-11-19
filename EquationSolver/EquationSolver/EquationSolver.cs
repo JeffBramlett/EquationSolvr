@@ -29,9 +29,25 @@ namespace EquationSolver
         {
             get
             {
+                if(_solver == null)
+                {
+                    _solver = new ExpressionSolver();
+                    _solver.ExceptionOccurred += Solver_ExceptionOccurred;
+                    _solver.VariableNotFound += Solver_VariableNotFound;
+                }
                 _solver = _solver ?? new ExpressionSolver();
                 return _solver;
             }
+        }
+
+        private void Solver_VariableNotFound(string variableName)
+        {
+            VariableNotFoundException?.Invoke(this, new VariableNotFoundEventArgs(variableName));
+        }
+
+        private void Solver_ExceptionOccurred(Exception e)
+        {
+            ExceptionOccurred?.Invoke(this, new ExceptionEventArgs(e));
         }
 
         private List<Equation> Equations
@@ -42,6 +58,12 @@ namespace EquationSolver
                 return _equationList;
             }
         }
+        #endregion
+
+        #region Events
+
+        public event EventHandler VariableNotFoundException;
+        public event EventHandler ExceptionOccurred;
         #endregion
 
         #region Ctors and Dtors

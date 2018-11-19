@@ -60,8 +60,6 @@ namespace EquationSolver
         /// The Result type of the expression.
         /// </summary>
         ResultType resType = ResultType.NONE;
-
-        StringBuilder errors;
         #endregion
         
         #region Properties
@@ -73,17 +71,6 @@ namespace EquationSolver
             get
             {
                 return resType;
-            }
-        }
-
-        /// <summary>
-        /// Any parsing errors that may have occurred.
-        /// </summary>
-        public string Errors
-        {
-            get
-            {
-                return errors.ToString();
             }
         }
 
@@ -186,6 +173,14 @@ namespace EquationSolver
                 }
             }
         }
+        #endregion
+
+        #region Delegates and Events
+        public delegate void VariableNotFoundDelegate(string variableName);
+        public event VariableNotFoundDelegate VariableNotFound;
+
+        public delegate void ExceptionOccurredDelegate(Exception e);
+        public event ExceptionOccurredDelegate ExceptionOccurred;
         #endregion
 
         #region Ctors
@@ -345,7 +340,6 @@ namespace EquationSolver
                 _pos = 0;
                 _strResult = "";
                 _bResult = false;
-                errors = new StringBuilder();
 
                 string e = input.Trim();
 
@@ -465,7 +459,7 @@ namespace EquationSolver
             }
             catch (Exception re)
             {
-                errors.Append("Error in Evaluate: " + re.Message + re.StackTrace);
+                ExceptionOccurred?.Invoke(re);
             }
         }
 
@@ -657,9 +651,7 @@ namespace EquationSolver
                         }
                         else
                         {
-                            errors.Append("\n*********** WIZARD ERROR ************");
-                            errors.Append("\nVariable: " + lstr + " does not exist");
-                            errors.Append("\n*************************************");
+                            VariableNotFound?.Invoke(lstr);
                         }
                     }
                     else
@@ -721,8 +713,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                errors.Append("\n" + input + " Has Errors !!!");
-                errors.Append("Error in Compare: " + e.Message + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
                 return false;
             }
         }
@@ -879,7 +870,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                errors.Append("\nError in assignment: " + e.Message + "\n" + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
             }
         }
 
@@ -903,7 +894,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                errors.Append("\nError in addOrSubtract: " + e.Message + "\n" + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
             }
         }
 
@@ -933,7 +924,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                errors.Append("\nError in multiDivOrMod: " + e.Message + "\n" + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
             }
         }
 
@@ -955,7 +946,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                errors.Append("\nError in powerUp: " + e.Message + "\n" + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
             }
         }
 
@@ -978,7 +969,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                errors.Append("\nError in plusOrMinus: " + e.Message + "\n" + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
             }
         }
 
@@ -1263,7 +1254,16 @@ namespace EquationSolver
                             default:
                                 {
                                     string v = new String(_token);
-                                    r = _varProvider[v].DecimalValue;
+                                    var val = _varProvider[v];
+                                    if (val != null)
+                                    {
+                                        r = _varProvider[v].DecimalValue;
+                                    }
+                                    else
+                                    {
+                                        VariableNotFound?.Invoke(v);
+                                        r = 0;
+                                    }
                                     break;
                                 }
                         }
@@ -1276,7 +1276,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                errors.Append("\nError in literal: " + e.Message + "\n" + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
             }
         }
         #endregion
@@ -1348,8 +1348,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                _token = new Char[] { '0' };
-                errors.Append("\nError in Parse: " + e.Message + "\n" + e.StackTrace);
+                ExceptionOccurred?.Invoke(e);
             }
         }
         #endregion

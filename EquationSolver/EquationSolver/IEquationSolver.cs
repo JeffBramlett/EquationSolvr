@@ -8,5 +8,8 @@ namespace EquationSolver
     {
         VariableProvider Variables { get; }
         IEquationSolver SolveEquations();
+
+        event EventHandler VariableNotFoundException;
+        event EventHandler ExceptionOccurred;
     }
 }

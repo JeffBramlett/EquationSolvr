@@ -8,6 +8,46 @@ namespace EquationSolver.Unit.Tests
     public class ErrorsTests
     {
         [TestMethod]
+        public void VariableNotFoundTest()
+        {
+            try
+            {
+                EquationProject project = new EquationProject()
+                {
+                    Title = "Unit Project",
+                };
+
+                Equation sinEquation = new Equation()
+                {
+                    UseExpression = "true",
+                    Expression = "notfound * 2",  /// missing closing parenthesis
+                    Target = "T1"
+                };
+
+                project.Equations.Add(sinEquation);
+
+                IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
+                solver.VariableNotFoundException += delegate (object sender, EventArgs e)
+                {
+                    var vnfe = e as VariableNotFoundEventArgs;
+                    if(vnfe != null)
+                    {
+                        Assert.AreEqual("notfound", vnfe.VariableName);
+                    }
+                    else
+                        Assert.Fail();
+                };
+
+                solver.SolveEquations();
+
+            }
+            catch (Exception vnfe)
+            {
+                // this is failure
+            }
+        }
+
+        [TestMethod]
         public void ValidForParenthesisTest()
         {
             try
@@ -30,7 +70,7 @@ namespace EquationSolver.Unit.Tests
 
                 Assert.Fail();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // this is success
             }
@@ -59,7 +99,7 @@ namespace EquationSolver.Unit.Tests
 
                 Assert.Fail();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // this is success
             }
