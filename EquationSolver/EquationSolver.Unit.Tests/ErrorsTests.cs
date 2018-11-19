@@ -44,6 +44,52 @@ namespace EquationSolver.Unit.Tests
             catch (Exception vnfe)
             {
                 // this is failure
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void DivideByZeroTest()
+        {
+            try
+            {
+                EquationProject project = new EquationProject()
+                {
+                    Title = "Unit Project",
+                };
+
+                Equation sinEquation = new Equation()
+                {
+                    UseExpression = "true",
+                    Expression = "10/0",  /// missing closing parenthesis
+                    Target = "T1"
+                };
+
+                project.Equations.Add(sinEquation);
+
+                IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
+                solver.VariableNotFoundException += delegate (object sender, EventArgs e)
+                {
+                    var vnfe = e as VariableNotFoundEventArgs;
+                    if (vnfe != null)
+                    {
+                        Assert.AreEqual("notfound", vnfe.VariableName);
+                    }
+                    else
+                        Assert.Fail();
+                };
+
+                solver.ExceptionOccurred += delegate (object sender, EventArgs e)
+                {
+                    Assert.IsTrue( e is ExceptionEventArgs);
+                };
+
+                solver.SolveEquations();
+
+            }
+            catch (Exception vnfe)
+            {
+                // this is failure
+                Assert.Fail();
             }
         }
 

@@ -9,7 +9,7 @@
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Added function for sum of numbers ( sum(n, n ,n, ...) ) and for average of numbers ( avg(n, n, n, ...)) and added equation validation</PackageReleaseNotes>
+    <PackageReleaseNotes>Added function for sum of numbers ( sum(n, n ,n, ...) ) and for average of numbers ( avg(n, n, n, ...)) and added equation validation.  Changed exception handing to eventhandlers</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
