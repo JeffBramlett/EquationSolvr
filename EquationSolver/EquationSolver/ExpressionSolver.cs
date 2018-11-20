@@ -1178,6 +1178,16 @@ namespace EquationSolver
                                     r = ToRadians(ds);
                                     break;
                                 }
+                            case "fac":
+                                {
+                                    Parse();
+                                    Parse();
+                                    decimal s = 0;
+                                    Assignment(ref s);
+                                    int i = Convert.ToInt32(s);
+                                    r = Utilities.Factorial(i);
+                                    break;
+                                }
                             case "min":
                                 {
                                     Parse();

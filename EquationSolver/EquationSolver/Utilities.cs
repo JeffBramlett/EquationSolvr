@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EquationSolver
 {
-    public class Utilities
+    class Utilities
     {
         static char[] numberChars = { '-', '+', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         /// <summary>
@@ -133,6 +133,10 @@ namespace EquationSolver
 
         #region Number munging
      
+        public static int Factorial(int n)
+        {
+            return (n == 1 || n == 0) ?  1 : n * Factorial(n - 1);
+        }
         /// <summary>
         /// Outputs the integer equivalent of the string
         /// </summary>

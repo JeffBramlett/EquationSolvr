@@ -59,6 +59,19 @@ namespace EquationSolver
 
             return solver;
         }
+        
+        public static Variable SolveExpression(string expression, VariableProvider varProvider = null)
+        {
+            VariableProvider prov = varProvider == null ? new VariableProvider() : varProvider;
+
+            ExpressionSolver expressionSolver = new ExpressionSolver();
+            expressionSolver.Resolve(expression, prov);
+
+            Variable v = new Variable();
+            v.SetName("result").SetValue(expressionSolver.StringResult);
+
+            return v;
+        }
         #endregion
 
         #region Privates

@@ -56,6 +56,7 @@
     <Compile Include="LogicalTests.cs" />
     <Compile Include="BranchingTests.cs" />
     <Compile Include="ErrorsTests.cs" />
+    <Compile Include="StaticExpressionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
