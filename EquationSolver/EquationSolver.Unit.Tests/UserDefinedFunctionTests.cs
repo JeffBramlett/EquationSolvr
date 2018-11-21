@@ -54,15 +54,15 @@ namespace EquationSolver.Unit.Tests
                     },
                     new Argument()
                     {
-                        Name = "b",
-                        Ordinal = 2,
-                        Default = "3"
-                    },
-                    new Argument()
-                    {
                         Name = "c",
                         Ordinal = 3,
                         Default = "-4"
+                    },
+                    new Argument()
+                    {
+                        Name = "b",
+                        Ordinal = 2,
+                        Default = "3"
                     }
                 }
             };
