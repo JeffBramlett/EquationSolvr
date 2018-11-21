@@ -1,0 +1,1 @@
+call C:\Tools\Xsd2Code\Xsd2Code.exe EquationSolver.Dto.xsd /n:EquationSolver.Dto  /db /sc 

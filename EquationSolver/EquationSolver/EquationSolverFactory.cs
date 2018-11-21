@@ -56,6 +56,7 @@ namespace EquationSolver
             equationProject.Equations.Sort();
 
             solver.AddEquations(equationProject.Equations);
+            solver.AddFunctions(equationProject.Functions);
 
             return solver;
         }

@@ -96,7 +96,10 @@ namespace EquationSolver
         {
             Equations.Add(equation);
         }
-
+        public void AddFunctions(IEnumerable<Function> functions)
+        {
+            Solver.Functions.AddRange(functions);
+        }
         public void AddEquations(IEnumerable<Equation> equations)
         {
             Equations.AddRange(equations);

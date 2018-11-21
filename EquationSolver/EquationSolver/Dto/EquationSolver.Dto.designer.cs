@@ -29,10 +29,13 @@ namespace EquationSolver.Dto {
         
         private List<Equation> equationsField;
         
+        private List<Function> functionsField;
+        
         /// <summary>
         /// EquationProject class constructor
         /// </summary>
         public EquationProject() {
+            this.functionsField = new List<Function>();
             this.equationsField = new List<Equation>();
             this.variablesField = new List<Variable>();
             this.auditField = new AuditInfo();
@@ -131,6 +134,25 @@ namespace EquationSolver.Dto {
             }
         }
         
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Function> Functions {
+            get {
+                return this.functionsField;
+            }
+            set {
+                if ((this.functionsField != null)) {
+                    if ((functionsField.Equals(value) != true)) {
+                        this.functionsField = value;
+                        this.OnPropertyChanged("Functions");
+                    }
+                }
+                else {
+                    this.functionsField = value;
+                    this.OnPropertyChanged("Functions");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         public virtual void OnPropertyChanged(string propertyName) {
@@ -142,6 +164,172 @@ namespace EquationSolver.Dto {
     }
     
     public partial class SolverSettings : System.ComponentModel.INotifyPropertyChanged {
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        public virtual void OnPropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
+            if ((handler != null)) {
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    public partial class Argument : System.ComponentModel.INotifyPropertyChanged {
+        
+        private string nameField;
+        
+        private int ordinalField;
+        
+        private string defaultField;
+        
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((this.nameField != null)) {
+                    if ((nameField.Equals(value) != true)) {
+                        this.nameField = value;
+                        this.OnPropertyChanged("Name");
+                    }
+                }
+                else {
+                    this.nameField = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+        
+        public int Ordinal {
+            get {
+                return this.ordinalField;
+            }
+            set {
+                if ((ordinalField.Equals(value) != true)) {
+                    this.ordinalField = value;
+                    this.OnPropertyChanged("Ordinal");
+                }
+            }
+        }
+        
+        public string Default {
+            get {
+                return this.defaultField;
+            }
+            set {
+                if ((this.defaultField != null)) {
+                    if ((defaultField.Equals(value) != true)) {
+                        this.defaultField = value;
+                        this.OnPropertyChanged("Default");
+                    }
+                }
+                else {
+                    this.defaultField = value;
+                    this.OnPropertyChanged("Default");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        public virtual void OnPropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
+            if ((handler != null)) {
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    public partial class Function : System.ComponentModel.INotifyPropertyChanged {
+        
+        private string nameField;
+        
+        private string descriptionField;
+        
+        private List<Argument> argumentsField;
+        
+        private string expressionField;
+        
+        /// <summary>
+        /// Function class constructor
+        /// </summary>
+        public Function() {
+            this.argumentsField = new List<Argument>();
+        }
+        
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((this.nameField != null)) {
+                    if ((nameField.Equals(value) != true)) {
+                        this.nameField = value;
+                        this.OnPropertyChanged("Name");
+                    }
+                }
+                else {
+                    this.nameField = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+        
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                if ((this.descriptionField != null)) {
+                    if ((descriptionField.Equals(value) != true)) {
+                        this.descriptionField = value;
+                        this.OnPropertyChanged("Description");
+                    }
+                }
+                else {
+                    this.descriptionField = value;
+                    this.OnPropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Argument> Arguments {
+            get {
+                return this.argumentsField;
+            }
+            set {
+                if ((this.argumentsField != null)) {
+                    if ((argumentsField.Equals(value) != true)) {
+                        this.argumentsField = value;
+                        this.OnPropertyChanged("Arguments");
+                    }
+                }
+                else {
+                    this.argumentsField = value;
+                    this.OnPropertyChanged("Arguments");
+                }
+            }
+        }
+        
+        public string Expression {
+            get {
+                return this.expressionField;
+            }
+            set {
+                if ((this.expressionField != null)) {
+                    if ((expressionField.Equals(value) != true)) {
+                        this.expressionField = value;
+                        this.OnPropertyChanged("Expression");
+                    }
+                }
+                else {
+                    this.expressionField = value;
+                    this.OnPropertyChanged("Expression");
+                }
+            }
+        }
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         

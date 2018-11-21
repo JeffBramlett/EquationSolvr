@@ -47,6 +47,13 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Functions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Function" type="Function" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:all>
     </xs:complexType>
   </xs:element>
@@ -73,6 +80,53 @@
             <xs:element name="Equation" type="Equation" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Function">
+    <xs:annotation>
+      <xs:documentation>User defined function</xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="Name" type="xs:string" nillable="false">
+        <xs:annotation>
+          <xs:documentation>the name of the function to identify it in expressions</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Description" type="xs:string" nillable="true">
+        <xs:annotation>
+          <xs:documentation>The description of this function</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Arguments">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Argument" type="Argument" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Expression" type="xs:string" nillable="false"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Argument">
+    <xs:annotation>
+      <xs:documentation>Arguments for the function expression</xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The argument name used to identify it</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Ordinal" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The order of this argument in expression</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Default" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The default value for the argument</xs:documentation>
+        </xs:annotation>
       </xs:element>
     </xs:all>
   </xs:complexType>

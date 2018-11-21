@@ -5,16 +5,22 @@
     <RepositoryUrl>https://github.com/JeffBramlett/EquationSolvr</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>equations,formulas,expressions,math,library</PackageTags>
-    <Description>.NET Standard Library to solve equations expressed as strings with variables, including boolean branching and nested equation trees using forward-only parsing (very fast).  Functions include common math, trigonometry and common functions. Extremely easy to use.</Description>
+    <Description>.NET Standard Library to solve equations expressed as free-form strings with variables, including boolean branching and nested equation trees using forward-only parsing (very fast).  Functions include common math, trigonometry and common functions. Extremely easy to use.</Description>
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Added function for sum of numbers ( sum(n, n ,n, ...) ) and for average of numbers ( avg(n, n, n, ...)) and added equation validation.  Changed exception handing to eventhandlers</PackageReleaseNotes>
+    <PackageReleaseNotes>New -&gt; Added Static method for expression solving
+New -&gt; Added function for Factorial of a number
+New -&gt; Changed min and max functions to use many numbers
+*Added function for sum of numbers ( sum(n, n ,n, ...) ) 
+* average of numbers ( avg(n, n, n, ...)) 
+* added equation validation.  
+*changed exception handing to eventhandlers</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

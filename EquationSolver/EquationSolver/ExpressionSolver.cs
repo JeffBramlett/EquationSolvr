@@ -56,6 +56,8 @@ namespace EquationSolver
         bool _isStringCompare = false;
         bool _noOperator = false;
 
+        List<Function> _functions;
+
         /// <summary>
         /// The Result type of the expression.
         /// </summary>
@@ -172,6 +174,16 @@ namespace EquationSolver
                     return _strResult;
                 }
             }
+        }
+
+        public List<Function> Functions
+        {
+            get
+            {
+                _functions = _functions ?? new List<Function>();
+                return _functions;
+            }
+            set { _functions = value; }
         }
         #endregion
 
@@ -767,6 +779,7 @@ namespace EquationSolver
                 return false;
             }
         }
+
         private bool ProcessComparison(string expr)
         {
             try
@@ -814,6 +827,7 @@ namespace EquationSolver
                 return false;
             }
         }
+
         private int AndOrLocate(string expr, int p)
         {
             try
@@ -826,6 +840,7 @@ namespace EquationSolver
                 return p;
             }
         }
+
         private bool IsComparison(string expr)
         {
             try
@@ -994,288 +1009,44 @@ namespace EquationSolver
                     else if (_type == VAR)
                     {
                         string var = new String(_token);
-
-                        switch (var)
+                        
+                        if(Literal_CommonFunctions(var, ref r))
                         {
-                            case "sin":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Sin(ds));
-                                    break;
-                                }
-                            case "cos":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Cos(ds));
-                                    break;
-                                }
-                            case "tan":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Tan(ds));
-                                    break;
-                                }
-                            case "asin":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Asin(ds));
-                                    break;
-                                }
-                            case "acos":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Acos(ds));
-                                    break;
-                                }
-                            case "atan":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Atan(ds));
-                                    break;
-                                }
-                            case "sinh":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Sinh(ds));
-                                    break;
-                                }
-                            case "cosh":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Cosh(ds));
-                                    break;
-                                }
-                            case "tanh":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Tanh(ds));
-                                    break;
-                                }
-                            case "exp":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Exp(ds));
-                                    break;
-                                }
-                            case "log":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Log(ds));
-                                    break;
-                                }
-                            case "log10":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Log10(ds));
-                                    break;
-                                }
-                            case "sqrt":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Sqrt(ds));
-                                    break;
-                                }
-                            case "floor":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Floor(ds));
-                                    break;
-                                }
-                            case "ceil":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Ceiling(ds));
-                                    break;
-                                }
-                            case "abs":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = Convert.ToDecimal(Math.Abs(ds));
-                                    break;
-                                }
+                            Parse();
+                            return;
+                        }
 
-                            case "deg":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = ToDegrees(ds);
-                                    break;
-                                }
-                            case "rad":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    double ds = Convert.ToDouble(s);
-                                    r = ToRadians(ds);
-                                    break;
-                                }
-                            case "fac":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s = 0;
-                                    Assignment(ref s);
-                                    int i = Convert.ToInt32(s);
-                                    r = Utilities.Factorial(i);
-                                    break;
-                                }
-                            case "min":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s1 = 0;
-                                    Assignment(ref s1);
-                                    Parse();
-                                    decimal s2 = 0;
-                                    Assignment(ref s2);
-                                    r = Math.Min(s1, s2);
-                                    break;
-                                }
-                            case "max":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s1 = 0;
-                                    Assignment(ref s1);
-                                    Parse();
-                                    decimal s2 = 0;
-                                    Assignment(ref s2);
-                                    r = Math.Max(s1, s2);
-                                    break;
-                                }
-                            case "round":
-                                {
-                                    Parse();
-                                    Parse();
-                                    decimal s1 = 0;
-                                    Assignment(ref s1);
-                                    Parse();
-                                    decimal s2 = 0;
-                                    Assignment(ref s2);
-                                    int d2 = Convert.ToInt32(Math.Round(s2));
-                                    r = Math.Round(s1, d2);
-                                    break;
-                                }
-                            case "sum":
-                                {
-                                    decimal sum = 0;
-                                    Parse();
-                                    Parse();
-                                    while(true)
-                                    {
-                                        decimal s1 = 0;
-                                        Assignment(ref s1);
-                                        sum += s1;
-                                        if (_token[0] == ')')
-                                            break;
-                                        Parse();
-                                    }
-                                    r = sum;
-                                    break;
-                                }
-                            case "avg":
-                                {
-                                    decimal sum = 0;
-                                    decimal cnt = 0;
-                                    Parse();
-                                    Parse();
-                                    while (true)
-                                    {
-                                        cnt++;
-                                        decimal s1 = 0;
-                                        Assignment(ref s1);
-                                        sum += s1;
-                                        if (_token[0] == ')')
-                                            break;
-                                        Parse();
-                                    }
-                                    r = sum/cnt;
-                                    break;
-                                }
-                            default:
-                                {
-                                    string v = new String(_token);
-                                    var val = _varProvider[v];
-                                    if (val != null)
-                                    {
-                                        r = _varProvider[v].DecimalValue;
-                                    }
-                                    else
-                                    {
-                                        VariableNotFound?.Invoke(v);
-                                        r = 0;
-                                    }
-                                    break;
-                                }
+                        if(Literal_MultiFunctions(var, ref r))
+                        {
+                            Parse();
+                            return;
+                        }
+
+                        if (Literal_TrigFunctions(var, ref r))
+                        {
+                            Parse();
+                            return;
+                        }
+
+                        if (Literal_UserFunction(var, ref r))
+                        {
+                            Parse();
+                            return;
+                        }
+                        else
+                        {
+
+                            string v = new String(_token);
+                            var val = _varProvider[v];
+                            if (val != null)
+                            {
+                                r = _varProvider[v].DecimalValue;
+                            }
+                            else
+                            {
+                                VariableNotFound?.Invoke(v);
+                                r = 0;
+                            }
                         }
                         Parse();
                         return;
@@ -1288,6 +1059,394 @@ namespace EquationSolver
             {
                 ExceptionOccurred?.Invoke(e);
             }
+        }
+
+        private bool  Literal_TrigFunctions(string var, ref decimal r)
+        {
+            bool isSet = false;
+
+            switch (var.ToLower())
+            {
+                case "sin":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Sin(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "cos":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Cos(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "tan":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Tan(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "asin":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Asin(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "acos":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Acos(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "atan":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Atan(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "sinh":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Sinh(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "cosh":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Cosh(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "tanh":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Tanh(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "exp":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Exp(ds));
+                        isSet = true;
+                        break;
+                    }
+            }
+
+            return isSet;
+        }
+
+        private bool Literal_CommonFunctions(string input, ref decimal r)
+        {
+            bool isSet = false;
+
+            switch(input.ToLower())
+            {
+                case "log":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Log(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "log10":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Log10(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "sqrt":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Sqrt(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "floor":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Floor(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "ceil":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Ceiling(ds));
+                        isSet = true;
+                        break;
+                    }
+                case "abs":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = Convert.ToDecimal(Math.Abs(ds));
+                        isSet = true;
+                        break;
+                    }
+
+                case "deg":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = ToDegrees(ds);
+                        isSet = true;
+                        break;
+                    }
+                case "rad":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        double ds = Convert.ToDouble(s);
+                        r = ToRadians(ds);
+                        isSet = true;
+                        break;
+                    }
+
+            }
+
+            return isSet;
+        }
+
+        private bool Literal_MultiFunctions(string var, ref decimal r)
+        {
+            bool isSet = false;
+
+            switch(var.ToLower())
+            {
+                case "fac":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s = 0;
+                        Assignment(ref s);
+                        int i = Convert.ToInt32(s);
+                        r = Utilities.Factorial(i);
+                        isSet = true;
+                        break;
+                    }
+                case "min":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s1 = 0;
+                        Assignment(ref s1);
+
+                        while (true)
+                        {
+                            decimal st = 0;
+                            Assignment(ref st);
+
+                            s1 = st < s1 ? st : s1;
+
+                            if (_token[0] == ')')
+                                break;
+                            Parse();
+                        }
+
+                        r = s1;
+                        isSet = true;
+                        break;
+                    }
+                case "max":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s1 = 0;
+                        Assignment(ref s1);
+
+                        while (true)
+                        {
+                            decimal st = 0;
+                            Assignment(ref st);
+
+                            s1 = st > s1 ? st : s1;
+
+                            if (_token[0] == ')')
+                                break;
+                            Parse();
+                        }
+
+                        r = s1;
+
+                        isSet = true;
+                        break;
+                    }
+                case "round":
+                    {
+                        Parse();
+                        Parse();
+                        decimal s1 = 0;
+                        Assignment(ref s1);
+                        Parse();
+                        decimal s2 = 0;
+                        Assignment(ref s2);
+                        int d2 = Convert.ToInt32(Math.Round(s2));
+                        r = Math.Round(s1, d2);
+                        isSet = true;
+                        break;
+                    }
+                case "sum":
+                    {
+                        decimal sum = 0;
+                        Parse();
+                        Parse();
+                        while (true)
+                        {
+                            decimal s1 = 0;
+                            Assignment(ref s1);
+                            sum += s1;
+                            if (_token[0] == ')')
+                                break;
+                            Parse();
+                        }
+                        r = sum;
+                        isSet = true;
+                        break;
+                    }
+                case "avg":
+                    {
+                        decimal sum = 0;
+                        decimal cnt = 0;
+                        Parse();
+                        Parse();
+                        while (true)
+                        {
+                            cnt++;
+                            decimal s1 = 0;
+                            Assignment(ref s1);
+                            sum += s1;
+                            if (_token[0] == ')')
+                                break;
+                            Parse();
+                        }
+                        r = sum / cnt;
+                        isSet = true;
+                        break;
+                    }
+
+            }
+
+            return isSet;
+        }
+
+        private bool Literal_UserFunction(string var, ref decimal r)
+        {
+            bool isSet = false;
+
+            var foundFunction = Functions.Find(f => f.Name == var);
+            if(foundFunction != null)
+            {
+                var expressionToSolve = foundFunction.Expression;
+                foundFunction.Arguments.Sort();
+
+                string[] argNames = new string[foundFunction.Arguments.Count];
+                string[] argValues = new string[foundFunction.Arguments.Count];
+                for(var i = 0; i < foundFunction.Arguments.Count; i++)
+                {
+                    Argument arg = foundFunction.Arguments[i];
+
+                    argNames[i] = foundFunction.Arguments[i].Name;
+                }
+
+                int ndx = 0;
+
+                Parse();
+                Parse();
+
+                while (true)
+                {
+                    decimal st = 0;
+                    Assignment(ref st);
+                    expressionToSolve = expressionToSolve.Replace(argNames[ndx], st.ToString());
+
+                    if (_token[0] == ')')
+                        break;
+                    Parse();
+                    ndx++;
+                }
+
+                
+                r = EquationSolverFactory.SolveExpression(expressionToSolve).DecimalValue; 
+                isSet = true;
+            }
+
+            return isSet;
         }
         #endregion
 

@@ -244,7 +244,7 @@ namespace EquationSolver.Unit.Tests
                     new Equation()
                     {
                         UseExpression = "true",
-                        Expression = "min(0, 10)",
+                        Expression = "min(0, 10, 7, 8, 3)",
                         Target = "T1"
                     },
                 }
@@ -269,7 +269,7 @@ namespace EquationSolver.Unit.Tests
                     new Equation()
                     {
                         UseExpression = "true",
-                        Expression = "max(0, 10)",
+                        Expression = "max(0, 10, 7, 8, 9)",
                         Target = "T1"
                     },
                 }

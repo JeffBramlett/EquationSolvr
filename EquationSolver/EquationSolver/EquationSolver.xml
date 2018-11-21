@@ -14,6 +14,11 @@
             EquationProject class constructor
             </summary>
         </member>
+        <member name="M:EquationSolver.Dto.Function.#ctor">
+            <summary>
+            Function class constructor
+            </summary>
+        </member>
         <member name="M:EquationSolver.Dto.Equation.#ctor">
             <summary>
             Equation class constructor
@@ -67,11 +72,6 @@
         <member name="P:EquationSolver.ExpressionSolver.TypeOfResult">
             <summary>
             The enumeration type of the result.
-            </summary>
-        </member>
-        <member name="P:EquationSolver.ExpressionSolver.Errors">
-            <summary>
-            Any parsing errors that may have occurred.
             </summary>
         </member>
         <member name="P:EquationSolver.ExpressionSolver.Result">
