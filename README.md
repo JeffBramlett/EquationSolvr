@@ -1,6 +1,10 @@
 # EquationSolvr
 Solve Equations Expressed as strings, branch equations for custom evaluations.  Equations can be mathmatical, boolean/comparison, with logical ANDs and ORs. 
 
+See: Documentation: http://www.jeffbramlett.com/EquationSolver/Conceptual
+
+See: Nuget: https://www.nuget.org/packages/EquationSolver/
+
 The libray is built with .Net Standard.  It uses a forward only parser for expressions so it is very fast and since it is small it is well suited to mobile applications that get the equations from a service the application applying values to variables in the equation.
 
 Calculation in Expressions follow the common order of operations (PEMDAS) (see: https://study.com/academy/lesson/order-of-operations.html)
