@@ -57,6 +57,7 @@ namespace EquationSolver
 
             solver.AddEquations(equationProject.Equations);
             solver.AddFunctions(equationProject.Functions);
+            solver.AddTables(equationProject.Tables);
 
             return solver;
         }

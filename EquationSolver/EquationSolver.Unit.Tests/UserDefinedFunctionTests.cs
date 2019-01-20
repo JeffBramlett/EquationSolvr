@@ -99,8 +99,8 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(quadraticProject);
             solver.SolveEquations();
 
-            Assert.AreEqual(-4, solver.Variables["X1"].DecimalValue);
-            Assert.AreEqual(1, solver.Variables["X2"].DecimalValue);
+            Assert.AreEqual(-4, solver.VariableProvider["X1"].DecimalValue);
+            Assert.AreEqual(1, solver.VariableProvider["X2"].DecimalValue);
         }
     }
 }

@@ -39,8 +39,8 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expectedSin, solver.Variables["sin"].DecimalValue);
-            Assert.AreEqual(expectedCos, solver.Variables["cos"].DecimalValue);
+            Assert.AreEqual(expectedSin, solver.VariableProvider["sin"].DecimalValue);
+            Assert.AreEqual(expectedCos, solver.VariableProvider["cos"].DecimalValue);
         }
 
         [TestMethod]
@@ -74,8 +74,8 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expectedSin, solver.Variables["asin"].DecimalValue);
-            Assert.AreEqual(expectedCos, solver.Variables["acos"].DecimalValue);
+            Assert.AreEqual(expectedSin, solver.VariableProvider["asin"].DecimalValue);
+            Assert.AreEqual(expectedCos, solver.VariableProvider["acos"].DecimalValue);
         }
 
         [TestMethod]
@@ -109,8 +109,8 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expectedSin, solver.Variables["sinh"].DecimalValue);
-            Assert.AreEqual(expectedCos, solver.Variables["cosh"].DecimalValue);
+            Assert.AreEqual(expectedSin, solver.VariableProvider["sinh"].DecimalValue);
+            Assert.AreEqual(expectedCos, solver.VariableProvider["cosh"].DecimalValue);
         }
 
         [TestMethod]
@@ -153,9 +153,9 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expectedTan, solver.Variables["tan"].DecimalValue);
-            Assert.AreEqual(expectedATan, solver.Variables["atan"].DecimalValue);
-            Assert.AreEqual(expectedTanh, solver.Variables["tanh"].DecimalValue);
+            Assert.AreEqual(expectedTan, solver.VariableProvider["tan"].DecimalValue);
+            Assert.AreEqual(expectedATan, solver.VariableProvider["atan"].DecimalValue);
+            Assert.AreEqual(expectedTanh, solver.VariableProvider["tanh"].DecimalValue);
         }
     }
 }

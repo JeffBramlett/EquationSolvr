@@ -47,10 +47,10 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(additionProject);
             solver.SolveEquations();
 
-            Assert.AreEqual(2, solver.Variables["T1"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T2"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T3"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T4"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T1"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T2"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T3"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T4"].DecimalValue);
         }
 
         [TestMethod]
@@ -91,10 +91,10 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(additionProject);
             solver.SolveEquations();
 
-            Assert.AreEqual(2, solver.Variables["T1"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T2"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T3"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T4"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T1"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T2"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T3"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T4"].DecimalValue);
         }
 
         [TestMethod]
@@ -141,10 +141,10 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(additionProject);
             solver.SolveEquations();
 
-            Assert.AreEqual(2, solver.Variables["T1"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T2"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T3"].DecimalValue);
-            Assert.AreEqual(2, solver.Variables["T4"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T1"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T2"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T3"].DecimalValue);
+            Assert.AreEqual(2, solver.VariableProvider["T4"].DecimalValue);
         }
 
         [TestMethod]

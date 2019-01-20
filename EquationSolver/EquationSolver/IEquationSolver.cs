@@ -6,7 +6,7 @@ namespace EquationSolver
 {
     public interface IEquationSolver: IDisposable
     {
-        VariableProvider Variables { get; }
+        VariableProvider VariableProvider { get; }
         IEquationSolver SolveEquations();
 
         event EventHandler VariableNotFoundException;

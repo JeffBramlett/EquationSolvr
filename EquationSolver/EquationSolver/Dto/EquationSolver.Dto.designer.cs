@@ -31,10 +31,13 @@ namespace EquationSolver.Dto {
         
         private List<Function> functionsField;
         
+        private List<Table> tablesField;
+        
         /// <summary>
         /// EquationProject class constructor
         /// </summary>
         public EquationProject() {
+            this.tablesField = new List<Table>();
             this.functionsField = new List<Function>();
             this.equationsField = new List<Equation>();
             this.variablesField = new List<Variable>();
@@ -153,6 +156,25 @@ namespace EquationSolver.Dto {
             }
         }
         
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Table> Tables {
+            get {
+                return this.tablesField;
+            }
+            set {
+                if ((this.tablesField != null)) {
+                    if ((tablesField.Equals(value) != true)) {
+                        this.tablesField = value;
+                        this.OnPropertyChanged("Tables");
+                    }
+                }
+                else {
+                    this.tablesField = value;
+                    this.OnPropertyChanged("Tables");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         public virtual void OnPropertyChanged(string propertyName) {
@@ -164,6 +186,147 @@ namespace EquationSolver.Dto {
     }
     
     public partial class SolverSettings : System.ComponentModel.INotifyPropertyChanged {
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        public virtual void OnPropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
+            if ((handler != null)) {
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    public partial class Row : System.ComponentModel.INotifyPropertyChanged {
+        
+        private string labelField;
+        
+        private List<string> columnsField;
+        
+        /// <summary>
+        /// Row class constructor
+        /// </summary>
+        public Row() {
+            this.columnsField = new List<string>();
+        }
+        
+        public string Label {
+            get {
+                return this.labelField;
+            }
+            set {
+                if ((this.labelField != null)) {
+                    if ((labelField.Equals(value) != true)) {
+                        this.labelField = value;
+                        this.OnPropertyChanged("Label");
+                    }
+                }
+                else {
+                    this.labelField = value;
+                    this.OnPropertyChanged("Label");
+                }
+            }
+        }
+        
+        [System.Xml.Serialization.XmlArrayItemAttribute("Column", IsNullable=false)]
+        public List<string> Columns {
+            get {
+                return this.columnsField;
+            }
+            set {
+                if ((this.columnsField != null)) {
+                    if ((columnsField.Equals(value) != true)) {
+                        this.columnsField = value;
+                        this.OnPropertyChanged("Columns");
+                    }
+                }
+                else {
+                    this.columnsField = value;
+                    this.OnPropertyChanged("Columns");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        public virtual void OnPropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
+            if ((handler != null)) {
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    public partial class Table : System.ComponentModel.INotifyPropertyChanged {
+        
+        private string nameField;
+        
+        private Row rowHeaderField;
+        
+        private List<Row> rowsField;
+        
+        /// <summary>
+        /// Table class constructor
+        /// </summary>
+        public Table() {
+            this.rowsField = new List<Row>();
+            this.rowHeaderField = new Row();
+        }
+        
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((this.nameField != null)) {
+                    if ((nameField.Equals(value) != true)) {
+                        this.nameField = value;
+                        this.OnPropertyChanged("Name");
+                    }
+                }
+                else {
+                    this.nameField = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+        
+        public Row RowHeader {
+            get {
+                return this.rowHeaderField;
+            }
+            set {
+                if ((this.rowHeaderField != null)) {
+                    if ((rowHeaderField.Equals(value) != true)) {
+                        this.rowHeaderField = value;
+                        this.OnPropertyChanged("RowHeader");
+                    }
+                }
+                else {
+                    this.rowHeaderField = value;
+                    this.OnPropertyChanged("RowHeader");
+                }
+            }
+        }
+        
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Row> Rows {
+            get {
+                return this.rowsField;
+            }
+            set {
+                if ((this.rowsField != null)) {
+                    if ((rowsField.Equals(value) != true)) {
+                        this.rowsField = value;
+                        this.OnPropertyChanged("Rows");
+                    }
+                }
+                else {
+                    this.rowsField = value;
+                    this.OnPropertyChanged("Rows");
+                }
+            }
+        }
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
@@ -347,15 +510,15 @@ namespace EquationSolver.Dto {
         
         private string expressionField;
         
+        private int iterateField;
+        
         private string targetField;
         
         private List<Equation> moreEquationsField;
         
-        /// <summary>
-        /// Equation class constructor
-        /// </summary>
         public Equation() {
             this.moreEquationsField = new List<Equation>();
+            this.iterateField = 1;
         }
         
         public string UseExpression {
@@ -390,6 +553,18 @@ namespace EquationSolver.Dto {
                 else {
                     this.expressionField = value;
                     this.OnPropertyChanged("Expression");
+                }
+            }
+        }
+        
+        public int Iterate {
+            get {
+                return this.iterateField;
+            }
+            set {
+                if ((iterateField.Equals(value) != true)) {
+                    this.iterateField = value;
+                    this.OnPropertyChanged("Iterate");
                 }
             }
         }

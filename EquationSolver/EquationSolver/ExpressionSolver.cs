@@ -94,17 +94,9 @@ namespace EquationSolver
                         return 1;
                     }
                 }
-                else if (resType == ResultType.NUMBER)
-                {
-                    return _resultAsDecimal;
-                }
-                else if (resType == ResultType.STRING)
-                {
-                    return 0;
-                }
                 else
-                {
-                    return 0;
+                { 
+                    return _resultAsDecimal;
                 }
             }
         }
@@ -1028,6 +1020,12 @@ namespace EquationSolver
                             return;
                         }
 
+                        if(Literal_VariableTableFunctions(var, ref r))
+                        {
+                            Parse();
+                            return;
+                        }
+
                         if (Literal_UserFunction(var, ref r))
                         {
                             Parse();
@@ -1443,6 +1441,47 @@ namespace EquationSolver
 
                 
                 r = EquationSolverFactory.SolveExpression(expressionToSolve).DecimalValue; 
+                isSet = true;
+            }
+
+            return isSet;
+        }
+
+        private bool Literal_VariableTableFunctions(string var, ref decimal r)
+        {
+            bool isSet = false;
+
+            switch (var.ToLower())
+            {
+                case "table":
+                    Parse();
+                    Parse();
+                    string tableName = new string(_token);
+                    Parse();
+                    decimal dcols = 0M;
+                    Assignment(ref dcols);
+                    int cols = Convert.ToInt32(dcols);
+                    _varProvider.StartTable(tableName, cols);
+
+                    isSet = true;
+                    break;
+            }
+
+            if(_varProvider.HasTable(var))
+            {
+                Parse();
+                Parse();
+                decimal drow = 0;
+                Assignment(ref drow);
+                Parse();
+                decimal dcol = 0;
+                Assignment(ref dcol);
+
+                int row = Convert.ToInt32(drow);
+                int col = Convert.ToInt32(dcol);
+
+                r = _varProvider.GetVariableInTable(var, col, row).DecimalValue;
+
                 isSet = true;
             }
 

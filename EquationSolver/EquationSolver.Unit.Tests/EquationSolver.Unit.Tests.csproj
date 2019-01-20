@@ -58,6 +58,7 @@
     <Compile Include="ErrorsTests.cs" />
     <Compile Include="StaticExpressionTests.cs" />
     <Compile Include="UserDefinedFunctionTests.cs" />
+    <Compile Include="VariableTableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

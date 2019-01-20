@@ -54,6 +54,13 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Tables">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Table" type="Table" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:all>
     </xs:complexType>
   </xs:element>
@@ -66,6 +73,31 @@
       <xs:element name="StringValue" type="xs:string"/>
     </xs:all>
   </xs:complexType>
+  <xs:complexType name="Table">
+    <xs:all>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="RowHeader" type="Row"/>
+      <xs:element name="Rows">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Row" type="Row" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Row">
+    <xs:all>
+      <xs:element name="Label" type="xs:string"/>
+      <xs:element name="Columns">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Column" type="xs:string" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
   <xs:complexType name="Equation">
     <xs:annotation>
       <xs:documentation>An aggregation of objects that comprise an equation and how it is executed</xs:documentation>
@@ -73,6 +105,7 @@
     <xs:all>
       <xs:element name="UseExpression" type="xs:string"/>
       <xs:element name="Expression" type="xs:string"/>
+      <xs:element name="Iterate" type="xs:int" default="1"/>
       <xs:element name="Target" type="xs:string"/>
       <xs:element name="MoreEquations">
         <xs:complexType>

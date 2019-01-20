@@ -14,14 +14,19 @@
             EquationProject class constructor
             </summary>
         </member>
+        <member name="M:EquationSolver.Dto.Row.#ctor">
+            <summary>
+            Row class constructor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.Table.#ctor">
+            <summary>
+            Table class constructor
+            </summary>
+        </member>
         <member name="M:EquationSolver.Dto.Function.#ctor">
             <summary>
             Function class constructor
-            </summary>
-        </member>
-        <member name="M:EquationSolver.Dto.Equation.#ctor">
-            <summary>
-            Equation class constructor
             </summary>
         </member>
         <member name="F:EquationSolver.Dto.VariableTypes.NONE">
@@ -247,6 +252,66 @@
             returns the elasped time since the SetTimeStart() has been called.
             </summary>
             <returns>the elasped time in milliseconds</returns>
+        </member>
+        <member name="T:EquationSolver.VariableProvider">
+            <summary>
+            Data management  class for variables and tables
+            </summary>
+        </member>
+        <member name="P:EquationSolver.VariableProvider.Tables">
+            <summary>
+            Table dictionary of variables
+            </summary>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.#ctor">
+            <summary>
+            Default Ctor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.AddVariable(EquationSolver.Dto.Variable)">
+            <summary>
+            Add a Variable
+            </summary>
+            <param name="variable">the variable to add</param> 
+        </member>
+        <member name="M:EquationSolver.VariableProvider.SetVariable(System.String,System.Object)">
+            <summary>
+            Set (add/update) variable by name and value
+            </summary>
+            <param name="name">the variable name</param>
+            <param name="value">the variable value</param>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.RemoveVariable(System.String)">
+            <summary>
+            Remove a Variable by name
+            </summary>
+            <param name="name">the name of the variable to remove</param>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.DumpVariables">
+            <summary>
+            Dump the Variables to an enumeration
+            </summary>
+            <returns>Enumeration of the current Variables</returns>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.DumpTable(System.String)">
+            <summary>
+            Dump a table to variable Enumeration by name
+            </summary>
+            <param name="tableName">the name of the table to dump to list</param>
+            <returns>Enumeration of Variables in the Table</returns>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.StartTable(System.String,System.Int32)">
+            <summary>
+            Define a new Table to begin holding values
+            </summary>
+            <param name="tableName">the name of the Table</param>
+            <param name="columns">the number of columns the table contains</param>
+        </member>
+        <member name="M:EquationSolver.VariableTable.EnumerateVariables">
+            <summary>
+            Enumerate the variables of this table
+            </summary>
+            <returns>the list of variables</returns>
         </member>
     </members>
 </doc>

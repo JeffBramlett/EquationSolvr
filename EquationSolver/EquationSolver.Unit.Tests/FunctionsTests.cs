@@ -30,7 +30,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -130,7 +130,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -155,7 +155,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -180,7 +180,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -205,7 +205,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -230,7 +230,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -255,7 +255,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -280,7 +280,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(expected, solver.Variables["T1"].DecimalValue);
+            Assert.AreEqual(expected, solver.VariableProvider["T1"].DecimalValue);
         }
 
         [TestMethod]
@@ -303,7 +303,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(123.46, solver.Variables["T1"].DoubleValue);
+            Assert.AreEqual(123.46, solver.VariableProvider["T1"].DoubleValue);
         }
 
         [TestMethod]
@@ -326,7 +326,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(10, solver.Variables["T1"].DoubleValue);
+            Assert.AreEqual(10, solver.VariableProvider["T1"].DoubleValue);
         }
 
         [TestMethod]
@@ -349,7 +349,7 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.AreEqual(2.5, solver.Variables["T1"].DoubleValue);
+            Assert.AreEqual(2.5, solver.VariableProvider["T1"].DoubleValue);
         }
     }
 }

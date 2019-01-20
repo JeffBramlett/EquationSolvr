@@ -52,10 +52,10 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.IsTrue(solver.Variables["T1"].BoolValue);
-            Assert.IsFalse(solver.Variables["T2"].BoolValue);
-            Assert.IsTrue(solver.Variables["T3"].BoolValue);
-            Assert.IsFalse(solver.Variables["T4"].BoolValue);
+            Assert.IsTrue(solver.VariableProvider["T1"].BoolValue);
+            Assert.IsFalse(solver.VariableProvider["T2"].BoolValue);
+            Assert.IsTrue(solver.VariableProvider["T3"].BoolValue);
+            Assert.IsFalse(solver.VariableProvider["T4"].BoolValue);
         }
         [TestMethod]
         public void StringComparisonTest()
@@ -88,8 +88,8 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.IsFalse(solver.Variables["T1"].BoolValue);
-            Assert.IsFalse(solver.Variables["T2"].BoolValue);
+            Assert.IsFalse(solver.VariableProvider["T1"].BoolValue);
+            Assert.IsFalse(solver.VariableProvider["T2"].BoolValue);
         }
 
 
@@ -137,10 +137,10 @@ namespace EquationSolver.Unit.Tests
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
             solver.SolveEquations();
 
-            Assert.IsTrue(solver.Variables["T1"].BoolValue);
-            Assert.IsFalse(solver.Variables["T2"].BoolValue);
-            Assert.IsTrue(solver.Variables["T3"].BoolValue);
-            Assert.IsFalse(solver.Variables["T4"].BoolValue);
+            Assert.IsTrue(solver.VariableProvider["T1"].BoolValue);
+            Assert.IsFalse(solver.VariableProvider["T2"].BoolValue);
+            Assert.IsTrue(solver.VariableProvider["T3"].BoolValue);
+            Assert.IsFalse(solver.VariableProvider["T4"].BoolValue);
         }
 
     }
