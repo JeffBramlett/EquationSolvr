@@ -1,0 +1,51 @@
+{
+  "Title": "Simple Branching Example",
+  "Settings": {},
+  "Audit": {
+    "CreatedOn": "2019-01-21T11:44:02.5771126-06:00",
+    "CreatedBy": "UnitTest",
+    "ModifiedOn": "2019-01-21T11:44:02.5780761-06:00",
+    "ModifiedBy": "UnitTest"
+  },
+  "Variables": [],
+  "Equations": [
+    {
+      "UseExpression": "quantity > 0",
+      "Expression": "price * quantity",
+      "Iterate": 1,
+      "Target": "subtotal",
+      "MoreEquations": [
+        {
+          "UseExpression": "subtotal < 500 and customerlevel < 5",
+          "Expression": "90",
+          "Iterate": 1,
+          "Target": "price",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "subtotal < 500 and customerlevel < 10 and customerlevel >= 5",
+          "Expression": "80",
+          "Iterate": 1,
+          "Target": "price",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "subtotal > 500",
+          "Expression": "70",
+          "Iterate": 1,
+          "Target": "price",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "true",
+          "Expression": "price * quantity",
+          "Iterate": 1,
+          "Target": "subtotal",
+          "MoreEquations": []
+        }
+      ]
+    }
+  ],
+  "Functions": [],
+  "Tables": []
+}

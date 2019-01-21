@@ -14,6 +14,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -39,6 +46,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -64,6 +78,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -89,6 +110,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -114,6 +142,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -139,6 +174,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -164,6 +206,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -189,6 +238,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -214,6 +270,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -239,6 +302,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()
@@ -264,6 +334,13 @@ namespace EquationSolver.Unit.Tests
             EquationProject project = new EquationProject()
             {
                 Title = "Project",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                },
                 Equations = new List<Equation>()
                 {
                     new Equation()

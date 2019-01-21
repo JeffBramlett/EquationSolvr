@@ -12,22 +12,45 @@ namespace EquationSolver.Unit.Tests
         {
             EquationProject project = new EquationProject()
             {
-                Title = "Unit Project",
+                Title = "Sin and Cosine table",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                }
             };
 
-            Equation sinEquation = new Equation()
+            Equation plotSinAndCos = new Equation()
             {
                 UseExpression = "true",
-                Expression = "sin(30)",
-                Target = "Test(1,1)"
+                Expression = "row + 1",
+                Iterate = 5,
+                Target = "row",
+                MoreEquations = new System.Collections.Generic.List<Equation>()
+                {
+                    new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "angle + 5",
+                        Target = "angle"
+                    },
+                    new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "sin(angle)",
+                        Target = "Test(row,1)"
+                    },
+                    new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "cos(angle)",
+                        Target = "Test(row,2)"
+                    }
+                }
             };
 
-            Equation cosEquation = new Equation()
-            {
-                UseExpression = "true",
-                Expression = "cos(30)",
-                Target = "Test(1,2)"
-            };
 
             Table calcTable = new Table()
             {
@@ -42,20 +65,40 @@ namespace EquationSolver.Unit.Tests
                 },
                 Rows = new System.Collections.Generic.List<Row>()
                 {
-                    new Row()
-                    {
-                        
-                    }
+                    new Row(),
+                    new Row(),
+                    new Row(),
+                    new Row(),
+                    new Row(),
                 }
 
             };
 
-            project.Equations.Add(sinEquation);
-            project.Equations.Add(cosEquation);
+            project.Equations.Add(plotSinAndCos);
             project.Tables.Add(calcTable);
 
+            string asjson = Helpers.Serialize(project);
+
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);
+            solver.VariableProvider.SetVariable("row", 0);
+            solver.VariableProvider.SetVariable("angle", 30);
+
             solver.SolveEquations();
+
+            Assert.AreEqual(Math.Sin(35), solver.VariableProvider.Tables["Test"].GetVariableAt(1, 1).DoubleValue);
+            Assert.AreEqual(Math.Cos(35), solver.VariableProvider.Tables["Test"].GetVariableAt(1, 2).DoubleValue);
+
+            Assert.AreEqual(Math.Sin(40), solver.VariableProvider.Tables["Test"].GetVariableAt(2, 1).DoubleValue);
+            Assert.AreEqual(Math.Cos(40), solver.VariableProvider.Tables["Test"].GetVariableAt(2, 2).DoubleValue);
+
+            Assert.AreEqual(Math.Sin(45), solver.VariableProvider.Tables["Test"].GetVariableAt(3, 1).DoubleValue);
+            Assert.AreEqual(Math.Cos(45), solver.VariableProvider.Tables["Test"].GetVariableAt(3, 2).DoubleValue);
+
+            Assert.AreEqual(Math.Sin(50), solver.VariableProvider.Tables["Test"].GetVariableAt(4, 1).DoubleValue);
+            Assert.AreEqual(Math.Cos(50), solver.VariableProvider.Tables["Test"].GetVariableAt(4, 2).DoubleValue);
+
+            Assert.AreEqual(Math.Sin(55), solver.VariableProvider.Tables["Test"].GetVariableAt(5, 1).DoubleValue);
+            Assert.AreEqual(Math.Cos(55), solver.VariableProvider.Tables["Test"].GetVariableAt(5, 2).DoubleValue);
 
         }
 
@@ -119,10 +162,10 @@ namespace EquationSolver.Unit.Tests
                 }
             };
 
-            // Add functions to Project
+            // Define Project
             EquationProject quadraticProject = new EquationProject()
             {
-                Title = "Quadratic Plotting",
+                Title = "Quadratic Plotting to Table",
                 Functions = new System.Collections.Generic.List<Function>()
                 {
                     quadraticMinusFunction,
@@ -200,6 +243,8 @@ namespace EquationSolver.Unit.Tests
             quadraticProject.Tables.Add(quadTable);
             quadraticProject.Equations.Add(iterateEquation);
 
+            string asjson = Helpers.Serialize(quadraticProject);
+
             // Get the solver for calculations
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(quadraticProject);
 
@@ -233,7 +278,7 @@ namespace EquationSolver.Unit.Tests
             // Add functions to Project
             EquationProject project = new EquationProject()
             {
-                Title = "Test table access",
+                Title = "Table Access as Lookup",
             };
 
             // Define table for results
@@ -325,6 +370,8 @@ namespace EquationSolver.Unit.Tests
             // Add to the project
             project.Tables.Add(rateTable);
             project.Equations.Add(quoteEquation);
+
+            string asjson = Helpers.Serialize(project);
 
             // Get the solver for calculations
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project);

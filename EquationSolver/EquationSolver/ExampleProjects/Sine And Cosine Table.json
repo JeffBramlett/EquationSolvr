@@ -1,0 +1,71 @@
+{
+  "Title": "Sin and Cosine table",
+  "Settings": {},
+  "Audit": {
+    "CreatedOn": "2019-01-21T11:29:48.174463-06:00",
+    "CreatedBy": "UnitTest",
+    "ModifiedOn": "2019-01-21T11:29:48.1764631-06:00",
+    "ModifiedBy": "UnitTest"
+  },
+  "Variables": [],
+  "Equations": [
+    {
+      "UseExpression": "true",
+      "Expression": "row + 1",
+      "Iterate": 5,
+      "Target": "row",
+      "MoreEquations": [
+        {
+          "UseExpression": "true",
+          "Expression": "angle + 5",
+          "Iterate": 1,
+          "Target": "angle",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "true",
+          "Expression": "sin(angle)",
+          "Iterate": 1,
+          "Target": "Test(row,1)",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "true",
+          "Expression": "cos(angle)",
+          "Iterate": 1,
+          "Target": "Test(row,2)",
+          "MoreEquations": []
+        }
+      ]
+    }
+  ],
+  "Functions": [],
+  "Tables": [
+    {
+      "Name": "Test",
+      "RowHeader": {
+        "Columns": [
+          "Sin",
+          "Cos"
+        ]
+      },
+      "Rows": [
+        {
+          "Columns": []
+        },
+        {
+          "Columns": []
+        },
+        {
+          "Columns": []
+        },
+        {
+          "Columns": []
+        },
+        {
+          "Columns": []
+        }
+      ]
+    }
+  ]
+}

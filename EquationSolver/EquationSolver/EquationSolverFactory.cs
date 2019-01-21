@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace EquationSolver
 {
+    /// <summary>
+    /// Factory for Eqution Projects to Equation Solver
+    /// </summary>
     public class EquationSolverFactory
     {
         #region fields
@@ -21,6 +24,9 @@ namespace EquationSolver
         #endregion
 
         #region Singleton
+        /// <summary>
+        /// Static Singleton instance of EquationSolverFactory
+        /// </summary>
         public static EquationSolverFactory Instance
         {
             get

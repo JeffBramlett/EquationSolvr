@@ -21,7 +21,14 @@ namespace EquationSolver.Unit.Tests
 
             EquationProject project = new EquationProject()
             {
-                Title = "Project"
+                Title = "Simple Branching Example",
+                Audit = new AuditInfo()
+                {
+                    CreatedBy = "UnitTest",
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = "UnitTest",
+                    ModifiedOn = DateTime.Now
+                }
             };
 
             Equation subTotal = new Equation()
@@ -58,7 +65,9 @@ namespace EquationSolver.Unit.Tests
                }
             };
 
-            project.Equations.Add(subTotal); 
+            project.Equations.Add(subTotal);
+
+            string asjson = Helpers.Serialize(project);
 
             IEquationSolver solver = EquationSolverFactory.Instance.CreateEquationSolver(project, variables);
             solver.SolveEquations();

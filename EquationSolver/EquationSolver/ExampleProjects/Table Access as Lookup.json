@@ -1,0 +1,82 @@
+{
+  "Title": "Table Access as Lookup",
+  "Settings": {},
+  "Audit": {
+    "CreatedOn": "0001-01-01T00:00:00",
+    "ModifiedOn": "0001-01-01T00:00:00"
+  },
+  "Variables": [],
+  "Equations": [
+    {
+      "UseExpression": "true",
+      "Expression": "Quantity * 100",
+      "Iterate": 1,
+      "Target": "SubTotal",
+      "MoreEquations": [
+        {
+          "UseExpression": "true",
+          "Expression": "SubTotal * RateTable(2, 2)",
+          "Iterate": 1,
+          "Target": "Tax",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "true",
+          "Expression": "SubTotal + Tax",
+          "Iterate": 1,
+          "Target": "Total",
+          "MoreEquations": []
+        }
+      ]
+    }
+  ],
+  "Functions": [],
+  "Tables": [
+    {
+      "Name": "RateTable",
+      "RowHeader": {
+        "Columns": [
+          "Rate1",
+          "Rate2"
+        ]
+      },
+      "Rows": [
+        {
+          "Label": "Qualifier1",
+          "Columns": [
+            ".25",
+            ".35"
+          ]
+        },
+        {
+          "Label": "Qualifier2",
+          "Columns": [
+            ".15",
+            ".25"
+          ]
+        },
+        {
+          "Label": "Qualifier3",
+          "Columns": [
+            ".05",
+            ".15"
+          ]
+        },
+        {
+          "Label": "Qualifier4",
+          "Columns": [
+            ".01",
+            ".02"
+          ]
+        },
+        {
+          "Label": "Qualifier5",
+          "Columns": [
+            ".005",
+            ".015"
+          ]
+        }
+      ]
+    }
+  ]
+}

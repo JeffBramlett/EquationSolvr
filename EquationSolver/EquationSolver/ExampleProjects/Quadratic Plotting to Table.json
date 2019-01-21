@@ -1,0 +1,119 @@
+{
+  "Title": "Quadratic Plotting to Table",
+  "Settings": {},
+  "Audit": {
+    "CreatedOn": "0001-01-01T00:00:00",
+    "ModifiedOn": "0001-01-01T00:00:00"
+  },
+  "Variables": [],
+  "Equations": [
+    {
+      "UseExpression": "true",
+      "Expression": "row + 1",
+      "Iterate": 5,
+      "Target": "row",
+      "MoreEquations": [
+        {
+          "UseExpression": "true",
+          "Expression": "a + 1",
+          "Iterate": 1,
+          "Target": "a",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "true",
+          "Expression": "quadraticMinus(a, b, c)",
+          "Iterate": 1,
+          "Target": "QuadTable(row,1)",
+          "MoreEquations": []
+        },
+        {
+          "UseExpression": "true",
+          "Expression": "quadraticPlus(a, b, c)",
+          "Iterate": 1,
+          "Target": "QuadTable(row,2)",
+          "MoreEquations": []
+        }
+      ]
+    }
+  ],
+  "Functions": [
+    {
+      "Name": "quadraticMinus",
+      "Description": "Quadratic (-) formula function",
+      "Arguments": [
+        {
+          "Name": "a",
+          "Ordinal": 1,
+          "Default": "1"
+        },
+        {
+          "Name": "b",
+          "Ordinal": 2,
+          "Default": "3"
+        },
+        {
+          "Name": "c",
+          "Ordinal": 3,
+          "Default": "-4"
+        }
+      ],
+      "Expression": "((b * -1) - sqrt(b ^ 2 - 4 * a * c)) / (2 * a)"
+    },
+    {
+      "Name": "quadraticPlus",
+      "Description": "Quadratic (+) formula function",
+      "Arguments": [
+        {
+          "Name": "a",
+          "Ordinal": 1,
+          "Default": "1"
+        },
+        {
+          "Name": "c",
+          "Ordinal": 3,
+          "Default": "-4"
+        },
+        {
+          "Name": "b",
+          "Ordinal": 2,
+          "Default": "3"
+        }
+      ],
+      "Expression": "((b * -1) + sqrt(b ^ 2 - 4 * a * c)) / (2 * a)"
+    }
+  ],
+  "Tables": [
+    {
+      "Name": "QuadTable",
+      "RowHeader": {
+        "Columns": [
+          "X-",
+          "X+"
+        ]
+      },
+      "Rows": [
+        {
+          "Label": "1",
+          "Columns": []
+        },
+        {
+          "Label": "2",
+          "Columns": []
+        },
+        {
+          "Label": "3",
+          "Columns": []
+        },
+        {
+          "Label": "4",
+          "Columns": []
+        },
+        {
+          "Label": "5",
+          "Columns": []
+        }
+      ]
+    }
+  ]
+}
