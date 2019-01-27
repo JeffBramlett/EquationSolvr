@@ -1,8 +1,10 @@
 ﻿using EquationSolver.Dto;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EquationSolver
@@ -37,14 +39,31 @@ namespace EquationSolver
         #endregion
 
         #region Publics
+        public IEquationSolver CreateEquationSolver(string equationProjectAsJson, VariableProvider varProvider = null)
+        {
+            EquationProject proj = JsonConvert.DeserializeObject<EquationProject>(equationProjectAsJson);
+
+            return CreateEquationSolver(proj, varProvider);
+        }
+
         public IEquationSolver CreateEquationSolver(EquationProject equationProject, VariableProvider varProvider = null)
         {
             foreach(var eq in equationProject.Equations)
             {
-                if(!ValidateEquation(eq))
+                var equationValids = ValidateEquation(eq);
+                if(equationValids != null && equationValids.Count() > 0)
                 {
-                    throw new ArgumentException("Equation(s) are not valid in the project");
+                    var exp = new ArgumentException("Equation(s) are not valid in the project (see exception.Data for details)");
+                    exp.Data.Add("ValidationErrors", new List<string>(equationValids));
+                    throw exp;
                 }
+            }
+
+            var tableValids = ValidateTables(equationProject);
+            if (tableValids != null && tableValids.Count() > 0)
+            {
+                var exp = new ArgumentException("Project table(s) have errors (see exception.Data for details)");
+                exp.Data.Add("Validation Errors", new List<string>(tableValids));
             }
 
             if(varProvider == null)
@@ -83,20 +102,32 @@ namespace EquationSolver
         #endregion
 
         #region Privates
-        private bool ValidateEquation(Equation equation)
+        private IEnumerable<string> ValidateEquation(Equation equation)
         {
             if (!ValidateExpression(equation.UseExpression))
-                return false;
+                yield return "UseExpression is invalid";
             if (!ValidateExpression(equation.Expression))
-                return false;
+                yield return "Expression is invalid";
 
             foreach(var eq in equation.MoreEquations)
             {
-                if (!ValidateEquation(eq))
-                    return false;
+                foreach(var result in ValidateEquation(eq))
+                {
+                    yield return result;
+                }
             }
+        }
 
-            return true;
+        private const string OnlyNameRegExpression = "^[a-zA-Z0-9_]+";
+
+        private IEnumerable<string> ValidateTables(EquationProject project)
+        {
+            foreach(var table in project.Tables)
+            {
+                Regex nameRegex = new Regex(OnlyNameRegExpression);
+                if (!nameRegex.IsMatch(table.Name))
+                    yield return "Table name is invalid (only alpha-numeric characters and no spaces)";
+            }
         }
 
         private bool ValidateExpression(string expression)

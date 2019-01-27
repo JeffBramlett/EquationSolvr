@@ -44,6 +44,16 @@
         <member name="F:EquationSolver.Dto.VariableTypes.DATE">
             <remarks/>
         </member>
+        <member name="T:EquationSolver.EquationSolverFactory">
+            <summary>
+            Factory for Eqution Projects to Equation Solver
+            </summary>
+        </member>
+        <member name="P:EquationSolver.EquationSolverFactory.Instance">
+            <summary>
+            Static Singleton instance of EquationSolverFactory
+            </summary>
+        </member>
         <member name="T:EquationSolver.ExpressionSolver.ResultType">
             <summary>
             Enumeration of Result Types

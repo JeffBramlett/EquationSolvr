@@ -145,7 +145,7 @@ namespace EquationSolver.Unit.Tests
 
                 Assert.Fail();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // this is success
             }

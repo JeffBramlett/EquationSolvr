@@ -85,20 +85,20 @@ namespace EquationSolver.Unit.Tests
 
             solver.SolveEquations();
 
-            Assert.AreEqual(Math.Sin(35), solver.VariableProvider.Tables["Test"].GetVariableAt(1, 1).DoubleValue);
-            Assert.AreEqual(Math.Cos(35), solver.VariableProvider.Tables["Test"].GetVariableAt(1, 2).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Sin(35), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(1, 1).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Cos(35), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(1, 2).DoubleValue);
 
-            Assert.AreEqual(Math.Sin(40), solver.VariableProvider.Tables["Test"].GetVariableAt(2, 1).DoubleValue);
-            Assert.AreEqual(Math.Cos(40), solver.VariableProvider.Tables["Test"].GetVariableAt(2, 2).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Sin(40), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(2, 1).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Cos(40), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(2, 2).DoubleValue);
 
-            Assert.AreEqual(Math.Sin(45), solver.VariableProvider.Tables["Test"].GetVariableAt(3, 1).DoubleValue);
-            Assert.AreEqual(Math.Cos(45), solver.VariableProvider.Tables["Test"].GetVariableAt(3, 2).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Sin(45), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(3, 1).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Cos(45), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(3, 2).DoubleValue);
 
-            Assert.AreEqual(Math.Sin(50), solver.VariableProvider.Tables["Test"].GetVariableAt(4, 1).DoubleValue);
-            Assert.AreEqual(Math.Cos(50), solver.VariableProvider.Tables["Test"].GetVariableAt(4, 2).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Sin(50), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(4, 1).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Cos(50), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(4, 2).DoubleValue);
 
-            Assert.AreEqual(Math.Sin(55), solver.VariableProvider.Tables["Test"].GetVariableAt(5, 1).DoubleValue);
-            Assert.AreEqual(Math.Cos(55), solver.VariableProvider.Tables["Test"].GetVariableAt(5, 2).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Sin(55), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(5, 1).DoubleValue);
+            Assert.AreEqual(Math.Round(Math.Cos(55), 15), solver.VariableProvider.Tables["Test"].GetVariableAt(5, 2).DoubleValue);
 
         }
 

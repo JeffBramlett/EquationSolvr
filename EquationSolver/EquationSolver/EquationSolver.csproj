@@ -5,25 +5,18 @@
     <RepositoryUrl>https://github.com/JeffBramlett/EquationSolvr</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>equations,formulas,expressions,math,library</PackageTags>
-    <Description>.NET Standard Library to solve equations expressed as free-form strings with variables, including boolean branching and nested equation trees using forward-only parsing (very fast).  Functions include common math, trigonometry and common functions, as well as User defined functions. Extremely easy to use.</Description>
+    <Description>.NET Standard Library to solve equations expressed as free-form strings with variables, including boolean branching and nested equation trees using forward-only parsing (very fast).  Functions include common math, trigonometry and common functions, as well as User defined functions, and user defined tables.</Description>
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>* Added Iteration to Equation to repeat equation for number of times
-* Added Tables into the Solver for lookups and results
-* Added Static method for expression solving
-* New -&gt; Added ability to define user functions in EquationProject to reuse formulas in expressions
-* Added function for Factorial of a number
-* Changed min and max functions to use many numbers
-*Added function for sum of numbers ( sum(n, n ,n, ...) ) 
-* average of numbers ( avg(n, n, n, ...)) 
-* added equation validation.  
-*changed exception handing to eventhandlers</PackageReleaseNotes>
+    <PackageReleaseNotes>* Added example projects serialized as json
+* Added loading project by json string to Solver factory
+* improved the factory validations</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.7</AssemblyVersion>
-    <FileVersion>1.0.0.7</FileVersion>
-    <Version>1.0.7</Version>
+    <AssemblyVersion>1.0.0.9</AssemblyVersion>
+    <FileVersion>1.0.0.9</FileVersion>
+    <Version>1.0.9</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -32,5 +25,9 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
 
 </Project>
