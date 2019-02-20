@@ -33,13 +33,10 @@ namespace EquationSolver.Dto {
         
         private List<Table> tablesField;
         
-        private List<Trigger> triggersField;
-        
         /// <summary>
         /// EquationProject class constructor
         /// </summary>
         public EquationProject() {
-            this.triggersField = new List<Trigger>();
             this.tablesField = new List<Table>();
             this.functionsField = new List<Function>();
             this.equationsField = new List<Equation>();
@@ -178,25 +175,6 @@ namespace EquationSolver.Dto {
             }
         }
         
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public List<Trigger> Triggers {
-            get {
-                return this.triggersField;
-            }
-            set {
-                if ((this.triggersField != null)) {
-                    if ((triggersField.Equals(value) != true)) {
-                        this.triggersField = value;
-                        this.OnPropertyChanged("Triggers");
-                    }
-                }
-                else {
-                    this.triggersField = value;
-                    this.OnPropertyChanged("Triggers");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         public virtual void OnPropertyChanged(string propertyName) {
@@ -208,98 +186,6 @@ namespace EquationSolver.Dto {
     }
     
     public partial class SolverSettings : System.ComponentModel.INotifyPropertyChanged {
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        public virtual void OnPropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
-            if ((handler != null)) {
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    public partial class Trigger : System.ComponentModel.INotifyPropertyChanged {
-        
-        private string variableTriggerField;
-        
-        private string useExpressionField;
-        
-        private string targetField;
-        
-        private string expressionField;
-        
-        public string VariableTrigger {
-            get {
-                return this.variableTriggerField;
-            }
-            set {
-                if ((this.variableTriggerField != null)) {
-                    if ((variableTriggerField.Equals(value) != true)) {
-                        this.variableTriggerField = value;
-                        this.OnPropertyChanged("VariableTrigger");
-                    }
-                }
-                else {
-                    this.variableTriggerField = value;
-                    this.OnPropertyChanged("VariableTrigger");
-                }
-            }
-        }
-        
-        public string UseExpression {
-            get {
-                return this.useExpressionField;
-            }
-            set {
-                if ((this.useExpressionField != null)) {
-                    if ((useExpressionField.Equals(value) != true)) {
-                        this.useExpressionField = value;
-                        this.OnPropertyChanged("UseExpression");
-                    }
-                }
-                else {
-                    this.useExpressionField = value;
-                    this.OnPropertyChanged("UseExpression");
-                }
-            }
-        }
-        
-        public string Target {
-            get {
-                return this.targetField;
-            }
-            set {
-                if ((this.targetField != null)) {
-                    if ((targetField.Equals(value) != true)) {
-                        this.targetField = value;
-                        this.OnPropertyChanged("Target");
-                    }
-                }
-                else {
-                    this.targetField = value;
-                    this.OnPropertyChanged("Target");
-                }
-            }
-        }
-        
-        public string Expression {
-            get {
-                return this.expressionField;
-            }
-            set {
-                if ((this.expressionField != null)) {
-                    if ((expressionField.Equals(value) != true)) {
-                        this.expressionField = value;
-                        this.OnPropertyChanged("Expression");
-                    }
-                }
-                else {
-                    this.expressionField = value;
-                    this.OnPropertyChanged("Expression");
-                }
-            }
-        }
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
@@ -622,6 +508,8 @@ namespace EquationSolver.Dto {
         
         private string nameField;
         
+        private string triggerField;
+        
         private string useExpressionField;
         
         private string expressionField;
@@ -651,6 +539,24 @@ namespace EquationSolver.Dto {
                 else {
                     this.nameField = value;
                     this.OnPropertyChanged("Name");
+                }
+            }
+        }
+        
+        public string Trigger {
+            get {
+                return this.triggerField;
+            }
+            set {
+                if ((this.triggerField != null)) {
+                    if ((triggerField.Equals(value) != true)) {
+                        this.triggerField = value;
+                        this.OnPropertyChanged("Trigger");
+                    }
+                }
+                else {
+                    this.triggerField = value;
+                    this.OnPropertyChanged("Trigger");
                 }
             }
         }

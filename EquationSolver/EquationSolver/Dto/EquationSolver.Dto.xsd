@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema id="Common"
-    targetNamespace="http://tempuri.org/Common.xsd"
+    targetNamespace="http://BlueJaySvc.com/schemas/Common.xsd"
     elementFormDefault="qualified"
-    xmlns="http://tempuri.org/Common.xsd"
-    xmlns:mstns="http://tempuri.org/Common.xsd"
+    xmlns="http://BlueJaySvc.com/schemas/Common.xsd"
+    xmlns:mstns="http://BlueJaySvc.com/schemas/Common.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
   <xs:element name="EquationProject">
@@ -61,24 +61,9 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Triggers">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="Trigger" type="Trigger" maxOccurs="unbounded"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
       </xs:all>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="Trigger">
-    <xs:all>
-      <xs:element name ="VariableTrigger" type="xs:string" minOccurs="1" nillable="false"/>
-      <xs:element name="UseExpression" type="xs:string" minOccurs="1" nillable="false"/>
-      <xs:element name="Target" type="xs:string" minOccurs="1" nillable="false"/>
-      <xs:element name="Expression" type="xs:string" minOccurs="1" nillable="false"/>
-    </xs:all>
-  </xs:complexType>
   <xs:complexType name="Variable">
     <xs:annotation>
       <xs:documentation>Value object to use in equations</xs:documentation>
@@ -119,6 +104,7 @@
     </xs:annotation>
     <xs:all>
       <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Trigger" type="xs:string" nillable="true"/>
       <xs:element name="UseExpression" type="xs:string"/>
       <xs:element name="Expression" type="xs:string"/>
       <xs:element name="Iterate" type="xs:int" default="1"/>

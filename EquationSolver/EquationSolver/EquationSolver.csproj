@@ -9,15 +9,15 @@
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>- Added triggers to EquationProject to react to variable value changes
+    <PackageReleaseNotes>- Simplified triggers to property of Equation
 * Added example projects serialized as json
 * Added loading project by json string to Solver factory
 * improved the factory validations</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.10</AssemblyVersion>
-    <FileVersion>1.0.0.10</FileVersion>
-    <Version>1.0.10</Version>
+    <AssemblyVersion>1.0.0.11</AssemblyVersion>
+    <FileVersion>1.0.0.11</FileVersion>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

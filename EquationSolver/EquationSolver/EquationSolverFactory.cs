@@ -83,10 +83,6 @@ namespace EquationSolver
             solver.AddEquations(equationProject.Equations);
             solver.AddFunctions(equationProject.Functions);
             solver.AddTables(equationProject.Tables);
-            foreach (var trigger in equationProject.Triggers)
-            {
-                solver.AddTrigger(trigger);
-            }
 
             return solver;
         }

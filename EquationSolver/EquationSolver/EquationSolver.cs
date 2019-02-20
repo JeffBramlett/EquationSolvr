@@ -17,10 +17,10 @@ namespace EquationSolver
         #endregion
 
         #region Fields
-        VariableProvider _variableProvider;
-        List<Equation> _equationList;
-        List<Trigger> _triggers;
-        ExpressionSolver _solver;
+        private VariableProvider _variableProvider;
+        private List<Equation> _equationList;
+        private Dictionary<string, List<Equation>> _triggerDictionary;
+        private ExpressionSolver _solver;
         #endregion
 
         #region Properties
@@ -72,14 +72,15 @@ namespace EquationSolver
             }
         }
 
-        private List<Trigger> Triggers
+        private Dictionary<string, List<Equation>> TriggerDictionary
         {
             get
             {
-                _triggers = _triggers ?? new List<Trigger>();
-                return _triggers;
+                _triggerDictionary = _triggerDictionary ?? new Dictionary<string, List<Equation>>();
+                return _triggerDictionary;
             }
         }
+
         #endregion
 
         #region Events
@@ -129,15 +130,44 @@ namespace EquationSolver
         #region Public Loading
         public void AddEquation(Equation equation)
         {
+            AddTriggerForEquation(equation);
             Equations.Add(equation);
         }
+
+        private void AddTriggerForEquation(Equation equation)
+        {
+            if (!string.IsNullOrEmpty(equation.Trigger))
+            {
+                string[] triggers = equation.Trigger.Split(',');
+                foreach (var trigger in triggers)
+                {
+                    if (TriggerDictionary.ContainsKey(trigger))
+                    {
+                        TriggerDictionary[trigger].Add(equation);
+                    }
+                    else
+                    {
+                        List<Equation> list = new List<Equation>()
+                        {
+                            equation
+                        };
+
+                        TriggerDictionary.Add(trigger, list);
+                    }
+                }
+            }
+        }
+
         public void AddFunctions(IEnumerable<Function> functions)
         {
             Solver.Functions.AddRange(functions);
         }
         public void AddEquations(IEnumerable<Equation> equations)
         {
-            Equations.AddRange(equations);
+            foreach (var equation in equations)
+            {
+                AddEquation(equation);
+            }
         }
 
         public void AddTables(IEnumerable<Table> tables)
@@ -171,11 +201,6 @@ namespace EquationSolver
                     rowNdx++;
                 }
             }
-        }
-
-        public void AddTrigger(Trigger trigger)
-        {
-            Triggers.Add(trigger);
         }
         #endregion
 
@@ -242,14 +267,11 @@ namespace EquationSolver
         #region Trigger/Variable change handling
         private void _variableProvider_VariableValueChanged(string variableName)
         {
-            var triggerList = Triggers.FindAll(t => t.VariableTrigger == variableName);
-            foreach (var trigger in triggerList)
+            if (TriggerDictionary.ContainsKey(variableName))
             {
-                Solver.Resolve(trigger.UseExpression, VariableProvider);
-                if (Solver.BoolResult)
+                foreach (var equation in TriggerDictionary[variableName])
                 {
-                    Solver.Resolve(trigger.Expression, VariableProvider);
-                    VariableProvider[trigger.Target].SetValue(Solver.StringResult);
+                    ExecuteEquation(equation);
                 }
             }
         }
