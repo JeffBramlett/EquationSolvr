@@ -55,6 +55,7 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="SimpleMathExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TriggerTests.cs" />
     <Compile Include="TrigonometryTests.cs" />
     <Compile Include="FunctionsTests.cs" />
     <Compile Include="LogicalTests.cs" />

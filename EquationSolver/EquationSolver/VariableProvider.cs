@@ -17,6 +17,19 @@ namespace EquationSolver
         private Dictionary<string, VariableTable> _tables;
         #endregion
 
+        #region Events
+        /// <summary>
+        /// Delegate for notifying that a variable has changed.
+        /// </summary>
+        /// <param name="variableName"></param>
+        public delegate void VarableValueChangedDelegate(string variableName);
+
+        /// <summary>
+        /// Event to notify delegates that a variable has changed.
+        /// </summary>
+        public event VarableValueChangedDelegate VariableValueChanged;
+        #endregion
+
         #region Properties
         private Dictionary<string, Variable> Variables
         {
@@ -60,6 +73,7 @@ namespace EquationSolver
             if (Variables.ContainsKey(variable.Name))
             {
                 Variables[variable.Name] = variable;
+                RaiseVariableChanged(variable.Name);
             }
             else
             {
@@ -74,9 +88,10 @@ namespace EquationSolver
         /// <param name="value">the variable value</param>
         public void SetVariable(string name, object value)
         {
-            if(Variables.ContainsKey(name))
+            if (Variables.ContainsKey(name))
             {
                 Variables[name].SetValue(value);
+                RaiseVariableChanged(name);
             }
             else
             {
@@ -190,6 +205,13 @@ namespace EquationSolver
             {
                 Tables[tableName].SetVariableValueAt(row, column, value);
             }
+        }
+        #endregion
+
+        #region Private Event Raising
+        private void RaiseVariableChanged(string variableName)
+        {
+            VariableValueChanged?.Invoke(variableName);
         }
         #endregion
 

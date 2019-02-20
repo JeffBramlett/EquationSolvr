@@ -61,9 +61,24 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Triggers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Trigger" type="Trigger" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:all>
     </xs:complexType>
   </xs:element>
+  <xs:complexType name="Trigger">
+    <xs:all>
+      <xs:element name ="VariableTrigger" type="xs:string" minOccurs="1" nillable="false"/>
+      <xs:element name="UseExpression" type="xs:string" minOccurs="1" nillable="false"/>
+      <xs:element name="Target" type="xs:string" minOccurs="1" nillable="false"/>
+      <xs:element name="Expression" type="xs:string" minOccurs="1" nillable="false"/>
+    </xs:all>
+  </xs:complexType>
   <xs:complexType name="Variable">
     <xs:annotation>
       <xs:documentation>Value object to use in equations</xs:documentation>
@@ -103,6 +118,7 @@
       <xs:documentation>An aggregation of objects that comprise an equation and how it is executed</xs:documentation>
     </xs:annotation>
     <xs:all>
+      <xs:element name="Name" type="xs:string"/>
       <xs:element name="UseExpression" type="xs:string"/>
       <xs:element name="Expression" type="xs:string"/>
       <xs:element name="Iterate" type="xs:int" default="1"/>

@@ -29,6 +29,14 @@
             Function class constructor
             </summary>
         </member>
+        <member name="M:EquationSolver.Dto.Equation.TryFindByName(System.String,EquationSolver.Dto.Equation@)">
+            <summary>
+            Find the equation by name or return false
+            </summary>
+            <param name="equationName">the equation name to find</param>
+            <param name="found">the found equation or null if not found</param>
+            <returns>true if found, false otherwise</returns>
+        </member>
         <member name="F:EquationSolver.Dto.VariableTypes.NONE">
             <remarks/>
         </member>
@@ -43,6 +51,21 @@
         </member>
         <member name="F:EquationSolver.Dto.VariableTypes.DATE">
             <remarks/>
+        </member>
+        <member name="M:EquationSolver.EquationSolver.Dispose">
+            <summary>
+            Release the resources used by this instance
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Extensions.TryFindItem``1(System.Collections.Generic.List{``0},System.Predicate{``0},``0@)">
+            <summary>
+            Try to find using a predicate from a list (reference types only).  (does null check and does not throw exception)
+            </summary>
+            <typeparam name="T">the type of the list</typeparam>
+            <param name="list">the list</param>
+            <param name="predicate">the predicate to use in find</param>
+            <param name="found">the found item (null if not found)</param>
+            <returns>true if found and false otherwise</returns>
         </member>
         <member name="T:EquationSolver.EquationSolverFactory">
             <summary>
@@ -266,6 +289,17 @@
         <member name="T:EquationSolver.VariableProvider">
             <summary>
             Data management  class for variables and tables
+            </summary>
+        </member>
+        <member name="T:EquationSolver.VariableProvider.VarableValueChangedDelegate">
+            <summary>
+            Delegate for notifying that a variable has changed.
+            </summary>
+            <param name="variableName"></param>
+        </member>
+        <member name="E:EquationSolver.VariableProvider.VariableValueChanged">
+            <summary>
+            Event to notify delegates that a variable has changed.
             </summary>
         </member>
         <member name="P:EquationSolver.VariableProvider.Tables">

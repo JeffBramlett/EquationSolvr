@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace EquationSolver
 {
-    sealed class EquationSolver :  IEquationSolver
+    sealed class EquationSolver : IEquationSolver
     {
-        #region constants
+        #region Constants
         private const string TableDefineRegExp = @"^table\(([a-zA-Z0-9]+),([0-9 ]+)\)";
         private const string TableAccessRegExp = @"^([a-zA-Z0-9]+)\(([a-zA-Z0-9 ]+),([0-9 ]+)\)";
         private const string TableSetValueRegExp = @"^([a-zA-Z0-9]+)\(([0-9 ]+),([0-9 ]+), ([a-zA-Z0-9 ]+)\)";
@@ -19,6 +19,7 @@ namespace EquationSolver
         #region Fields
         VariableProvider _variableProvider;
         List<Equation> _equationList;
+        List<Trigger> _triggers;
         ExpressionSolver _solver;
         #endregion
 
@@ -27,7 +28,12 @@ namespace EquationSolver
         {
             get
             {
-                _variableProvider = _variableProvider ?? new VariableProvider();
+                if (_variableProvider == null)
+                {
+                    _variableProvider = new VariableProvider();
+                    _variableProvider.VariableValueChanged += _variableProvider_VariableValueChanged;
+                }
+
                 return _variableProvider;
             }
         }
@@ -36,7 +42,7 @@ namespace EquationSolver
         {
             get
             {
-                if(_solver == null)
+                if (_solver == null)
                 {
                     _solver = new ExpressionSolver();
                     _solver.ExceptionOccurred += Solver_ExceptionOccurred;
@@ -65,6 +71,15 @@ namespace EquationSolver
                 return _equationList;
             }
         }
+
+        private List<Trigger> Triggers
+        {
+            get
+            {
+                _triggers = _triggers ?? new List<Trigger>();
+                return _triggers;
+            }
+        }
         #endregion
 
         #region Events
@@ -77,6 +92,16 @@ namespace EquationSolver
         public EquationSolver(VariableProvider provider = null)
         {
             _variableProvider = provider;
+            if (_variableProvider != null)
+            {
+                _variableProvider.VariableValueChanged += _variableProvider_VariableValueChanged;
+            }
+        }
+
+        ~EquationSolver()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
         }
         #endregion
 
@@ -88,8 +113,8 @@ namespace EquationSolver
 
         #region Public Execution methods
         public IEquationSolver SolveEquations()
-        {          
-            foreach(var equation in Equations)
+        {
+            foreach (var equation in Equations)
             {
                 for (var i = 0; i < equation.Iterate; i++)
                 {
@@ -117,25 +142,25 @@ namespace EquationSolver
 
         public void AddTables(IEnumerable<Table> tables)
         {
-            foreach(var table in tables)
+            foreach (var table in tables)
             {
                 int columnCnt = table.RowHeader.Columns.Count;
 
                 VariableProvider.StartTable(table.Name, columnCnt);
 
                 int ndx = 1;
-                foreach(var col in table.RowHeader.Columns)
+                foreach (var col in table.RowHeader.Columns)
                 {
                     VariableProvider.SetColumnLabel(table.Name, ndx, col);
                     ndx++;
                 }
 
                 int rowNdx = 1;
-                foreach(var row in table.Rows)
+                foreach (var row in table.Rows)
                 {
                     VariableProvider.MakeRowInTable(table.Name, row.Label);
 
-                    for(var c = 0; c < columnCnt; c++)
+                    for (var c = 0; c < columnCnt; c++)
                     {
                         if (c < row.Columns.Count)
                         {
@@ -146,6 +171,11 @@ namespace EquationSolver
                     rowNdx++;
                 }
             }
+        }
+
+        public void AddTrigger(Trigger trigger)
+        {
+            Triggers.Add(trigger);
         }
         #endregion
 
@@ -164,7 +194,7 @@ namespace EquationSolver
                     VariableProvider.SetVariable(equation.Target, Solver.StringResult);
                 }
 
-                foreach(var moreEquation in equation.MoreEquations)
+                foreach (var moreEquation in equation.MoreEquations)
                 {
                     ExecuteEquation(moreEquation);
                 }
@@ -178,21 +208,21 @@ namespace EquationSolver
 
             if (tableRegex.IsMatch(input.Trim()))
             {
-                
+
                 var tableName = groups[1].Value.Trim();
                 var grp1 = groups[2].Value.Trim();
                 var grp2 = groups[3].Value.Trim();
 
                 int cols = int.Parse(grp2);
 
-                if(tableName.ToLower() == "table")
+                if (tableName.ToLower() == "table")
                 {
                     VariableProvider.StartTable(grp1, cols);
                 }
-                else if(VariableProvider.HasTable(tableName))
+                else if (VariableProvider.HasTable(tableName))
                 {
                     int row;
-                    if(!int.TryParse(grp1, out row))
+                    if (!int.TryParse(grp1, out row))
                     {
                         var varValue = VariableProvider[grp1].DecimalValue;
                         row = Convert.ToInt32(varValue);
@@ -209,6 +239,23 @@ namespace EquationSolver
         }
         #endregion
 
+        #region Trigger/Variable change handling
+        private void _variableProvider_VariableValueChanged(string variableName)
+        {
+            var triggerList = Triggers.FindAll(t => t.VariableTrigger == variableName);
+            foreach (var trigger in triggerList)
+            {
+                Solver.Resolve(trigger.UseExpression, VariableProvider);
+                if (Solver.BoolResult)
+                {
+                    Solver.Resolve(trigger.Expression, VariableProvider);
+                    VariableProvider[trigger.Target].SetValue(Solver.StringResult);
+                }
+            }
+        }
+
+        #endregion
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
@@ -218,7 +265,10 @@ namespace EquationSolver
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
+                    if (_variableProvider != null)
+                    {
+                        _variableProvider.VariableValueChanged -= _variableProvider_VariableValueChanged;
+                    }
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
@@ -228,20 +278,39 @@ namespace EquationSolver
             }
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~EquationSolver() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
+        /// <summary>
+        /// Release the resources used by this instance
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
         #endregion
+    }
+
+    static class Extensions
+    {
+        /// <summary>
+        /// Try to find using a predicate from a list (reference types only).  (does null check and does not throw exception)
+        /// </summary>
+        /// <typeparam name="T">the type of the list</typeparam>
+        /// <param name="list">the list</param>
+        /// <param name="predicate">the predicate to use in find</param>
+        /// <param name="found">the found item (null if not found)</param>
+        /// <returns>true if found and false otherwise</returns>
+        public static bool TryFindItem<T>(this List<T> list, Predicate<T> predicate, out T found) where T : class
+        {
+            found = null;
+
+            if (list != null)
+            {
+                found = list.Find(predicate);
+            }
+
+            return found != null;
+        }
+
     }
 }

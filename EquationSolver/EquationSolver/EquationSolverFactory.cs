@@ -48,10 +48,10 @@ namespace EquationSolver
 
         public IEquationSolver CreateEquationSolver(EquationProject equationProject, VariableProvider varProvider = null)
         {
-            foreach(var eq in equationProject.Equations)
+            foreach (var eq in equationProject.Equations)
             {
                 var equationValids = ValidateEquation(eq);
-                if(equationValids != null && equationValids.Count() > 0)
+                if (equationValids != null && equationValids.Count() > 0)
                 {
                     var exp = new ArgumentException("Equation(s) are not valid in the project (see exception.Data for details)");
                     exp.Data.Add("ValidationErrors", new List<string>(equationValids));
@@ -66,12 +66,12 @@ namespace EquationSolver
                 exp.Data.Add("Validation Errors", new List<string>(tableValids));
             }
 
-            if(varProvider == null)
+            if (varProvider == null)
             {
                 varProvider = new VariableProvider();
             }
 
-            foreach(Variable vr in equationProject.Variables)
+            foreach (Variable vr in equationProject.Variables)
             {
                 varProvider.SetVariable(vr.Name, vr.StringValue);
             }
@@ -83,10 +83,14 @@ namespace EquationSolver
             solver.AddEquations(equationProject.Equations);
             solver.AddFunctions(equationProject.Functions);
             solver.AddTables(equationProject.Tables);
+            foreach (var trigger in equationProject.Triggers)
+            {
+                solver.AddTrigger(trigger);
+            }
 
             return solver;
         }
-        
+
         public static Variable SolveExpression(string expression, VariableProvider varProvider = null)
         {
             VariableProvider prov = varProvider == null ? new VariableProvider() : varProvider;
@@ -109,9 +113,9 @@ namespace EquationSolver
             if (!ValidateExpression(equation.Expression))
                 yield return "Expression is invalid";
 
-            foreach(var eq in equation.MoreEquations)
+            foreach (var eq in equation.MoreEquations)
             {
-                foreach(var result in ValidateEquation(eq))
+                foreach (var result in ValidateEquation(eq))
                 {
                     yield return result;
                 }
@@ -122,7 +126,7 @@ namespace EquationSolver
 
         private IEnumerable<string> ValidateTables(EquationProject project)
         {
-            foreach(var table in project.Tables)
+            foreach (var table in project.Tables)
             {
                 Regex nameRegex = new Regex(OnlyNameRegExpression);
                 if (!nameRegex.IsMatch(table.Name))
@@ -144,7 +148,7 @@ namespace EquationSolver
         private List<Equation> SortEquations(List<Equation> listToSort)
         {
             List<Equation> sortedList = new List<Equation>();
-            foreach(var eq in listToSort)
+            foreach (var eq in listToSort)
             {
                 if (sortedList.Count == 0)
                     sortedList.Add(eq);
@@ -157,7 +161,7 @@ namespace EquationSolver
                     else
                         sortedList.Insert(ndx, eq);
                 }
-                
+
             }
             return sortedList;
         }
