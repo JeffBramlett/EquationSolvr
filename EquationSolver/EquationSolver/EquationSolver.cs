@@ -20,7 +20,7 @@ namespace EquationSolver
         private VariableProvider _variableProvider;
         private List<Equation> _equationList;
         private Dictionary<string, List<Equation>> _triggerDictionary;
-        private ExpressionSolver _solver;
+        private IExpressionSolver _solver;
         #endregion
 
         #region Properties
@@ -38,29 +38,32 @@ namespace EquationSolver
             }
         }
 
-        private ExpressionSolver Solver
+        public CalculationMethods CalculationMethod { get; set; } 
+
+        private IExpressionSolver Solver
         {
             get
             {
                 if (_solver == null)
                 {
-                    _solver = new ExpressionSolver();
+                    _solver = new DecimalExpressionSolver();
                     _solver.ExceptionOccurred += Solver_ExceptionOccurred;
                     _solver.VariableNotFound += Solver_VariableNotFound;
                 }
-                _solver = _solver ?? new ExpressionSolver();
+                _solver = _solver ?? new DecimalExpressionSolver();
                 return _solver;
             }
         }
 
-        private void Solver_VariableNotFound(string variableName)
+
+        private void Solver_VariableNotFound(object sender, EventArgs e)
         {
-            VariableNotFoundException?.Invoke(this, new VariableNotFoundEventArgs(variableName));
+            VariableNotFoundException?.Invoke(this, e);
         }
 
-        private void Solver_ExceptionOccurred(Exception e)
+        private void Solver_ExceptionOccurred(object sender, EventArgs e)
         {
-            ExceptionOccurred?.Invoke(this, new ExceptionEventArgs(e));
+            ExceptionOccurred?.Invoke(this, e);
         }
 
         private List<Equation> Equations
@@ -90,8 +93,10 @@ namespace EquationSolver
         #endregion
 
         #region Ctors and Dtors
-        public EquationSolver(VariableProvider provider = null)
+        public EquationSolver(IExpressionSolver solver, VariableProvider provider = null)
         {
+            _solver = solver;
+
             _variableProvider = provider;
             if (_variableProvider != null)
             {

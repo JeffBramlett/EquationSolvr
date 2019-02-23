@@ -18,7 +18,6 @@ namespace EquationSolver.Unit.Tests
             variables.SetVariable("customerlevel", 1);
             variables.SetVariable("discount", 1);
 
-
             EquationProject project = new EquationProject()
             {
                 Title = "Simple Trigger Example",
@@ -36,33 +35,6 @@ namespace EquationSolver.Unit.Tests
                 UseExpression = "quantity > 0",
                 Expression = "price * quantity",
                 Target = "subtotal",
-                MoreEquations = new List<Equation>()
-                {
-                    new Equation()
-                    {
-                        UseExpression = "subtotal < 500 and customerlevel < 5",
-                        Expression = "90",
-                        Target = "price"
-                    },
-                    new Equation()
-                    {
-                        UseExpression = "subtotal < 500 and customerlevel < 10 and customerlevel >= 5",
-                        Expression = "80",
-                        Target = "price"
-                    },
-                    new Equation()
-                    {
-                        UseExpression = "subtotal > 500",
-                        Expression = "70",
-                        Target = "price"
-                    },
-                    new Equation()
-                    {
-                        UseExpression = "true",
-                        Expression = "price * quantity",
-                        Target = "subtotal"
-                    },
-               }
             };
 
             Equation calcEquation = new Equation()
@@ -114,7 +86,7 @@ namespace EquationSolver.Unit.Tests
             variables.SetVariable("customerlevel",7);
             Assert.AreEqual(320, variables["subtotal"].DoubleValue);
 
-            variables.SetVariable("quantity",8);
+            variables["quantity"].SetValue(8);
             Assert.AreEqual(560, variables["subtotal"].DoubleValue);
 
         }

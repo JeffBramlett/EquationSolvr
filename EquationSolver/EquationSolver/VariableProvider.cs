@@ -10,7 +10,7 @@ namespace EquationSolver
     /// <summary>
     /// Data management  class for variables and tables
     /// </summary>
-    public class VariableProvider
+    public class VariableProvider : IVariableProvider
     {
         #region Fields
         private Dictionary<string, Variable> _variables;
@@ -77,6 +77,7 @@ namespace EquationSolver
             }
             else
             {
+                variable.SetParentProvider(this);
                 Variables.Add(variable.Name, variable);
             }
         }
@@ -98,6 +99,7 @@ namespace EquationSolver
                 Variable variable = new Variable();
                 variable.SetName(name);
                 variable.SetValue(value);
+                variable.SetParentProvider(this);
                 Variables.Add(name, variable);
             }
         }
@@ -208,8 +210,8 @@ namespace EquationSolver
         }
         #endregion
 
-        #region Private Event Raising
-        private void RaiseVariableChanged(string variableName)
+        #region Event Raising
+        public void RaiseVariableChanged(string variableName)
         {
             VariableValueChanged?.Invoke(variableName);
         }

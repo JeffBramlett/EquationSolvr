@@ -187,6 +187,24 @@ namespace EquationSolver.Dto {
     
     public partial class SolverSettings : System.ComponentModel.INotifyPropertyChanged {
         
+        private CalculationMethods calculationMethodField;
+        
+        public SolverSettings() {
+            this.calculationMethodField = CalculationMethods.Decimal;
+        }
+        
+        public CalculationMethods CalculationMethod {
+            get {
+                return this.calculationMethodField;
+            }
+            set {
+                if ((calculationMethodField.Equals(value) != true)) {
+                    this.calculationMethodField = value;
+                    this.OnPropertyChanged("CalculationMethod");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         public virtual void OnPropertyChanged(string propertyName) {
@@ -195,6 +213,15 @@ namespace EquationSolver.Dto {
                 handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    public enum CalculationMethods {
+        
+        /// <remarks/>
+        Decimal,
+        
+        /// <remarks/>
+        Double,
     }
     
     public partial class Row : System.ComponentModel.INotifyPropertyChanged {

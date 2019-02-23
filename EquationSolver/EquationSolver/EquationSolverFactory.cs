@@ -48,23 +48,9 @@ namespace EquationSolver
 
         public IEquationSolver CreateEquationSolver(EquationProject equationProject, VariableProvider varProvider = null)
         {
-            foreach (var eq in equationProject.Equations)
-            {
-                var equationValids = ValidateEquation(eq);
-                if (equationValids != null && equationValids.Count() > 0)
-                {
-                    var exp = new ArgumentException("Equation(s) are not valid in the project (see exception.Data for details)");
-                    exp.Data.Add("ValidationErrors", new List<string>(equationValids));
-                    throw exp;
-                }
-            }
+            ValidateEquations(equationProject);
 
-            var tableValids = ValidateTables(equationProject);
-            if (tableValids != null && tableValids.Count() > 0)
-            {
-                var exp = new ArgumentException("Project table(s) have errors (see exception.Data for details)");
-                exp.Data.Add("Validation Errors", new List<string>(tableValids));
-            }
+            ValidateTablesInProject(equationProject);
 
             if (varProvider == null)
             {
@@ -76,7 +62,14 @@ namespace EquationSolver
                 varProvider.SetVariable(vr.Name, vr.StringValue);
             }
 
-            EquationSolver solver = new EquationSolver(varProvider);
+            IExpressionSolver expressionSolver = new DecimalExpressionSolver();
+            if (equationProject.Settings.CalculationMethod == CalculationMethods.Double)
+            {
+                expressionSolver = new DoubleExpressionSolver();
+            }
+
+            EquationSolver solver = new EquationSolver(expressionSolver, varProvider);
+            solver.CalculationMethod = equationProject.Settings.CalculationMethod;
 
             equationProject.Equations.Sort();
 
@@ -87,11 +80,35 @@ namespace EquationSolver
             return solver;
         }
 
+        private void ValidateTablesInProject(EquationProject equationProject)
+        {
+            var tableValids = ValidateTables(equationProject);
+            if (tableValids != null && tableValids.Count() > 0)
+            {
+                var exp = new ArgumentException("Project table(s) have errors (see exception.Data for details)");
+                exp.Data.Add("Validation Errors", new List<string>(tableValids));
+            }
+        }
+
+        private void ValidateEquations(EquationProject equationProject)
+        {
+            foreach (var eq in equationProject.Equations)
+            {
+                var equationValids = ValidateEquation(eq);
+                if (equationValids != null && equationValids.Count() > 0)
+                {
+                    var exp = new ArgumentException("Equation(s) are not valid in the project (see exception.Data for details)");
+                    exp.Data.Add("ValidationErrors", new List<string>(equationValids));
+                    throw exp;
+                }
+            }
+        }
+
         public static Variable SolveExpression(string expression, VariableProvider varProvider = null)
         {
             VariableProvider prov = varProvider == null ? new VariableProvider() : varProvider;
 
-            ExpressionSolver expressionSolver = new ExpressionSolver();
+            DecimalExpressionSolver expressionSolver = new DecimalExpressionSolver();
             expressionSolver.Resolve(expression, prov);
 
             Variable v = new Variable();

@@ -169,6 +169,9 @@
     <xs:annotation>
       <xs:documentation>Settings used in solving equations</xs:documentation>
     </xs:annotation>
+    <xs:all>
+      <xs:element name="CalculationMethod" type="CalculationMethods" default="Decimal"/>
+    </xs:all>
   </xs:complexType>
   <xs:complexType name="AuditInfo">
     <xs:all>
@@ -178,6 +181,12 @@
       <xs:element name="ModifiedBy" type="xs:string"/>
     </xs:all>
   </xs:complexType>
+  <xs:simpleType name="CalculationMethods">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Decimal"/>
+      <xs:enumeration value="Double"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="VariableTypes">
     <xs:annotation>
       <xs:documentation>Types of variables to be used in the Equation Solver</xs:documentation>

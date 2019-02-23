@@ -5,19 +5,18 @@
     <RepositoryUrl>https://github.com/JeffBramlett/EquationSolvr</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <PackageTags>equations,formulas,expressions,math,library</PackageTags>
-    <Description>.NET Standard Library to solve equations expressed as free-form strings with variables, including boolean branching and nested equation trees using forward-only parsing (very fast).  Functions include common math, trigonometry and common functions, as well as User defined functions, and user defined tables.</Description>
+    <Description>.NET Standard Library to solve equations expressed as free-form strings with variables, including boolean branching and nested equation trees using forward-only parsing (very fast).  Functions include common math, trigonometry and common functions, equation triggers, decimal or double calculation determination, as well as User defined functions, and user defined tables.</Description>
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>- Simplified triggers to property of Equation
-* Added example projects serialized as json
-* Added loading project by json string to Solver factory
-* improved the factory validations</PackageReleaseNotes>
+    <PackageReleaseNotes>- Enable switching calculation methods between decimal and double
+- Simplified triggers to property of Equation
+</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.11</AssemblyVersion>
-    <FileVersion>1.0.0.11</FileVersion>
-    <Version>1.0.11</Version>
+    <AssemblyVersion>1.0.0.12</AssemblyVersion>
+    <FileVersion>1.0.0.12</FileVersion>
+    <Version>1.0.12</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -26,6 +25,32 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ExampleProjects\Double Calculation Using Table.json" />
+    <None Remove="ExampleProjects\Quadratic Plotting to Table.json" />
+    <None Remove="ExampleProjects\Simple Branching Example.json" />
+    <None Remove="ExampleProjects\Sine And Cosine Table.json" />
+    <None Remove="ExampleProjects\Table Access as Lookup.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ExampleProjects\Double Calculation Using Table.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ExampleProjects\Quadratic Plotting to Table.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ExampleProjects\Simple Branching Example.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ExampleProjects\Sine And Cosine Table.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ExampleProjects\Table Access as Lookup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />

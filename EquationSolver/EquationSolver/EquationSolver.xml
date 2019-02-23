@@ -4,6 +4,106 @@
         <name>EquationSolver</name>
     </assembly>
     <members>
+        <member name="F:EquationSolver.DecimalExpressionSolver.resType">
+            <summary>
+            The Result type of the expression.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.TypeOfResult">
+            <summary>
+            The enumeration type of the result.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.ResultAsDecimal">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.ResultAsDouble">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.BoolResult">
+            <summary>
+            The boolean result of the expression
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.StringResult">
+            <summary>
+            The string of the result of the expression.
+            </summary>
+            <remarks>More need here .... </remarks>
+        </member>
+        <member name="M:EquationSolver.DecimalExpressionSolver.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.DecimalExpressionSolver.Resolve(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            This is the method to call to run the expression machine.
+            </summary>
+            <param name="input">the string that is the expression</param>
+            <param name="variableProvider">the variable engine to get variables from</param>
+        </member>
+        <member name="M:EquationSolver.DecimalExpressionSolver.Compare(System.String)">
+            <summary>
+            Loads and resolves a comparison string
+            </summary>
+            <param name="input">the expression as a string</param>
+            <returns>the result of the comparison (true or false)</returns>
+        </member>
+        <member name="F:EquationSolver.DoubleExpressionSolver.resType">
+            <summary>
+            The Result type of the expression.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.TypeOfResult">
+            <summary>
+            The enumeration type of the result.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.ResultAsDecimal">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.ResultAsDouble">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.BoolResult">
+            <summary>
+            The boolean result of the expression
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.StringResult">
+            <summary>
+            The string of the result of the expression.
+            </summary>
+            <remarks>More need here .... </remarks>
+        </member>
+        <member name="M:EquationSolver.DoubleExpressionSolver.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.DoubleExpressionSolver.Resolve(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            This is the method to call to run the expression machine.
+            </summary>
+            <param name="input">the string that is the expression</param>
+            <param name="variableProvider">the variable engine to get variables from</param>
+        </member>
+        <member name="M:EquationSolver.DoubleExpressionSolver.Compare(System.String)">
+            <summary>
+            Loads and resolves a comparison string
+            </summary>
+            <param name="input">the expression as a string</param>
+            <returns>the result of the comparison (true or false)</returns>
+        </member>
         <member name="T:EquationSolver.Dto.EquationProject">
             <summary>
             The container for an equation project, encapsulates all the equations and variables
@@ -13,6 +113,12 @@
             <summary>
             EquationProject class constructor
             </summary>
+        </member>
+        <member name="F:EquationSolver.Dto.CalculationMethods.Decimal">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.CalculationMethods.Double">
+            <remarks/>
         </member>
         <member name="M:EquationSolver.Dto.Row.#ctor">
             <summary>
@@ -77,75 +183,30 @@
             Static Singleton instance of EquationSolverFactory
             </summary>
         </member>
-        <member name="T:EquationSolver.ExpressionSolver.ResultType">
+        <member name="T:EquationSolver.ResultType">
             <summary>
             Enumeration of Result Types
             </summary>
         </member>
-        <member name="F:EquationSolver.ExpressionSolver.ResultType.NONE">
+        <member name="F:EquationSolver.ResultType.NONE">
             <summary>
             Default enum value
             </summary>
         </member>
-        <member name="F:EquationSolver.ExpressionSolver.ResultType.BOOL">
+        <member name="F:EquationSolver.ResultType.BOOL">
             <summary>
             ResultType as Boolean
             </summary>
         </member>
-        <member name="F:EquationSolver.ExpressionSolver.ResultType.NUMBER">
+        <member name="F:EquationSolver.ResultType.NUMBER">
             <summary>
             ResultType as Number
             </summary>
         </member>
-        <member name="F:EquationSolver.ExpressionSolver.ResultType.STRING">
+        <member name="F:EquationSolver.ResultType.STRING">
             <summary>
             ResultType as String
             </summary>
-        </member>
-        <member name="F:EquationSolver.ExpressionSolver.resType">
-            <summary>
-            The Result type of the expression.
-            </summary>
-        </member>
-        <member name="P:EquationSolver.ExpressionSolver.TypeOfResult">
-            <summary>
-            The enumeration type of the result.
-            </summary>
-        </member>
-        <member name="P:EquationSolver.ExpressionSolver.Result">
-            <summary>
-            The result as a double
-            </summary>
-        </member>
-        <member name="P:EquationSolver.ExpressionSolver.BoolResult">
-            <summary>
-            The boolean result of the expression
-            </summary>
-        </member>
-        <member name="P:EquationSolver.ExpressionSolver.StringResult">
-            <summary>
-            The string of the result of the expression.
-            </summary>
-            <remarks>More need here .... </remarks>
-        </member>
-        <member name="M:EquationSolver.ExpressionSolver.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:EquationSolver.ExpressionSolver.Resolve(System.String,EquationSolver.VariableProvider)">
-            <summary>
-            This is the method to call to run the expression machine.
-            </summary>
-            <param name="input">the string that is the expression</param>
-            <param name="variableProvider">the variable engine to get variables from</param>
-        </member>
-        <member name="M:EquationSolver.ExpressionSolver.Compare(System.String)">
-            <summary>
-            Loads and resolves a comparison string
-            </summary>
-            <param name="input">the expression as a string</param>
-            <returns>the result of the comparison (true or false)</returns>
         </member>
         <member name="F:EquationSolver.Utilities.d1">
             <summary>

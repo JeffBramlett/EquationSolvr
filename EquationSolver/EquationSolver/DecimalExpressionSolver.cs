@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace EquationSolver
 {
-    class ExpressionSolver
+    
+    class DecimalExpressionSolver : IExpressionSolver
     {
         #region Enums and Constants
         const int NONE = 0;
@@ -16,28 +17,6 @@ namespace EquationSolver
         const int DEL = 2;
         const int NUM = 3;
 
-        /// <summary>
-        /// Enumeration of Result Types
-        /// </summary>
-        public enum ResultType
-        {
-            /// <summary>
-            /// Default enum value
-            /// </summary>
-            NONE,
-            /// <summary>
-            /// ResultType as Boolean
-            /// </summary>
-            BOOL,
-            /// <summary>
-            /// ResultType as Number
-            /// </summary>
-            NUMBER,
-            /// <summary>
-            /// ResultType as String
-            /// </summary>
-            STRING
-        }
         #endregion
 
         #region Fields
@@ -48,7 +27,7 @@ namespace EquationSolver
         int _pos = 0;
         char[] _token;
 
-        double _resultXXXAsDouble;
+        double _resultAsDouble;
         decimal _resultAsDecimal;
         bool _bResult;
         string _strResult;
@@ -77,9 +56,9 @@ namespace EquationSolver
         }
 
         /// <summary>
-        /// The result as a double
+        /// The result as a decimal
         /// </summary>
-        public decimal Result
+        public decimal ResultAsDecimal
         {
             get
             {
@@ -97,6 +76,31 @@ namespace EquationSolver
                 else
                 { 
                     return _resultAsDecimal;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The result as a decimal
+        /// </summary>
+        public double ResultAsDouble
+        {
+            get
+            {
+                if (resType == ResultType.BOOL)
+                {
+                    if (_bResult)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+                else
+                {
+                    return Convert.ToDouble(_resultAsDecimal);
                 }
             }
         }
@@ -180,18 +184,15 @@ namespace EquationSolver
         #endregion
 
         #region Delegates and Events
-        public delegate void VariableNotFoundDelegate(string variableName);
-        public event VariableNotFoundDelegate VariableNotFound;
-
-        public delegate void ExceptionOccurredDelegate(Exception e);
-        public event ExceptionOccurredDelegate ExceptionOccurred;
+        public event EventHandler ExceptionOccurred;
+        public event EventHandler VariableNotFound;
         #endregion
 
         #region Ctors
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ExpressionSolver()
+        public DecimalExpressionSolver()
         {
             _resultAsDecimal = 0;
             _bResult = false;
@@ -463,7 +464,7 @@ namespace EquationSolver
             }
             catch (Exception re)
             {
-                ExceptionOccurred?.Invoke(re);
+                RaiseExceptionOccurred("", re);
             }
         }
 
@@ -655,7 +656,7 @@ namespace EquationSolver
                         }
                         else
                         {
-                            VariableNotFound?.Invoke(lstr);
+                            RaiseVariableNotFoundOccurred(lstr);
                         }
                     }
                     else
@@ -717,7 +718,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
                 return false;
             }
         }
@@ -877,7 +878,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
             }
         }
 
@@ -901,7 +902,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
             }
         }
 
@@ -931,7 +932,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
             }
         }
 
@@ -953,7 +954,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
             }
         }
 
@@ -976,7 +977,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
             }
         }
 
@@ -1042,7 +1043,7 @@ namespace EquationSolver
                             }
                             else
                             {
-                                VariableNotFound?.Invoke(v);
+                                RaiseVariableNotFoundOccurred(v);
                                 r = 0;
                             }
                         }
@@ -1055,7 +1056,7 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
             }
         }
 
@@ -1556,9 +1557,34 @@ namespace EquationSolver
             }
             catch (Exception e)
             {
-                ExceptionOccurred?.Invoke(e);
+                RaiseExceptionOccurred("", e);
             }
         }
         #endregion
+
+        #region Raising Events
+
+        private void RaiseExceptionOccurred(string message, Exception ex)
+        {
+            if (ExceptionOccurred != null)
+            {
+                var exEvent = ExceptionOccurred;
+                ExceptionEventArgs args = new ExceptionEventArgs(ex);
+                exEvent.Invoke(this, args);
+            }
+        }
+
+        private void RaiseVariableNotFoundOccurred(string variableName)
+        {
+            if (VariableNotFound != null)
+            {
+                var exEvent = VariableNotFound;
+                VariableNotFoundEventArgs args = new VariableNotFoundEventArgs(variableName);
+                exEvent.Invoke(this, args);
+            }
+        }
+
+        #endregion
+
     }
 }

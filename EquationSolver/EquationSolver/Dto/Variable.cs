@@ -23,6 +23,8 @@ namespace EquationSolver.Dto
 
         public bool BoolValue { get; private set; }
 
+        private IVariableProvider ParentProvider { get; set; }
+
         public short ShortValue
         {
             get { return Convert.ToInt16(DecimalValue); }
@@ -88,10 +90,19 @@ namespace EquationSolver.Dto
                 DoubleValue = Convert.ToDouble(value);
                 BoolValue = DecimalValue >= 0;
             }
-
+            
             ReadString();
+
+            if (ParentProvider != null)
+            {
+                ParentProvider.RaiseVariableChanged(Name);
+            }
         }
 
+        public void SetParentProvider(IVariableProvider provider)
+        {
+            ParentProvider = provider;
+        }
 
         public int Compare(Variable x, Variable y)
         {
