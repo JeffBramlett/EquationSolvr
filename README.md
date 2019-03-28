@@ -1,7 +1,7 @@
 # EquationSolvr
 Solve Equations Expressed as strings, branch equations for custom evaluations.  Equations can be mathmatical, boolean/comparison, with logical ANDs and ORs. 
 
-See: Documentation: http://www.jeffbramlett.com/EquationSolver/Conceptual
+See: Documentation: http://www.bluejaysvc.com/OpenSource/ConceptualEquationSolver
 
 See: Nuget: https://www.nuget.org/packages/EquationSolver/
 
