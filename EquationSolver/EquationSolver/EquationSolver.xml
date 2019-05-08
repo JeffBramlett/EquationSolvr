@@ -104,14 +104,14 @@
             <param name="input">the expression as a string</param>
             <returns>the result of the comparison (true or false)</returns>
         </member>
-        <member name="T:EquationSolver.Dto.EquationProject">
+        <member name="T:EquationSolver.Dto.EquationProjectMerge">
             <summary>
-            The container for an equation project, encapsulates all the equations and variables
+            Collection of Equation Projects to Load
             </summary>
         </member>
-        <member name="M:EquationSolver.Dto.EquationProject.#ctor">
+        <member name="M:EquationSolver.Dto.EquationProjectMerge.#ctor">
             <summary>
-            EquationProject class constructor
+            EquationProjectMerge class constructor
             </summary>
         </member>
         <member name="F:EquationSolver.Dto.CalculationMethods.Decimal">
@@ -142,6 +142,16 @@
             <param name="equationName">the equation name to find</param>
             <param name="found">the found equation or null if not found</param>
             <returns>true if found, false otherwise</returns>
+        </member>
+        <member name="T:EquationSolver.Dto.EquationProject">
+            <summary>
+            The container for an equation project, encapsulates all the equations and variables
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.EquationProject.#ctor">
+            <summary>
+            EquationProject class constructor
+            </summary>
         </member>
         <member name="F:EquationSolver.Dto.VariableTypes.NONE">
             <remarks/>
@@ -182,6 +192,31 @@
             <summary>
             Static Singleton instance of EquationSolverFactory
             </summary>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.CreateEquationSolver(EquationSolver.Dto.EquationProjectMerge,EquationSolver.VariableProvider)">
+            <summary>
+            Create Eqution Solver by merging many EquationProjects
+            (enables the use of common equations, functions, and tables)
+            </summary>
+            <param name="mergeProject">the merging definition</param>
+            <param name="varProvider">External variable provider</param>
+            <returns>an EquationSolver</returns>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.CreateEquationSolver(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            Create EquationSolver from EquationProject serialized as JSON
+            </summary>
+            <param name="equationProjectAsJson">the Equation Project as JSON</param>
+            <param name="varProvider">External variable provider</param>
+            <returns>an EquationSolver</returns>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.CreateEquationSolver(EquationSolver.Dto.EquationProject,EquationSolver.VariableProvider)">
+            <summary>
+            Create an EquationSolver from an EquationProject
+            </summary>
+            <param name="equationProject">the Equation Project</param>
+            <param name="varProvider">External variable provider</param>
+            <returns>an EquationSolver</returns>
         </member>
         <member name="T:EquationSolver.ResultType">
             <summary>

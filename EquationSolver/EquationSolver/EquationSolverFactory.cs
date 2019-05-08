@@ -39,6 +39,43 @@ namespace EquationSolver
         #endregion
 
         #region Publics
+        /// <summary>
+        /// Create Eqution Solver by merging many EquationProjects
+        /// (enables the use of common equations, functions, and tables)
+        /// </summary>
+        /// <param name="mergeProject">the merging definition</param>
+        /// <param name="varProvider">External variable provider</param>
+        /// <returns>an EquationSolver</returns>
+        public IEquationSolver CreateEquationSolver(EquationProjectMerge mergeProject, VariableProvider varProvider = null)
+        {
+            EquationProject proj = new EquationProject()
+            {
+                Settings = mergeProject.Settings,
+                Title = mergeProject.Title,
+                Audit = mergeProject.Audit,
+                Equations = new List<Equation>(),
+                Functions = new List<Function>(),
+                Tables = new List<Table>(),
+                Variables = new List<Variable>()
+            };
+
+            foreach (var equationProject in mergeProject.EquationProjectList)
+            {
+                proj.Equations.AddRange(equationProject.Equations);
+                proj.Functions.AddRange(equationProject.Functions);
+                proj.Tables.AddRange(equationProject.Tables);
+                proj.Variables.AddRange(equationProject.Variables);
+            }
+
+            return CreateEquationSolver(proj, varProvider); ;
+        }
+
+        /// <summary>
+        /// Create EquationSolver from EquationProject serialized as JSON
+        /// </summary>
+        /// <param name="equationProjectAsJson">the Equation Project as JSON</param>
+        /// <param name="varProvider">External variable provider</param>
+        /// <returns>an EquationSolver</returns>
         public IEquationSolver CreateEquationSolver(string equationProjectAsJson, VariableProvider varProvider = null)
         {
             EquationProject proj = JsonConvert.DeserializeObject<EquationProject>(equationProjectAsJson);
@@ -46,6 +83,12 @@ namespace EquationSolver
             return CreateEquationSolver(proj, varProvider);
         }
 
+        /// <summary>
+        /// Create an EquationSolver from an EquationProject
+        /// </summary>
+        /// <param name="equationProject">the Equation Project</param>
+        /// <param name="varProvider">External variable provider</param>
+        /// <returns>an EquationSolver</returns>
         public IEquationSolver CreateEquationSolver(EquationProject equationProject, VariableProvider varProvider = null)
         {
             ValidateEquations(equationProject);
@@ -80,6 +123,22 @@ namespace EquationSolver
             return solver;
         }
 
+        public static Variable SolveExpression(string expression, VariableProvider varProvider = null)
+        {
+            VariableProvider prov = varProvider == null ? new VariableProvider() : varProvider;
+
+            DecimalExpressionSolver expressionSolver = new DecimalExpressionSolver();
+            expressionSolver.Resolve(expression, prov);
+
+            Variable v = new Variable();
+            v.SetName("result").SetValue(expressionSolver.StringResult);
+
+            return v;
+        }
+        #endregion
+
+        #region Privates
+
         private void ValidateTablesInProject(EquationProject equationProject)
         {
             var tableValids = ValidateTables(equationProject);
@@ -104,21 +163,6 @@ namespace EquationSolver
             }
         }
 
-        public static Variable SolveExpression(string expression, VariableProvider varProvider = null)
-        {
-            VariableProvider prov = varProvider == null ? new VariableProvider() : varProvider;
-
-            DecimalExpressionSolver expressionSolver = new DecimalExpressionSolver();
-            expressionSolver.Resolve(expression, prov);
-
-            Variable v = new Variable();
-            v.SetName("result").SetValue(expressionSolver.StringResult);
-
-            return v;
-        }
-        #endregion
-
-        #region Privates
         private IEnumerable<string> ValidateEquation(Equation equation)
         {
             if (!ValidateExpression(equation.UseExpression))

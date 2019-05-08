@@ -15,9 +15,9 @@ namespace EquationSolver.Dto {
     
     
     /// <summary>
-    /// The container for an equation project, encapsulates all the equations and variables
+    /// Collection of Equation Projects to Load
     /// </summary>
-    public partial class EquationProject : System.ComponentModel.INotifyPropertyChanged {
+    public partial class EquationProjectMerge : System.ComponentModel.INotifyPropertyChanged {
         
         private string titleField;
         
@@ -25,22 +25,13 @@ namespace EquationSolver.Dto {
         
         private AuditInfo auditField;
         
-        private List<Variable> variablesField;
-        
-        private List<Equation> equationsField;
-        
-        private List<Function> functionsField;
-        
-        private List<Table> tablesField;
+        private List<EquationProject> equationProjectListField;
         
         /// <summary>
-        /// EquationProject class constructor
+        /// EquationProjectMerge class constructor
         /// </summary>
-        public EquationProject() {
-            this.tablesField = new List<Table>();
-            this.functionsField = new List<Function>();
-            this.equationsField = new List<Equation>();
-            this.variablesField = new List<Variable>();
+        public EquationProjectMerge() {
+            this.equationProjectListField = new List<EquationProject>();
             this.auditField = new AuditInfo();
             this.settingsField = new SolverSettings();
         }
@@ -99,78 +90,21 @@ namespace EquationSolver.Dto {
             }
         }
         
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public List<Variable> Variables {
+        [System.Xml.Serialization.XmlArrayItemAttribute("EquationProject", IsNullable=false)]
+        public List<EquationProject> EquationProjectList {
             get {
-                return this.variablesField;
+                return this.equationProjectListField;
             }
             set {
-                if ((this.variablesField != null)) {
-                    if ((variablesField.Equals(value) != true)) {
-                        this.variablesField = value;
-                        this.OnPropertyChanged("Variables");
+                if ((this.equationProjectListField != null)) {
+                    if ((equationProjectListField.Equals(value) != true)) {
+                        this.equationProjectListField = value;
+                        this.OnPropertyChanged("EquationProjectList");
                     }
                 }
                 else {
-                    this.variablesField = value;
-                    this.OnPropertyChanged("Variables");
-                }
-            }
-        }
-        
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public List<Equation> Equations {
-            get {
-                return this.equationsField;
-            }
-            set {
-                if ((this.equationsField != null)) {
-                    if ((equationsField.Equals(value) != true)) {
-                        this.equationsField = value;
-                        this.OnPropertyChanged("Equations");
-                    }
-                }
-                else {
-                    this.equationsField = value;
-                    this.OnPropertyChanged("Equations");
-                }
-            }
-        }
-        
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public List<Function> Functions {
-            get {
-                return this.functionsField;
-            }
-            set {
-                if ((this.functionsField != null)) {
-                    if ((functionsField.Equals(value) != true)) {
-                        this.functionsField = value;
-                        this.OnPropertyChanged("Functions");
-                    }
-                }
-                else {
-                    this.functionsField = value;
-                    this.OnPropertyChanged("Functions");
-                }
-            }
-        }
-        
-        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
-        public List<Table> Tables {
-            get {
-                return this.tablesField;
-            }
-            set {
-                if ((this.tablesField != null)) {
-                    if ((tablesField.Equals(value) != true)) {
-                        this.tablesField = value;
-                        this.OnPropertyChanged("Tables");
-                    }
-                }
-                else {
-                    this.tablesField = value;
-                    this.OnPropertyChanged("Tables");
+                    this.equationProjectListField = value;
+                    this.OnPropertyChanged("EquationProjectList");
                 }
             }
         }
@@ -801,6 +735,177 @@ namespace EquationSolver.Dto {
                 else {
                     this.modifiedByField = value;
                     this.OnPropertyChanged("ModifiedBy");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        public virtual void OnPropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler handler = this.PropertyChanged;
+            if ((handler != null)) {
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <summary>
+    /// The container for an equation project, encapsulates all the equations and variables
+    /// </summary>
+    public partial class EquationProject : System.ComponentModel.INotifyPropertyChanged {
+        
+        private string titleField;
+        
+        private SolverSettings settingsField;
+        
+        private AuditInfo auditField;
+        
+        private List<Variable> variablesField;
+        
+        private List<Equation> equationsField;
+        
+        private List<Function> functionsField;
+        
+        private List<Table> tablesField;
+        
+        /// <summary>
+        /// EquationProject class constructor
+        /// </summary>
+        public EquationProject() {
+            this.tablesField = new List<Table>();
+            this.functionsField = new List<Function>();
+            this.equationsField = new List<Equation>();
+            this.variablesField = new List<Variable>();
+            this.auditField = new AuditInfo();
+            this.settingsField = new SolverSettings();
+        }
+        
+        public string Title {
+            get {
+                return this.titleField;
+            }
+            set {
+                if ((this.titleField != null)) {
+                    if ((titleField.Equals(value) != true)) {
+                        this.titleField = value;
+                        this.OnPropertyChanged("Title");
+                    }
+                }
+                else {
+                    this.titleField = value;
+                    this.OnPropertyChanged("Title");
+                }
+            }
+        }
+        
+        public SolverSettings Settings {
+            get {
+                return this.settingsField;
+            }
+            set {
+                if ((this.settingsField != null)) {
+                    if ((settingsField.Equals(value) != true)) {
+                        this.settingsField = value;
+                        this.OnPropertyChanged("Settings");
+                    }
+                }
+                else {
+                    this.settingsField = value;
+                    this.OnPropertyChanged("Settings");
+                }
+            }
+        }
+        
+        public AuditInfo Audit {
+            get {
+                return this.auditField;
+            }
+            set {
+                if ((this.auditField != null)) {
+                    if ((auditField.Equals(value) != true)) {
+                        this.auditField = value;
+                        this.OnPropertyChanged("Audit");
+                    }
+                }
+                else {
+                    this.auditField = value;
+                    this.OnPropertyChanged("Audit");
+                }
+            }
+        }
+        
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Variable> Variables {
+            get {
+                return this.variablesField;
+            }
+            set {
+                if ((this.variablesField != null)) {
+                    if ((variablesField.Equals(value) != true)) {
+                        this.variablesField = value;
+                        this.OnPropertyChanged("Variables");
+                    }
+                }
+                else {
+                    this.variablesField = value;
+                    this.OnPropertyChanged("Variables");
+                }
+            }
+        }
+        
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Equation> Equations {
+            get {
+                return this.equationsField;
+            }
+            set {
+                if ((this.equationsField != null)) {
+                    if ((equationsField.Equals(value) != true)) {
+                        this.equationsField = value;
+                        this.OnPropertyChanged("Equations");
+                    }
+                }
+                else {
+                    this.equationsField = value;
+                    this.OnPropertyChanged("Equations");
+                }
+            }
+        }
+        
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Function> Functions {
+            get {
+                return this.functionsField;
+            }
+            set {
+                if ((this.functionsField != null)) {
+                    if ((functionsField.Equals(value) != true)) {
+                        this.functionsField = value;
+                        this.OnPropertyChanged("Functions");
+                    }
+                }
+                else {
+                    this.functionsField = value;
+                    this.OnPropertyChanged("Functions");
+                }
+            }
+        }
+        
+        [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable=false)]
+        public List<Table> Tables {
+            get {
+                return this.tablesField;
+            }
+            set {
+                if ((this.tablesField != null)) {
+                    if ((tablesField.Equals(value) != true)) {
+                        this.tablesField = value;
+                        this.OnPropertyChanged("Tables");
+                    }
+                }
+                else {
+                    this.tablesField = value;
+                    this.OnPropertyChanged("Tables");
                 }
             }
         }

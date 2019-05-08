@@ -6,6 +6,37 @@
     xmlns:mstns="http://BlueJaySvc.com/schemas/Common.xsd"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
+  <xs:element name="EquationProjectMerge">
+    <xs:annotation>
+      <xs:documentation>Collection of Equation Projects to Load</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Title" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>The logical title of the merged Equation Projects</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Settings" type="SolverSettings">
+          <xs:annotation>
+            <xs:documentation>The settings to use for solving settings</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Audit" type="AuditInfo" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Audit information to track changes to this object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="EquationProjectList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="EquationProject" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="EquationProject">
     <xs:annotation>
       <xs:documentation>The container for an equation project, encapsulates all the equations and variables</xs:documentation>

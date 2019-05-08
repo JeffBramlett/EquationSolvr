@@ -9,14 +9,17 @@
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>- Enable switching calculation methods between decimal and double
+    <PackageReleaseNotes>Added ability to merge multiple EquationProjects into a single EquationSolver; allowing for many "common" projects to be defined once and then reused.
+* Note:  Available as webservices hosted in the cloud.
+- Enable switching calculation methods between decimal and double
 - Simplified triggers to property of Equation
 </PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>http://www.jeffbramlett.com/equationsolver</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.12</AssemblyVersion>
-    <FileVersion>1.0.0.12</FileVersion>
-    <Version>1.0.12</Version>
+    <PackageProjectUrl>https://bluejaywebsvc.com/OpenSource/ConceptualEquationSolver</PackageProjectUrl>
+    <AssemblyVersion>1.0.0.15</AssemblyVersion>
+    <FileVersion>1.0.0.15</FileVersion>
+    <Version>1.0.15</Version>
+    <PackageIconUrl>https://bluejaywebsvc.com/images/bluejaylogo.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
