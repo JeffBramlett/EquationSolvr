@@ -301,12 +301,6 @@
             ResultType as String
             </summary>
         </member>
-        <member name="T:EquationSolver.Symbiance.Symbiant`1">
-            <summary>
-            Generic implementation of a Symbiant
-            </summary>
-            <typeparam name="T">Type for symbiant execution</typeparam>
-        </member>
         <member name="F:EquationSolver.Utilities.d1">
             <summary>
             For debug timing tests
