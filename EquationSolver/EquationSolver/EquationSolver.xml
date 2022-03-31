@@ -35,6 +35,11 @@
             </summary>
             <remarks>More need here .... </remarks>
         </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.Functions">
+            <summary>
+            Function collection
+            </summary>
+        </member>
         <member name="M:EquationSolver.DecimalExpressionSolver.#ctor">
             <summary>
             Default constructor
@@ -125,15 +130,32 @@
             Row class constructor
             </summary>
         </member>
-        <member name="M:EquationSolver.Dto.Table.#ctor">
+        <member name="T:EquationSolver.Dto.Equation">
             <summary>
-            Table class constructor
+            Data class for an Equation
             </summary>
         </member>
-        <member name="M:EquationSolver.Dto.Function.#ctor">
+        <member name="M:EquationSolver.Dto.Equation.Compare(EquationSolver.Dto.Equation,EquationSolver.Dto.Equation)">
             <summary>
-            Function class constructor
+            Compare two Equations and return a number for sorting
             </summary>
+            <param name="x">the first equation to compare with the second</param>
+            <param name="y">the second Equation</param>
+            <returns>a number for sorting</returns>
+        </member>
+        <member name="M:EquationSolver.Dto.Equation.CompareTo(EquationSolver.Dto.Equation)">
+            <summary>
+            Compare this Equation with the other
+            </summary>
+            <param name="other">the other Equation</param>
+            <returns>a number for sorting</returns>
+        </member>
+        <member name="M:EquationSolver.Dto.Equation.HasTarget(System.String)">
+            <summary>
+            Does this Equations have a variable target for it's value
+            </summary>
+            <param name="targetName">the target name</param>
+            <returns>true for having a target, false otherwise</returns>
         </member>
         <member name="M:EquationSolver.Dto.Equation.TryFindByName(System.String,EquationSolver.Dto.Equation@)">
             <summary>
@@ -142,6 +164,21 @@
             <param name="equationName">the equation name to find</param>
             <param name="found">the found equation or null if not found</param>
             <returns>true if found, false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Dto.Function.#ctor">
+            <summary>
+            Function class constructor
+            </summary>
+        </member>
+        <member name="T:EquationSolver.Dto.Table">
+            <summary>
+            Class for table data persistence and operations
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.Table.#ctor">
+            <summary>
+            Table class constructor
+            </summary>
         </member>
         <member name="T:EquationSolver.Dto.EquationProject">
             <summary>
@@ -188,6 +225,11 @@
             Factory for Eqution Projects to Equation Solver
             </summary>
         </member>
+        <member name="M:EquationSolver.EquationSolverFactory.#ctor">
+            <summary>
+            Default Ctor
+            </summary>
+        </member>
         <member name="P:EquationSolver.EquationSolverFactory.Instance">
             <summary>
             Static Singleton instance of EquationSolverFactory
@@ -218,6 +260,22 @@
             <param name="varProvider">External variable provider</param>
             <returns>an EquationSolver</returns>
         </member>
+        <member name="M:EquationSolver.EquationSolverFactory.SolveExpression(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            Solve the expression to the internal varaible provider or the supplied one
+            </summary>
+            <param name="expression">the expression to solve</param>
+            <param name="varProvider">the variable provider</param>
+            <returns></returns>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.SolveForX(System.String,System.String)">
+            <summary>
+            (Work in progress)
+            </summary>
+            <param name="expression"></param>
+            <param name="variableName"></param>
+            <returns></returns>
+        </member>
         <member name="T:EquationSolver.ResultType">
             <summary>
             Enumeration of Result Types
@@ -242,6 +300,12 @@
             <summary>
             ResultType as String
             </summary>
+        </member>
+        <member name="T:EquationSolver.Symbiance.Symbiant`1">
+            <summary>
+            Generic implementation of a Symbiant
+            </summary>
+            <typeparam name="T">Type for symbiant execution</typeparam>
         </member>
         <member name="F:EquationSolver.Utilities.d1">
             <summary>

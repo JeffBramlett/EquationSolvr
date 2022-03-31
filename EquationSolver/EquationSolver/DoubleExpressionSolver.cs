@@ -286,6 +286,10 @@ namespace EquationSolver
         #endregion
 
         #region Evaluation functions
+        public void SolveForX(string input, VariableProvider variableProvider, string variableName = "x")
+        {
+
+        }
         /// <summary>
         /// This is the method to call to run the expression machine.
         /// </summary>

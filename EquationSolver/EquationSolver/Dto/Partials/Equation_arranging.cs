@@ -6,13 +6,27 @@ using System.Threading.Tasks;
 
 namespace EquationSolver.Dto
 {
+    /// <summary>
+    /// Data class for an Equation
+    /// </summary>
     public partial class Equation : IComparable<Equation>, IComparer<Equation>
     {
+        /// <summary>
+        /// Compare two Equations and return a number for sorting
+        /// </summary>
+        /// <param name="x">the first equation to compare with the second</param>
+        /// <param name="y">the second Equation</param>
+        /// <returns>a number for sorting</returns>
         public int Compare(Equation x, Equation y)
         {
             return x.CompareTo(y);
         }
 
+        /// <summary>
+        /// Compare this Equation with the other
+        /// </summary>
+        /// <param name="other">the other Equation</param>
+        /// <returns>a number for sorting</returns>
         public int CompareTo(Equation other)
         {
             int hasUse = UseExpression.Contains(other.Target) ? 1 : 0;
@@ -22,6 +36,11 @@ namespace EquationSolver.Dto
 
         }
 
+        /// <summary>
+        /// Does this Equations have a variable target for it's value
+        /// </summary>
+        /// <param name="targetName">the target name</param>
+        /// <returns>true for having a target, false otherwise</returns>
         public bool HasTarget(string targetName)
         {
             bool found = false;

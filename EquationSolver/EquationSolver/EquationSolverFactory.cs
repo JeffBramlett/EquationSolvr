@@ -19,6 +19,9 @@ namespace EquationSolver
         #endregion
 
         #region Ctors and Dtors
+        /// <summary>
+        /// Default Ctor
+        /// </summary>
         public EquationSolverFactory()
         {
 
@@ -123,12 +126,37 @@ namespace EquationSolver
             return solver;
         }
 
+        /// <summary>
+        /// Solve the expression to the internal varaible provider or the supplied one
+        /// </summary>
+        /// <param name="expression">the expression to solve</param>
+        /// <param name="varProvider">the variable provider</param>
+        /// <returns></returns>
         public static Variable SolveExpression(string expression, VariableProvider varProvider = null)
         {
             VariableProvider prov = varProvider == null ? new VariableProvider() : varProvider;
 
             DecimalExpressionSolver expressionSolver = new DecimalExpressionSolver();
             expressionSolver.Resolve(expression, prov);
+
+            Variable v = new Variable();
+            v.SetName("result").SetValue(expressionSolver.StringResult);
+
+            return v;
+        }
+
+        /// <summary>
+        /// (Work in progress)
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="variableName"></param>
+        /// <returns></returns>
+        public static Variable SolveForX(string expression, string variableName = "x")
+        {
+            VariableProvider prov = new VariableProvider();
+
+            DecimalExpressionSolver expressionSolver = new DecimalExpressionSolver();
+            expressionSolver.SolveForX(expression, prov, variableName);
 
             Variable v = new Variable();
             v.SetName("result").SetValue(expressionSolver.StringResult);

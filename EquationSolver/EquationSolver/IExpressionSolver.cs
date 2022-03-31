@@ -47,5 +47,7 @@ namespace EquationSolver
         event EventHandler VariableNotFound;
 
         void Resolve(string input, VariableProvider variableProvider);
+
+        void SolveForX(string input, VariableProvider variableProvider, string variableName = "x");
     }
 }

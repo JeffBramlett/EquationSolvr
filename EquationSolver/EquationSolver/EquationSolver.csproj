@@ -15,15 +15,15 @@
 - Simplified triggers to property of Equation
 </PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://bluejaywebsvc.com/OpenSource/ConceptualEquationSolver</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.15</AssemblyVersion>
-    <FileVersion>1.0.0.15</FileVersion>
-    <Version>1.0.15</Version>
+    <PackageProjectUrl>http://aboutjeffbramlett.com/resources/equationsolver</PackageProjectUrl>
+    <AssemblyVersion>1.0.0.16</AssemblyVersion>
+    <FileVersion>1.0.0.16</FileVersion>
+    <Version>1.0.16</Version>
     <PackageIconUrl>https://bluejaywebsvc.com/images/bluejaylogo.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\jeff_\Source\Repos\EquationSolver\EquationSolvr\EquationSolver\EquationSolver\EquationSolver.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\jeff_\source\repos\EquationSolver\EquationSolvr\EquationSolver\EquationSolver\EquationSolver.xml</DocumentationFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>

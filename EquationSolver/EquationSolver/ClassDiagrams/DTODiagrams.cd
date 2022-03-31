@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="EquationSolver.Dto.EquationProjectMerge" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>ABAACAgAAIAAAEAAIACAAAAAgAAAAAAAgAAAAAAAAAE=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.SolverSettings" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="8.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAEAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.Row" BaseTypeListCollapsed="true">
+    <Position X="9" Y="12.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAEIAAAAAAAgAAAAAAABAAAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.Table" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="12.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAFAAIIAAAAQAgAAAIACAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.Argument" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAEAQAIJAAIAQAgAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>DTO\PARTIALS\Function_arranging.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.Function" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="4.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAIIAAEAQAgAAAAAAQIIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.Equation" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="10" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAFABQQoIAAACQJgAIIAAAQAIBAAAAAgAA=</HashCode>
+      <FileName>DTO\PARTIALS\Equation_arranging.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.Variable" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="16.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABCAgQEIMAAQAQAgAIAAUAgAADAQAAQAAA=</HashCode>
+      <FileName>DTO\Variable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.AuditInfo" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACgBAAAgAAAAAIAAAAAAAgAACAAAABAAEAAAAAAE=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EquationSolver.Dto.EquationProject" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>ABAICAgAAIAAIEAAIAEAQAIAkAAAAAAAiAQAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Enum Name="EquationSolver.Dto.CalculationMethods">
+    <Position X="9" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EquationSolver.Dto.VariableTypes">
+    <Position X="4.75" Y="16.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAEAAAAAAAgAAAAAAEAIAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

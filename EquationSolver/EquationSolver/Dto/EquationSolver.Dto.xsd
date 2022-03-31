@@ -64,7 +64,7 @@
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Variable" type="Variable" maxOccurs="unbounded"/>
+              <xs:element ref="Variable" maxOccurs="unbounded"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -74,49 +74,69 @@
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Equation" type="Equation" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:element ref="Equation" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="Functions">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Function" type="Function" maxOccurs="unbounded"/>
+              <xs:element ref="Function" maxOccurs="unbounded"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="Tables">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Table" type="Table" maxOccurs="unbounded"/>
+              <xs:element ref="Table" maxOccurs="unbounded"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:all>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="Variable">
+  <xs:element name="Variable">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>Value object to use in equations</xs:documentation>
+      </xs:annotation>
+      <xs:all>
+        <xs:element name="Name" type="xs:string"/>
+        <xs:element name="StringValue" type="xs:string"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Table">
     <xs:annotation>
-      <xs:documentation>Value object to use in equations</xs:documentation>
+      <xs:documentation>Class for table data persistence and operations</xs:documentation>
     </xs:annotation>
-    <xs:all>
-      <xs:element name="Name" type="xs:string"/>
-      <xs:element name="StringValue" type="xs:string"/>
-    </xs:all>
-  </xs:complexType>
-  <xs:complexType name="Table">
-    <xs:all>
-      <xs:element name="Name" type="xs:string"/>
-      <xs:element name="RowHeader" type="Row"/>
-      <xs:element name="Rows">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Row" type="Row" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:all>
-  </xs:complexType>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Name" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>The name of the table</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="RowHeader" type="Row">
+          <xs:annotation>
+            <xs:documentation>The header for the rows (column names and etc.)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Rows">
+          <xs:annotation>
+            <xs:documentation>
+              The rows of the table
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Row" type="Row" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+   </xs:element>
   <xs:complexType name="Row">
     <xs:all>
       <xs:element name="Label" type="xs:string"/>
@@ -129,73 +149,79 @@
       </xs:element>
     </xs:all>
   </xs:complexType>
-  <xs:complexType name="Equation">
-    <xs:annotation>
-      <xs:documentation>An aggregation of objects that comprise an equation and how it is executed</xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name="Name" type="xs:string"/>
-      <xs:element name="Trigger" type="xs:string" nillable="true"/>
-      <xs:element name="UseExpression" type="xs:string"/>
-      <xs:element name="Expression" type="xs:string"/>
-      <xs:element name="Iterate" type="xs:int" default="1"/>
-      <xs:element name="Target" type="xs:string"/>
-      <xs:element name="MoreEquations">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Equation" type="Equation" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:all>
-  </xs:complexType>
-  <xs:complexType name="Function">
-    <xs:annotation>
-      <xs:documentation>User defined function</xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name="Name" type="xs:string" nillable="false">
-        <xs:annotation>
-          <xs:documentation>the name of the function to identify it in expressions</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="Description" type="xs:string" nillable="true">
-        <xs:annotation>
-          <xs:documentation>The description of this function</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="Arguments">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Argument" type="Argument" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="Expression" type="xs:string" nillable="false"/>
-    </xs:all>
-  </xs:complexType>
-  <xs:complexType name="Argument">
-    <xs:annotation>
-      <xs:documentation>Arguments for the function expression</xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name="Name" type="xs:string">
-        <xs:annotation>
-          <xs:documentation>The argument name used to identify it</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="Ordinal" type="xs:int">
-        <xs:annotation>
-          <xs:documentation>The order of this argument in expression</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="Default" type="xs:string">
-        <xs:annotation>
-          <xs:documentation>The default value for the argument</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:all>
-  </xs:complexType>
+  <xs:element name="Equation">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>An aggregation of objects that comprise an equation and how it is executed</xs:documentation>
+      </xs:annotation>
+      <xs:all>
+        <xs:element name="Name" type="xs:string"/>
+        <xs:element name="Trigger" type="xs:string" nillable="true"/>
+        <xs:element name="UseExpression" type="xs:string"/>
+        <xs:element name="Expression" type="xs:string"/>
+        <xs:element name="Iterate" type="xs:int" default="1"/>
+        <xs:element name="Target" type="xs:string"/>
+        <xs:element name="MoreEquations">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Equation" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+    </xs:element>
+  <xs:element name="Function">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>User defined function</xs:documentation>
+      </xs:annotation>
+      <xs:all>
+        <xs:element name="Name" type="xs:string" nillable="false">
+          <xs:annotation>
+            <xs:documentation>the name of the function to identify it in expressions</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Description" type="xs:string" nillable="true">
+          <xs:annotation>
+            <xs:documentation>The description of this function</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Arguments">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Argument" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Expression" type="xs:string" nillable="false"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Argument">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>Argument for the function expression</xs:documentation>
+      </xs:annotation>
+      <xs:all>
+        <xs:element name="Name" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>The argument name used to identify it</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Ordinal" type="xs:int">
+          <xs:annotation>
+            <xs:documentation>The order of this argument in expression</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Default" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>The default value for the argument</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
   <xs:complexType name="SolverSettings">
     <xs:annotation>
       <xs:documentation>Settings used in solving equations</xs:documentation>
@@ -213,6 +239,11 @@
     </xs:all>
   </xs:complexType>
   <xs:simpleType name="CalculationMethods">
+    <xs:annotation>
+      <xs:documentation>
+        Numeric accuracy in calculation enumeration
+      </xs:documentation>
+    </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:enumeration value="Decimal"/>
       <xs:enumeration value="Double"/>

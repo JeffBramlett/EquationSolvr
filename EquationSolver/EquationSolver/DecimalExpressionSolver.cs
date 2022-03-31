@@ -22,10 +22,13 @@ namespace EquationSolver
         #region Fields
         private VariableProvider _varProvider;
 
-        int _type = 0;
-        char[] _expr;
-        int _pos = 0;
-        char[] _token;
+        private int TokenType { get; set; }
+
+        private int PreviousTokenType { get; set; }
+
+        private char[] ExprArray { get; set; }
+        private int Position { get; set; }
+        private char[] TokenArray { get; set; }
 
         double _resultAsDouble;
         decimal _resultAsDecimal;
@@ -43,6 +46,9 @@ namespace EquationSolver
         ResultType resType = ResultType.NONE;
         #endregion
         
+        #region Private properties
+        #endregion
+
         #region Properties
         /// <summary>
         /// The enumeration type of the result.
@@ -172,6 +178,9 @@ namespace EquationSolver
             }
         }
 
+        /// <summary>
+        /// Function collection
+        /// </summary>
         public List<Function> Functions
         {
             get
@@ -287,7 +296,24 @@ namespace EquationSolver
         }
         #endregion
 
+        #region EquationMath
+        #endregion
+
+        #region VariableMath
+        #endregion
+
         #region Evaluation functions
+        public void SolveForX(string input, VariableProvider variableProvider, string variableName = "x")
+        {
+            if(input.Contains(variableName) && input.Contains("="))
+            {
+
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
         /// <summary>
         /// This is the method to call to run the expression machine.
         /// </summary>
@@ -342,7 +368,7 @@ namespace EquationSolver
             try
             {
                 _resultAsDecimal = 0;
-                _pos = 0;
+                Position = 0;
                 _strResult = "";
                 _bResult = false;
 
@@ -366,9 +392,9 @@ namespace EquationSolver
                     }
                     if (variable == null)
                     {
-                        _expr = e.ToCharArray();
+                        ExprArray = e.ToCharArray();
                         Parse();
-                        if (_type == NUM && Utilities.IsANumber(e))
+                        if (TokenType == NUM && Utilities.IsANumber(e))
                         {
                             _resultAsDecimal = decimal.Parse(e);
                             _strResult = "" + _resultAsDecimal;
@@ -447,14 +473,14 @@ namespace EquationSolver
                 {
                     _noOperator = false;
                     string etmp = e + "~";
-                    _expr = etmp.ToCharArray();
+                    ExprArray = etmp.ToCharArray();
 
                     if (e.IndexOf("[") > -1)
                     {
                     }
                     else
                     {
-                        while (_pos < _expr.Length - 1)
+                        while (Position < ExprArray.Length - 1)
                         {
                             Parse();
                             Assignment(ref _resultAsDecimal);
@@ -890,7 +916,7 @@ namespace EquationSolver
                 decimal d = 0;
 
                 MultiplyDivideOrMod(ref r);
-                while ((o = _token[0]) == '+' || o == '-')
+                while ((o = TokenArray[0]) == '+' || o == '-')
                 {
                     Parse();
                     MultiplyDivideOrMod(ref d);
@@ -914,7 +940,7 @@ namespace EquationSolver
                 decimal d = 0;
 
                 PowerUp(ref r);
-                while ((o = _token[0]) == '*' || o == '/' || o == '%')
+                while ((o = TokenArray[0]) == '*' || o == '/' || o == '%')
                 {
                     Parse();
                     PowerUp(ref d);
@@ -943,7 +969,7 @@ namespace EquationSolver
                 decimal d = 0;
 
                 PlusOrMinus(ref r);
-                if (_token[0] == '^')
+                if (TokenArray[0] == '^')
                 {
                     Parse();
                     PlusOrMinus(ref d);
@@ -964,9 +990,9 @@ namespace EquationSolver
             {
                 char o = '0';
 
-                if (_token[0] == '+' || _token[0] == '-')
+                if (TokenArray[0] == '+' || TokenArray[0] == '-')
                 {
-                    o = _token[0];
+                    o = TokenArray[0];
                     Parse();
                 }
                 Literal(ref r);
@@ -985,7 +1011,7 @@ namespace EquationSolver
         {
             try
             {
-                if (_token[0] == '(')
+                if (TokenArray[0] == '(')
                 {
                     Parse();
                     Assignment(ref r);
@@ -993,15 +1019,15 @@ namespace EquationSolver
                 }
                 else
                 {
-                    if (_type == NUM)
+                    if (TokenType == NUM)
                     {
-                        string p = new String(_token);
+                        string p = new String(TokenArray);
                         r = decimal.Parse(p);
                         Parse();
                     }
-                    else if (_type == VAR)
+                    else if (TokenType == VAR)
                     {
-                        string var = new String(_token);
+                        string var = new String(TokenArray);
                         
                         if(Literal_CommonFunctions(var, ref r))
                         {
@@ -1035,7 +1061,7 @@ namespace EquationSolver
                         else
                         {
 
-                            string v = new String(_token);
+                            string v = new String(TokenArray);
                             var val = _varProvider[v];
                             if (val != null)
                             {
@@ -1043,6 +1069,7 @@ namespace EquationSolver
                             }
                             else
                             {
+                                _varProvider.AddVariable(new Variable() { Name = v, StringValue = r.ToString() });
                                 RaiseVariableNotFoundOccurred(v);
                                 r = 0;
                             }
@@ -1313,7 +1340,7 @@ namespace EquationSolver
 
                             s1 = st < s1 ? st : s1;
 
-                            if (_token[0] == ')')
+                            if (TokenArray[0] == ')')
                                 break;
                             Parse();
                         }
@@ -1336,7 +1363,7 @@ namespace EquationSolver
 
                             s1 = st > s1 ? st : s1;
 
-                            if (_token[0] == ')')
+                            if (TokenArray[0] == ')')
                                 break;
                             Parse();
                         }
@@ -1370,7 +1397,7 @@ namespace EquationSolver
                             decimal s1 = 0;
                             Assignment(ref s1);
                             sum += s1;
-                            if (_token[0] == ')')
+                            if (TokenArray[0] == ')')
                                 break;
                             Parse();
                         }
@@ -1390,7 +1417,7 @@ namespace EquationSolver
                             decimal s1 = 0;
                             Assignment(ref s1);
                             sum += s1;
-                            if (_token[0] == ')')
+                            if (TokenArray[0] == ')')
                                 break;
                             Parse();
                         }
@@ -1434,7 +1461,7 @@ namespace EquationSolver
                     Assignment(ref st);
                     expressionToSolve = expressionToSolve.Replace(argNames[ndx], st.ToString());
 
-                    if (_token[0] == ')')
+                    if (TokenArray[0] == ')')
                         break;
                     Parse();
                     ndx++;
@@ -1457,7 +1484,7 @@ namespace EquationSolver
                 case "table":
                     Parse();
                     Parse();
-                    string tableName = new string(_token);
+                    string tableName = new string(TokenArray);
                     Parse();
                     decimal dcols = 0M;
                     Assignment(ref dcols);
@@ -1495,55 +1522,55 @@ namespace EquationSolver
         {
             try
             {
-                _type = NONE;
-                if (_pos < _expr.Length)
+                TokenType = NONE;
+                if (Position < ExprArray.Length)
                 {
                     StringBuilder sb = new StringBuilder();
-                    if (_expr[_pos] == '~')
+                    if (ExprArray[Position] == '~')
                         return;
 
-                    while (IsWhite(_expr[_pos]))
-                        _pos++;
+                    while (IsWhite(ExprArray[Position]))
+                        Position++;
 
-                    if (IsDelimiter(_expr[_pos]))
+                    if (IsDelimiter(ExprArray[Position]))
                     {
-                        if (_noOperator && IsMinus(_expr[_pos]))
+                        if (_noOperator && IsMinus(ExprArray[Position]))
                         {
-                            _type = NUM;
+                            TokenType = NUM;
                         }
                         else
                         {
-                            _type = DEL;
+                            TokenType = DEL;
                         }
-                        sb.Append(_expr[_pos]);
-                        _pos++;
+                        sb.Append(ExprArray[Position]);
+                        Position++;
                     }
-                    else if (IsNumeric(_expr[_pos]))
+                    else if (IsNumeric(ExprArray[Position]))
                     {
-                        _type = NUM;
-                        while (IsNumeric(_expr[_pos]))
+                        TokenType = NUM;
+                        while (IsNumeric(ExprArray[Position]))
                         {
-                            sb.Append(_expr[_pos]);
-                            _pos++;
-                            if (_pos == _expr.Length)
+                            sb.Append(ExprArray[Position]);
+                            Position++;
+                            if (Position == ExprArray.Length)
                             {
                                 break;
                             }
                         }
                     }
-                    else if (IsAlpha(_expr[_pos]))
+                    else if (IsAlpha(ExprArray[Position]))
                     {
-                        _type = VAR;
-                        while (IsAlpha(_expr[_pos]))
+                        TokenType = VAR;
+                        while (IsAlpha(ExprArray[Position]))
                         {
-                            if(IsDelimiter(_expr[_pos]))
+                            if(IsDelimiter(ExprArray[Position]))
                             {
                                 break;
                             }
-                            else if (_pos < _expr.Length - 1)
+                            else if (Position < ExprArray.Length - 1)
                             {
-                                sb.Append(_expr[_pos]);
-                                _pos++;
+                                sb.Append(ExprArray[Position]);
+                                Position++;
                             }
                             else
                             {
@@ -1552,8 +1579,9 @@ namespace EquationSolver
 
                         }
                     }
-                    _token = sb.ToString().ToCharArray();
+                    TokenArray = sb.ToString().ToCharArray();
                 }
+                PreviousTokenType = TokenType;
             }
             catch (Exception e)
             {
