@@ -1,0 +1,515 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EquationSolver</name>
+    </assembly>
+    <members>
+        <member name="F:EquationSolver.DecimalExpressionSolver.resType">
+            <summary>
+            The Result type of the expression.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.TypeOfResult">
+            <summary>
+            The enumeration type of the result.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.ResultAsDecimal">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.ResultAsDouble">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.BoolResult">
+            <summary>
+            The boolean result of the expression
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.StringResult">
+            <summary>
+            The string of the result of the expression.
+            </summary>
+            <remarks>More need here .... </remarks>
+        </member>
+        <member name="P:EquationSolver.DecimalExpressionSolver.Functions">
+            <summary>
+            Function collection
+            </summary>
+        </member>
+        <member name="M:EquationSolver.DecimalExpressionSolver.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.DecimalExpressionSolver.Resolve(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            This is the method to call to run the expression machine.
+            </summary>
+            <param name="input">the string that is the expression</param>
+            <param name="variableProvider">the variable engine to get variables from</param>
+        </member>
+        <member name="M:EquationSolver.DecimalExpressionSolver.Compare(System.String)">
+            <summary>
+            Loads and resolves a comparison string
+            </summary>
+            <param name="input">the expression as a string</param>
+            <returns>the result of the comparison (true or false)</returns>
+        </member>
+        <member name="F:EquationSolver.DoubleExpressionSolver.resType">
+            <summary>
+            The Result type of the expression.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.TypeOfResult">
+            <summary>
+            The enumeration type of the result.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.ResultAsDecimal">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.ResultAsDouble">
+            <summary>
+            The result as a decimal
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.BoolResult">
+            <summary>
+            The boolean result of the expression
+            </summary>
+        </member>
+        <member name="P:EquationSolver.DoubleExpressionSolver.StringResult">
+            <summary>
+            The string of the result of the expression.
+            </summary>
+            <remarks>More need here .... </remarks>
+        </member>
+        <member name="M:EquationSolver.DoubleExpressionSolver.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.DoubleExpressionSolver.Resolve(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            This is the method to call to run the expression machine.
+            </summary>
+            <param name="input">the string that is the expression</param>
+            <param name="variableProvider">the variable engine to get variables from</param>
+        </member>
+        <member name="M:EquationSolver.DoubleExpressionSolver.Compare(System.String)">
+            <summary>
+            Loads and resolves a comparison string
+            </summary>
+            <param name="input">the expression as a string</param>
+            <returns>the result of the comparison (true or false)</returns>
+        </member>
+        <member name="T:EquationSolver.Dto.EquationProjectMerge">
+            <summary>
+            Collection of Equation Projects to Load
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.EquationProjectMerge.#ctor">
+            <summary>
+            EquationProjectMerge class constructor
+            </summary>
+        </member>
+        <member name="F:EquationSolver.Dto.CalculationMethods.Decimal">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.CalculationMethods.Double">
+            <remarks/>
+        </member>
+        <member name="M:EquationSolver.Dto.Row.#ctor">
+            <summary>
+            Row class constructor
+            </summary>
+        </member>
+        <member name="T:EquationSolver.Dto.Equation">
+            <summary>
+            Data class for an Equation
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.Equation.Compare(EquationSolver.Dto.Equation,EquationSolver.Dto.Equation)">
+            <summary>
+            Compare two Equations and return a number for sorting
+            </summary>
+            <param name="x">the first equation to compare with the second</param>
+            <param name="y">the second Equation</param>
+            <returns>a number for sorting</returns>
+        </member>
+        <member name="M:EquationSolver.Dto.Equation.CompareTo(EquationSolver.Dto.Equation)">
+            <summary>
+            Compare this Equation with the other
+            </summary>
+            <param name="other">the other Equation</param>
+            <returns>a number for sorting</returns>
+        </member>
+        <member name="M:EquationSolver.Dto.Equation.HasTarget(System.String)">
+            <summary>
+            Does this Equations have a variable target for it's value
+            </summary>
+            <param name="targetName">the target name</param>
+            <returns>true for having a target, false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Dto.Equation.TryFindByName(System.String,EquationSolver.Dto.Equation@)">
+            <summary>
+            Find the equation by name or return false
+            </summary>
+            <param name="equationName">the equation name to find</param>
+            <param name="found">the found equation or null if not found</param>
+            <returns>true if found, false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Dto.Function.#ctor">
+            <summary>
+            Function class constructor
+            </summary>
+        </member>
+        <member name="T:EquationSolver.Dto.Table">
+            <summary>
+            Class for table data persistence and operations
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.Table.#ctor">
+            <summary>
+            Table class constructor
+            </summary>
+        </member>
+        <member name="T:EquationSolver.Dto.EquationProject">
+            <summary>
+            The container for an equation project, encapsulates all the equations and variables
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Dto.EquationProject.#ctor">
+            <summary>
+            EquationProject class constructor
+            </summary>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.NONE">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.TEXT">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.BOOL">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.NUMBER">
+            <remarks/>
+        </member>
+        <member name="F:EquationSolver.Dto.VariableTypes.DATE">
+            <remarks/>
+        </member>
+        <member name="M:EquationSolver.EquationSolver.Dispose">
+            <summary>
+            Release the resources used by this instance
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Extensions.TryFindItem``1(System.Collections.Generic.List{``0},System.Predicate{``0},``0@)">
+            <summary>
+            Try to find using a predicate from a list (reference types only).  (does null check and does not throw exception)
+            </summary>
+            <typeparam name="T">the type of the list</typeparam>
+            <param name="list">the list</param>
+            <param name="predicate">the predicate to use in find</param>
+            <param name="found">the found item (null if not found)</param>
+            <returns>true if found and false otherwise</returns>
+        </member>
+        <member name="T:EquationSolver.EquationSolverFactory">
+            <summary>
+            Factory for Eqution Projects to Equation Solver
+            </summary>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.#ctor">
+            <summary>
+            Default Ctor
+            </summary>
+        </member>
+        <member name="P:EquationSolver.EquationSolverFactory.Instance">
+            <summary>
+            Static Singleton instance of EquationSolverFactory
+            </summary>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.CreateEquationSolver(EquationSolver.Dto.EquationProjectMerge,EquationSolver.VariableProvider)">
+            <summary>
+            Create Eqution Solver by merging many EquationProjects
+            (enables the use of common equations, functions, and tables)
+            </summary>
+            <param name="mergeProject">the merging definition</param>
+            <param name="varProvider">External variable provider</param>
+            <returns>an EquationSolver</returns>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.CreateEquationSolver(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            Create EquationSolver from EquationProject serialized as JSON
+            </summary>
+            <param name="equationProjectAsJson">the Equation Project as JSON</param>
+            <param name="varProvider">External variable provider</param>
+            <returns>an EquationSolver</returns>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.CreateEquationSolver(EquationSolver.Dto.EquationProject,EquationSolver.VariableProvider)">
+            <summary>
+            Create an EquationSolver from an EquationProject
+            </summary>
+            <param name="equationProject">the Equation Project</param>
+            <param name="varProvider">External variable provider</param>
+            <returns>an EquationSolver</returns>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.SolveExpression(System.String,EquationSolver.VariableProvider)">
+            <summary>
+            Solve the expression to the internal varaible provider or the supplied one
+            </summary>
+            <param name="expression">the expression to solve</param>
+            <param name="varProvider">the variable provider</param>
+            <returns></returns>
+        </member>
+        <member name="M:EquationSolver.EquationSolverFactory.SolveForX(System.String,System.String)">
+            <summary>
+            (Work in progress)
+            </summary>
+            <param name="expression"></param>
+            <param name="variableName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EquationSolver.ResultType">
+            <summary>
+            Enumeration of Result Types
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ResultType.NONE">
+            <summary>
+            Default enum value
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ResultType.BOOL">
+            <summary>
+            ResultType as Boolean
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ResultType.NUMBER">
+            <summary>
+            ResultType as Number
+            </summary>
+        </member>
+        <member name="F:EquationSolver.ResultType.STRING">
+            <summary>
+            ResultType as String
+            </summary>
+        </member>
+        <member name="F:EquationSolver.Utilities.d1">
+            <summary>
+            For debug timing tests
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Utilities.#ctor">
+            <summary>
+            Useless constructor.
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Utilities.RelativeToAbsolutePath(System.String@,System.String,System.String)">
+            <summary>
+            Outputs the relative path supplied as an absolute path using the basepath supplied.
+            </summary>
+            <param name="sPath">The path to output</param>
+            <param name="sBasepath">the base path to compare to</param>
+            <param name="sRelpath">the relative path</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.AbsPathMunge(System.String@,System.String,System.String)">
+            <summary>
+            Ouputs the relative path from the absolute path supplied
+            </summary>
+            <param name="sPath">the output path</param>
+            <param name="sAbsPath">the absolute path</param>
+            <param name="sBasepath">the base path to compare to</param>
+            <returns>true is successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.MakeDateFromString(System.DateTime@,System.String)">
+            <summary>
+            Ouputs a DateTime object from the string supplied.
+            </summary>
+            <param name="oDateTime">the DateTime object ouput</param>
+            <param name="sDate">the string of the date</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.StringToInteger(System.String,System.Int32@)">
+            <summary>
+            Outputs the integer equivalent of the string
+            </summary>
+            <param name="strI">the Integer string</param>
+            <param name="iNumber">the int output</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.StringToDouble(System.String,System.Double@)">
+            <summary>
+            Outputs the double value of the string supplied
+            </summary>
+            <param name="str">the string of the double</param>
+            <param name="dNumber">the double ouput</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.StringToDecimal(System.String,System.Decimal@)">
+            <summary>
+            Outputs the double value of the string supplied
+            </summary>
+            <param name="str">the string of the double</param>
+            <param name="dNumber">the double ouput</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsANumber(System.String)">
+            <summary>
+            Verifies that the string is composed of digits and signs exclusively.
+            </summary>
+            <param name="str">string to check</param>
+            <returns>True if it is a number, false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsPositiveWholeNumber(System.String)">
+            <summary>
+            Determines if the string is a representation of a whole number greater than zero
+            </summary>
+            <param name="str">the string of the number</param>
+            <returns>true if successful</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.NormalizeXML(System.String)">
+            <summary>
+            Converts characters reserved for XML syntax to equvalent values that can be used by XML.
+            </summary>
+            <example>
+            Utilities.NormalizeXML("<SomeXmlNode expression="5&lt;6"></SomeXmlNode><br/>
+            Outputs<br/>
+            5&lt;6<br/>
+            </example>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.MakeAppropriateCDATA(System.String)">
+            <summary>
+            Checks for characters reserved for XML Syntax and encloses the string in a CDATA section.
+            </summary>
+            <param name="sString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.CopyLocation(System.String,System.String)">
+            <summary>
+            Copies file and folders from the source location to the destination location.
+            </summary>
+            <param name="src">the source location</param>
+            <param name="dest">the destination location</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.CopyDirectory(System.String,System.String)">
+            <summary>
+            Copies the directory contents from the source directory to the destination directory.
+            </summary>
+            <param name="srcDir">the source directory</param>
+            <param name="destDir">the destination directory</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.CopySubDirectories(System.String,System.String)">
+            <summary>
+            Copies all subdirectories from the source directory to the destination directory
+            </summary>
+            <param name="srcParentDir">the "Parent" directory</param>
+            <param name="destDir">the destination directory</param>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsStringBoolean(System.Boolean@,System.String)">
+            <summary>
+            Determines if the supplied string corresponds to a word that means true or false.
+            </summary>
+            <param name="bIsTrue">Ouput of boolean resolved from the string</param>
+            <param name="str">string to examine</param>
+            <returns>true if successful and false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.IsStringTrue(System.String)">
+            <summary>
+            Determines if the supplied string represents a True boolean
+            </summary>
+            <param name="str">the string of the boolean</param>
+            <returns>true if the string is correct for true and false otherwise</returns>
+        </member>
+        <member name="M:EquationSolver.Utilities.SetTimeStart">
+            <summary>
+            Sets a starting TimeDate object.              
+            </summary>
+        </member>
+        <member name="M:EquationSolver.Utilities.GetElaspedTime">
+            <summary>
+            returns the elasped time since the SetTimeStart() has been called.
+            </summary>
+            <returns>the elasped time in milliseconds</returns>
+        </member>
+        <member name="T:EquationSolver.VariableProvider">
+            <summary>
+            Data management  class for variables and tables
+            </summary>
+        </member>
+        <member name="T:EquationSolver.VariableProvider.VarableValueChangedDelegate">
+            <summary>
+            Delegate for notifying that a variable has changed.
+            </summary>
+            <param name="variableName"></param>
+        </member>
+        <member name="E:EquationSolver.VariableProvider.VariableValueChanged">
+            <summary>
+            Event to notify delegates that a variable has changed.
+            </summary>
+        </member>
+        <member name="P:EquationSolver.VariableProvider.Tables">
+            <summary>
+            Table dictionary of variables
+            </summary>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.#ctor">
+            <summary>
+            Default Ctor
+            </summary>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.AddVariable(EquationSolver.Dto.Variable)">
+            <summary>
+            Add a Variable
+            </summary>
+            <param name="variable">the variable to add</param> 
+        </member>
+        <member name="M:EquationSolver.VariableProvider.SetVariable(System.String,System.Object)">
+            <summary>
+            Set (add/update) variable by name and value
+            </summary>
+            <param name="name">the variable name</param>
+            <param name="value">the variable value</param>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.RemoveVariable(System.String)">
+            <summary>
+            Remove a Variable by name
+            </summary>
+            <param name="name">the name of the variable to remove</param>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.DumpVariables">
+            <summary>
+            Dump the Variables to an enumeration
+            </summary>
+            <returns>Enumeration of the current Variables</returns>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.DumpTable(System.String)">
+            <summary>
+            Dump a table to variable Enumeration by name
+            </summary>
+            <param name="tableName">the name of the table to dump to list</param>
+            <returns>Enumeration of Variables in the Table</returns>
+        </member>
+        <member name="M:EquationSolver.VariableProvider.StartTable(System.String,System.Int32)">
+            <summary>
+            Define a new Table to begin holding values
+            </summary>
+            <param name="tableName">the name of the Table</param>
+            <param name="columns">the number of columns the table contains</param>
+        </member>
+        <member name="M:EquationSolver.VariableTable.EnumerateVariables">
+            <summary>
+            Enumerate the variables of this table
+            </summary>
+            <returns>the list of variables</returns>
+        </member>
+    </members>
+</doc>

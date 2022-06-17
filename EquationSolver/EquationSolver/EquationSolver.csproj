@@ -9,16 +9,16 @@
     <Copyright>Jeffrey Bramlett @ November 2018</Copyright>
     <Authors>Jeffrey Bramlett</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Added ability to merge multiple EquationProjects into a single EquationSolver; allowing for many "common" projects to be defined once and then reused.
+    <PackageReleaseNotes>Fixed problems with handling "or" in expressions; Added ability to merge multiple EquationProjects into a single EquationSolver; allowing for many "common" projects to be defined once and then reused.
 * Note:  Available as webservices hosted in the cloud.
 - Enable switching calculation methods between decimal and double
 - Simplified triggers to property of Equation
 </PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/JeffBramlett/EquationSolvr/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>http://aboutjeffbramlett.com/resources/equationsolver</PackageProjectUrl>
-    <AssemblyVersion>1.0.0.17</AssemblyVersion>
-    <FileVersion>1.0.0.17</FileVersion>
-    <Version>1.0.17</Version>
+    <AssemblyVersion>1.0.0.18</AssemblyVersion>
+    <FileVersion>1.0.0.18</FileVersion>
+    <Version>1.0.18</Version>
     <PackageIconUrl>https://bluejaywebsvc.com/images/bluejaylogo.png</PackageIconUrl>
   </PropertyGroup>
 

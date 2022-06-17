@@ -815,15 +815,17 @@ namespace EquationSolver
 
                 if (orStrs.Length > 1)
                 {
+                    var orSuccess = false;
                     for (int o = 0; o < orStrs.Length; o++)
                     {
                         string strOrCheck = orStrs[o];
                         rb = Compare(strOrCheck);
-                        if (!rb)
+                        if (rb)
                         {
-                            break;
+                            orSuccess = true;
                         }
                     }
+                    rb = orSuccess;
                 }
 
                 if (andStrs.Length > 1)
