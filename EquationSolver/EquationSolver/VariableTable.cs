@@ -9,13 +9,33 @@ namespace EquationSolver
     {
         private int _columns;
         private List<Variable[]> _rows;
-        
- 
+
+        private List<string> _rowNames;
+        private List<string> _columnNames;
+
         public int Count
         {
             get
             {
                 return Rows.Count;
+            }
+        }
+
+        public List<string> ColumnNames
+        {
+            get
+            {
+                _columnNames = _columnNames ?? new List<string>();
+                return _columnNames;
+            }
+        }
+
+        public List<string> RowNames
+        {
+            get
+            {
+                _rowNames = _rowNames ?? new List<string>();
+                return _rowNames;
             }
         }
        
@@ -26,15 +46,6 @@ namespace EquationSolver
                 if(_rows == null)
                 {
                     _rows = new List<Variable[]>();
-
-                    var varArray = new Variable[_columns + 1];
-                    for (var i = 1; i <= _columns; i++)
-                    {
-                        varArray[i] = new Variable();
-                        varArray[i].SetValue("column" + i);
-                    }
-                    Rows.Add(varArray);
-
                 }
 
                 return _rows;
@@ -73,9 +84,47 @@ namespace EquationSolver
             return list;
         }
 
+        public Variable this[int row, int column]
+        {
+            get
+            {
+                return Rows[row][column];
+            }
+            set
+            {
+                Rows[row][column].SetValue(value);
+            }
+        }
+
+        public Variable this[int row, string column]
+        {
+            get
+            {
+                int ndx = ColumnNames.IndexOf(column);
+                return Rows[row][ndx];
+            }
+            set
+            {
+                int ndx = ColumnNames.IndexOf(column);
+                Rows[row][ndx].SetValue(value);
+            }
+        }
+
+        public Variable[] RowAt(int index)
+        {
+            return Rows[index];
+        }
+
         public Variable GetVariableAt(int row, int column)
         {
             return Rows[row][column];
+        }
+
+        public Variable GetVariableAt(int row, string column)
+        {
+            var rowVars = Rows[row];
+            var colNdx = ColumnNames.IndexOf(column);
+            return rowVars[colNdx];
         }
 
         public void SetVariableValueAt(int row, int column, object value)
@@ -85,28 +134,43 @@ namespace EquationSolver
 
         public void SetColumnLabel(int column, string label)
         {
-            Rows[0][column].SetValue(label);
+            if(column < ColumnNames.Count)
+            {
+                ColumnNames[column] = label;
+            }
+            else
+                ColumnNames.Add(label);
         }
 
         public void SetRowLabel(int row, string label)
         {
-            Rows[row][0].SetValue(label);
+            if(row < RowNames.Count)
+            {
+                RowNames[row] = label;
+            }
+            else
+                RowNames.Add(label);
         }
 
-        public int MakeRow(string rowLabel = "")
+        public int MakeRow(string rowLabel = "", params object[] columnValues)
         {
             string label = string.IsNullOrEmpty(rowLabel) ? "Row" + Rows.Count : rowLabel;
 
-            var varArray = new Variable[_columns + 1];
+            var varArray = new Variable[_columns];
 
-            varArray[0] = new Variable();
-            varArray[0].SetValue(label);
-
-            for(var i = 1; i <= _columns; i++)
+            for(var i = 0; i < _columns; i++)
             {
                 varArray[i] = new Variable();
+                if(columnValues.Length > 0 && i < columnValues.Length)
+                {
+                    varArray[i].SetValue(columnValues[i]);
+                }
             }
+
             Rows.Add(varArray);
+
+            SetRowLabel(Rows.Count - 1, label);
+            
             return Rows.Count - 1;
         }
 
@@ -114,7 +178,7 @@ namespace EquationSolver
         {
             decimal sum = 0;
 
-            for (var i = 1; i <= _columns; i++)
+            for (var i = 0; i < _columns; i++)
             {
                 sum += Rows[i][column].DecimalValue;
             }
@@ -127,7 +191,7 @@ namespace EquationSolver
             decimal sum = 0;
 
             var rowArray = Rows[row];
-            for(var i = 1; i <= _columns; i++)
+            for(var i = 0; i < _columns; i++)
             {
                 sum += rowArray[i].DecimalValue;
             }
@@ -139,12 +203,12 @@ namespace EquationSolver
         {
             decimal sum = 0;
 
-            for (var i = 1; i < Rows.Count; i++)
+            for (var i = 0; i < Rows.Count; i++)
             {
                 sum += Rows[i][column].DecimalValue;
             }
 
-            return sum / (Rows.Count - 1);
+            return sum / (Rows.Count);
         }
 
         public decimal AverageOfRow(int row)
@@ -152,7 +216,7 @@ namespace EquationSolver
             decimal sum = 0;
 
             var rowArray = Rows[row];
-            for (var i = 1; i <= _columns; i++)
+            for (var i = 0; i < _columns; i++)
             {
                 sum += rowArray[i].DecimalValue;
             }

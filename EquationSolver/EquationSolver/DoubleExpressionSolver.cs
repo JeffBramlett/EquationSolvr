@@ -1292,9 +1292,11 @@ namespace EquationSolver
                         double s1 = 0;
                         Assignment(ref s1);
 
+                        double st = 0;
                         while (true)
                         {
-                            double st = 0;
+                            Parse();
+
                             Assignment(ref st);
 
                             s1 = st < s1 ? st : s1;
@@ -1313,11 +1315,14 @@ namespace EquationSolver
                         Parse();
                         Parse();
                         double s1 = 0;
+                        double st = 0;
+
                         Assignment(ref s1);
 
                         while (true)
                         {
-                            double st = 0;
+                            Parse();
+
                             Assignment(ref st);
 
                             s1 = st > s1 ? st : s1;
@@ -1474,6 +1479,26 @@ namespace EquationSolver
 
             return isSet;
         }
+
+        private bool Literal_LookupTable(string var, ref decimal r)
+        {
+            bool isSet = false;
+
+            if (var.ToLower() == "lookup")
+            {
+                Parse();
+                Parse();
+                var tableName = new string(_token);
+                Parse();
+                Parse();
+                var colName = new string(_token);
+                Parse();
+
+            }
+
+            return isSet;
+        }
+
         #endregion
 
         #region Parsing

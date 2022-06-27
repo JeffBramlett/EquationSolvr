@@ -29,7 +29,7 @@ namespace EquationSolver
     }
 
     #endregion
-    interface IExpressionSolver
+    public interface IExpressionSolver
     {
         bool BoolResult { get; }
         List<Function> Functions { get; set; }

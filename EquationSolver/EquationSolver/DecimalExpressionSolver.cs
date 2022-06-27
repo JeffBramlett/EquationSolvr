@@ -1055,6 +1055,12 @@ namespace EquationSolver
                             return;
                         }
 
+                        if(Literal_LookupTable(var, ref r))
+                        {
+                            Parse();
+                            return;
+                        }
+
                         if (Literal_UserFunction(var, ref r))
                         {
                             Parse();
@@ -1335,9 +1341,10 @@ namespace EquationSolver
                         decimal s1 = 0;
                         Assignment(ref s1);
 
+                        decimal st = 0;
                         while (true)
                         {
-                            decimal st = 0;
+                            Parse();
                             Assignment(ref st);
 
                             s1 = st < s1 ? st : s1;
@@ -1358,9 +1365,12 @@ namespace EquationSolver
                         decimal s1 = 0;
                         Assignment(ref s1);
 
+                        decimal st = 0;
+
                         while (true)
                         {
-                            decimal st = 0;
+                            Parse();
+
                             Assignment(ref st);
 
                             s1 = st > s1 ? st : s1;
@@ -1504,15 +1514,72 @@ namespace EquationSolver
                 decimal drow = 0;
                 Assignment(ref drow);
                 Parse();
-                decimal dcol = 0;
-                Assignment(ref dcol);
 
+                string colText = new string(TokenArray);
                 int row = Convert.ToInt32(drow);
-                int col = Convert.ToInt32(dcol);
 
-                r = _varProvider.GetVariableInTable(var, col, row).DecimalValue;
+                int colNdx;
+                if (int.TryParse(colText, out colNdx))
+                {
+                    decimal dcol = 0;
+                    Assignment(ref dcol);
+
+                    int col = Convert.ToInt32(dcol);
+
+                    r = _varProvider.GetVariableInTable(var, col, row).DecimalValue;
+                }
+                else
+                {
+                    r = _varProvider.GetVariableInTable(var, colText, row).DecimalValue;
+                }
 
                 isSet = true;
+            }
+
+            return isSet;
+        }
+
+        private bool Literal_LookupTable(string var, ref decimal r)
+        {
+            bool isSet = false;
+
+            if(var.ToLower() == "lookup")
+            {
+                Parse();
+                Parse();
+                var tableName = new string(TokenArray);
+                Parse();
+                Parse();
+                var colName = new string(TokenArray);
+                Parse();
+
+                var exps = new List<string>();
+                
+                StringBuilder sb = new StringBuilder();
+
+                while(true)
+                {
+                    Parse();
+                    var nextToken = new string(TokenArray);
+                    if (nextToken == ")")
+                    {
+                        exps.Add(sb.ToString());
+                        break;
+                    }
+                    else if (nextToken == ",")
+                    {
+                        exps.Add(sb.ToString() );
+                    }
+                    else
+                    {
+                        if (nextToken.ToLower() == "is")
+                            sb.Append(" = ");
+                        else
+                            sb.Append(nextToken + " ");
+                    }
+                }
+
+                var found = _varProvider.Lookup(this, tableName, colName, exps.ToArray());
             }
 
             return isSet;

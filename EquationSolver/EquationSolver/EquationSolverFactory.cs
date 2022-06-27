@@ -114,6 +114,19 @@ namespace EquationSolver
                 expressionSolver = new DoubleExpressionSolver();
             }
 
+
+            foreach(Table table in equationProject.Tables)
+            {
+                varProvider.StartTable(table.Name, table.RowHeader.Columns.ToArray());
+
+                for(var i = 0; i < table.RowHeader.Columns.Count; i++ )
+                {
+                    var header = table.RowHeader.Columns[i];
+                    varProvider.SetColumnLabel(table.Name, i, header);
+                }
+
+            }
+
             EquationSolver solver = new EquationSolver(expressionSolver, varProvider);
             solver.CalculationMethod = equationProject.Settings.CalculationMethod;
 

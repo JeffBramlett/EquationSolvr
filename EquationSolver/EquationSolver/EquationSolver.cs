@@ -190,7 +190,7 @@ namespace EquationSolver
                     ndx++;
                 }
 
-                int rowNdx = 1;
+                int rowNdx = 0;
                 foreach (var row in table.Rows)
                 {
                     VariableProvider.MakeRowInTable(table.Name, row.Label);
@@ -199,7 +199,7 @@ namespace EquationSolver
                     {
                         if (c < row.Columns.Count)
                         {
-                            VariableProvider.SetValueInTable(table.Name, c + 1, rowNdx, row.Columns[c]);
+                            VariableProvider.SetValueInTable(table.Name, c, rowNdx, row.Columns[c]);
                         }
                     }
 

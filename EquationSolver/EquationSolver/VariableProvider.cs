@@ -165,6 +165,19 @@ namespace EquationSolver
             }
         }
 
+        public void StartTable(string tableName, string[] columns)
+        {
+            if (!Tables.ContainsKey(tableName))
+            {
+                VariableTable table = new VariableTable(tableName, columns.Length);
+                for(var i = 0; i < columns.Length; i++)
+                {
+                    table.SetColumnLabel(i, columns[i]);
+                }
+                Tables.Add(tableName, table);
+            }
+        }
+
         public bool HasTable(string tableName)
         {
             return Tables.ContainsKey(tableName);
@@ -180,13 +193,41 @@ namespace EquationSolver
 
         public void SetRowLabel(string tableName, int ndx, string label)
         {
-            if (Tables.ContainsKey(tableName))
+            if (!Tables.ContainsKey(tableName))
             {
                 Tables[tableName].SetRowLabel(ndx, label);
             }
         }
 
+        public Variable Lookup(IExpressionSolver solver, string tableName, string colToReturn, params string[] colExpressions)
+        {
+            Variable retVar = null;
 
+            if (Tables.ContainsKey(tableName))
+            {
+                var table = Tables[tableName];
+
+                for(var i = 0; i < table.Count; i++)
+                {
+                    var row = table.RowAt(i);
+                    foreach(var expression in colExpressions)
+                    {
+                        foreach(var colName in table.ColumnNames)
+                        {
+                            var variable = table.GetVariableAt(i, colName);
+                            expression.Replace(colName, variable.StringValue);
+                            solver.Resolve(expression, this);
+
+                            if (solver.BoolResult)
+                                retVar = variable;
+                       }
+
+                    }
+                }
+            }
+
+            return retVar;
+        }
 
         public void MakeRowInTable(string tableName, string rowName = "")
         {
@@ -197,6 +238,11 @@ namespace EquationSolver
         }
 
         public Variable GetVariableInTable(string tableName, int column, int row)
+        {
+            return Tables[tableName].GetVariableAt(row, column);
+        }
+
+        public Variable GetVariableInTable(string tableName, string column, int row)
         {
             return Tables[tableName].GetVariableAt(row, column);
         }
