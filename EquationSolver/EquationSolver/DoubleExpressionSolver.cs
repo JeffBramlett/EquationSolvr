@@ -1025,9 +1025,14 @@ namespace EquationSolver
                             return;
                         }
 
-                        if(Literal_VariableTableFunctions(var, ref r))
+                        if (Literal_VariableTableFunctions(var, ref r))
                         {
                             Parse();
+                            return;
+                        }
+
+                        if (Literal_LookupTable(var, ref r))
+                        {
                             return;
                         }
 
@@ -1450,7 +1455,7 @@ namespace EquationSolver
                     Parse();
                     string tableName = new string(_token);
                     Parse();
-                    double dcols = 0;
+                    double dcols = 0f;
                     Assignment(ref dcols);
                     int cols = Convert.ToInt32(dcols);
                     _varProvider.StartTable(tableName, cols);
@@ -1459,20 +1464,31 @@ namespace EquationSolver
                     break;
             }
 
-            if(_varProvider.HasTable(var))
+            if (_varProvider.HasTable(var))
             {
                 Parse();
                 Parse();
                 double drow = 0;
                 Assignment(ref drow);
                 Parse();
-                double dcol = 0;
-                Assignment(ref dcol);
 
+                string colText = new string(_token);
                 int row = Convert.ToInt32(drow);
-                int col = Convert.ToInt32(dcol);
 
-                r = _varProvider.GetVariableInTable(var, col, row).DoubleValue;
+                int colNdx;
+                if (int.TryParse(colText, out colNdx))
+                {
+                    double dcol = 0;
+                    Assignment(ref dcol);
+
+                    int col = Convert.ToInt32(dcol);
+
+                    r = _varProvider.GetVariableInTable(var, col, row).DoubleValue;
+                }
+                else
+                {
+                    r = _varProvider.GetVariableInTable(var, colText, row).DoubleValue;
+                }
 
                 isSet = true;
             }
@@ -1480,7 +1496,7 @@ namespace EquationSolver
             return isSet;
         }
 
-        private bool Literal_LookupTable(string var, ref decimal r)
+        private bool Literal_LookupTable(string var, ref double r)
         {
             bool isSet = false;
 
@@ -1494,11 +1510,42 @@ namespace EquationSolver
                 var colName = new string(_token);
                 Parse();
 
-            }
+                var exps = new List<string>();
 
+                StringBuilder sb = new StringBuilder();
+
+                while (true)
+                {
+                    Parse();
+                    var nextToken = new string(_token);
+                    if (nextToken == ")")
+                    {
+                        exps.Add(sb.ToString());
+                        break;
+                    }
+                    else if (nextToken == ",")
+                    {
+                        exps.Add(sb.ToString());
+                    }
+                    else
+                    {
+                        if (nextToken.ToLower() == "is")
+                            sb.Append(" = ");
+                        else
+                            sb.Append(nextToken + " ");
+                    }
+                }
+
+                var found = _varProvider.Lookup(tableName, colName, exps.ToArray());
+                if (found != null)
+                {
+                    r = found.DoubleValue;
+                }
+
+                isSet = true;
+            }
             return isSet;
         }
-
         #endregion
 
         #region Parsing

@@ -366,14 +366,21 @@ namespace EquationSolver.Unit.Tests
             var quoteEquation = new Equation()
             {
                 UseExpression = "true",
-                Expression = "Quantity * 100",
-                Target = "SubTotal",
+                Expression = "0",
+                Target = "check",
                 MoreEquations = new System.Collections.Generic.List<Equation>()
                 {
                     new Equation()
                     {
                         UseExpression = "true",
-                        Expression = "SubTotal * lookup(RateTable, Rate2, Rate1 is 1)",
+                        Expression = "Quantity * 100",
+                        Target = "SubTotal",
+
+                    },
+                   new Equation()
+                    {
+                        UseExpression = "true",
+                        Expression = "SubTotal * lookup(RateTable, Rate2, Rate1 is .05)",
                         Target = "Tax",
 
                     },
@@ -399,7 +406,7 @@ namespace EquationSolver.Unit.Tests
 
             solver.SolveEquations();
 
-            Assert.AreEqual(500M, solver.VariableProvider["Total"].DecimalValue);
+            Assert.AreEqual(575M, solver.VariableProvider["Total"].DecimalValue);
         }
 
 

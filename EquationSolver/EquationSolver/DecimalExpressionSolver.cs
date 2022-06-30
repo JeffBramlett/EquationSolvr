@@ -1057,7 +1057,6 @@ namespace EquationSolver
 
                         if(Literal_LookupTable(var, ref r))
                         {
-                            Parse();
                             return;
                         }
 
@@ -1579,9 +1578,14 @@ namespace EquationSolver
                     }
                 }
 
-                var found = _varProvider.Lookup(this, tableName, colName, exps.ToArray());
-            }
+                var found = _varProvider.Lookup(tableName, colName, exps.ToArray());
+                if (found != null)
+                {
+                    r = found.DecimalValue;
+                }
 
+                isSet = true;
+            }
             return isSet;
         }
         #endregion

@@ -134,6 +134,9 @@ namespace EquationSolver
 
         public void SetColumnLabel(int column, string label)
         {
+            if (ColumnNames.Contains(label))
+                return;
+
             if(column < ColumnNames.Count)
             {
                 ColumnNames[column] = label;

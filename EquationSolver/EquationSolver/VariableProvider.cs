@@ -199,7 +199,7 @@ namespace EquationSolver
             }
         }
 
-        public Variable Lookup(IExpressionSolver solver, string tableName, string colToReturn, params string[] colExpressions)
+        public Variable Lookup(string tableName, string colToReturn, params string[] colExpressions)
         {
             Variable retVar = null;
 
@@ -209,24 +209,34 @@ namespace EquationSolver
 
                 for(var i = 0; i < table.Count; i++)
                 {
+                    int correctCheck = colExpressions.Length;
+                    int noCorrect = 0;
+
                     var row = table.RowAt(i);
-                    foreach(var expression in colExpressions)
+
+                    retVar = table.GetVariableAt(i, colToReturn);
+
+                    foreach (var expression in colExpressions)
                     {
                         foreach(var colName in table.ColumnNames)
                         {
                             var variable = table.GetVariableAt(i, colName);
-                            expression.Replace(colName, variable.StringValue);
-                            solver.Resolve(expression, this);
-
-                            if (solver.BoolResult)
-                                retVar = variable;
-                       }
-
+                            var repExpression = expression.Replace(colName, variable.StringValue);
+                            var resultVar = EquationSolverFactory.SolveExpression(repExpression, this);
+                            if (resultVar.BoolValue)
+                            {
+                                noCorrect++;
+                            }
+                        }
+                    }
+                    if(noCorrect == correctCheck)
+                    {
+                        return retVar;
                     }
                 }
             }
 
-            return retVar;
+            return null;
         }
 
         public void MakeRowInTable(string tableName, string rowName = "")
