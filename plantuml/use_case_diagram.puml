@@ -1,0 +1,66 @@
+@startuml EquationSolver Use Case Diagram
+
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor LightBlue
+skinparam usecaseBorderColor DarkBlue
+skinparam packageBackgroundColor WhiteSmoke
+
+left to right direction
+
+actor "Client Application" as Client
+
+rectangle "EquationSolver Library" {
+  usecase "Create Equation Project" as UC1
+  usecase "Define Variables" as UC2
+  usecase "Define Equations" as UC3
+  usecase "Define Functions" as UC4
+  usecase "Define Tables" as UC5
+  usecase "Create Equation Solver" as UC6
+  usecase "Solve Equations" as UC7
+  usecase "Access Variable Results" as UC8
+  usecase "Handle Variable Triggers" as UC9
+  usecase "Solve Single Expression" as UC10
+  usecase "Solve for Variable X" as UC11
+}
+
+Client --> UC1
+Client --> UC2
+Client --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6
+Client --> UC7
+Client --> UC8
+Client --> UC10
+Client --> UC11
+
+UC1 ..> UC2 : includes
+UC1 ..> UC3 : includes
+UC1 ..> UC4 : includes
+UC1 ..> UC5 : includes
+UC6 ..> UC1 : includes
+UC7 ..> UC9 : includes
+UC7 ..> UC8 : includes
+
+note right of UC1
+  EquationProject contains all the
+  definitions needed for solving
+end note
+
+note right of UC6
+  EquationSolverFactory creates
+  the appropriate solver based on
+  calculation method
+end note
+
+note right of UC7
+  Equations are solved in order,
+  with branching based on UseExpression
+end note
+
+note right of UC9
+  When variables change, equations
+  with matching triggers are executed
+end note
+
+@enduml

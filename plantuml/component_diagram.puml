@@ -1,0 +1,56 @@
+@startuml EquationSolver Component Diagram
+
+skinparam componentStyle uml2
+skinparam componentBackgroundColor LightBlue
+skinparam interfaceBackgroundColor LightGreen
+skinparam packageBackgroundColor WhiteSmoke
+
+package "EquationSolver Library" {
+  component [EquationSolverFactory] as Factory
+  component [EquationSolver] as Solver
+  component [ExpressionSolvers] as ExprSolvers {
+    component [DecimalExpressionSolver] as DecimalSolver
+    component [DoubleExpressionSolver] as DoubleSolver
+  }
+  component [VariableProvider] as VarProvider
+  
+  package "Data Transfer Objects" as DTO {
+    component [EquationProject] as Project
+    component [Equation] as Equation
+    component [Function] as Function
+    component [Variable] as Variable
+    component [Table] as Table
+  }
+  
+  interface "IEquationSolver" as IEqSolver
+  interface "IExpressionSolver" as IExprSolver
+  interface "IVariableProvider" as IVarProvider
+  
+  Factory ..> IEqSolver : creates
+  Solver ..|> IEqSolver : implements
+  DecimalSolver ..|> IExprSolver : implements
+  DoubleSolver ..|> IExprSolver : implements
+  VarProvider ..|> IVarProvider : implements
+  
+  Solver --> IExprSolver : uses
+  Solver --> VarProvider : uses
+  Factory --> Solver : creates
+  Factory --> ExprSolvers : creates
+  Factory --> Project : consumes
+  Solver --> Equation : processes
+  Solver --> Function : uses
+  VarProvider --> Variable : manages
+  VarProvider --> Table : manages
+}
+
+[Client Application] as Client
+
+Client --> Factory : uses
+Client --> IEqSolver : uses
+Client ..> Project : creates
+Client ..> Equation : creates
+Client ..> Function : creates
+Client ..> Variable : creates
+Client ..> Table : creates
+
+@enduml

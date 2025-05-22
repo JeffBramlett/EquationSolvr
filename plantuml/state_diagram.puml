@@ -1,0 +1,41 @@
+@startuml EquationSolver State Diagram
+
+skinparam stateBorderColor DarkBlue
+skinparam stateBackgroundColor LightBlue
+skinparam stateArrowColor DarkBlue
+
+title Equation Lifecycle State Diagram
+
+[*] --> Defined : Create Equation
+
+state Defined {
+  [*] --> Configured : Set Properties
+  Configured --> Validated : Add to EquationProject
+}
+
+state Validated {
+  [*] --> Ready : Validate in Factory
+}
+
+state Ready {
+  [*] --> Evaluating : SolveEquations() called
+}
+
+state Evaluating {
+  [*] --> UseExpressionEvaluated : Evaluate UseExpression
+  UseExpressionEvaluated --> Skipped : UseExpression == false
+  UseExpressionEvaluated --> ExpressionEvaluated : UseExpression == true
+  ExpressionEvaluated --> TargetAssigned : Assign result to target
+  TargetAssigned --> ChildrenProcessing : Process child equations
+  ChildrenProcessing --> Completed : All children processed
+  Skipped --> Completed
+}
+
+state Completed {
+  [*] --> Triggered : Variable change triggers equation
+  Triggered --> Evaluating : Re-evaluate equation
+}
+
+Completed --> [*] : Solver disposed
+
+@enduml

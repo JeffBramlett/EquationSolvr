@@ -1,0 +1,139 @@
+@startuml EquationSolver Class Diagram
+
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classBackgroundColor LightBlue
+skinparam interfaceBackgroundColor LightGreen
+skinparam packageBackgroundColor WhiteSmoke
+
+package "EquationSolver" {
+  interface IEquationSolver {
+    + VariableProvider VariableProvider { get; }
+    + IEquationSolver SolveEquations()
+    + event EventHandler VariableNotFoundException
+    + event EventHandler ExceptionOccurred
+  }
+
+  interface IExpressionSolver {
+    + bool BoolResult { get; }
+    + List<Function> Functions { get; set; }
+    + decimal ResultAsDecimal { get; }
+    + double ResultAsDouble { get; }
+    + string StringResult { get; }
+    + ResultType TypeOfResult { get; }
+    + event EventHandler ExceptionOccurred
+    + event EventHandler VariableNotFound
+    + void Resolve(string input, VariableProvider variableProvider)
+    + void SolveForX(string input, VariableProvider variableProvider, string variableName)
+  }
+
+  class EquationSolver {
+    - VariableProvider _variableProvider
+    - List<Equation> _equationList
+    - Dictionary<string, List<Equation>> _triggerDictionary
+    - IExpressionSolver _solver
+    + VariableProvider VariableProvider { get; }
+    + CalculationMethods CalculationMethod { get; set; }
+    + IEquationSolver SolveEquations()
+    + void AddEquation(Equation equation)
+    + void AddFunctions(IEnumerable<Function> functions)
+    + void AddEquations(IEnumerable<Equation> equations)
+    + void AddTables(IEnumerable<Table> tables)
+    - void ExecuteEquation(Equation equation)
+    - bool HandleTargetForTable(string input, string resultForTarget)
+  }
+
+  class EquationSolverFactory {
+    - static Lazy<EquationSolverFactory> _instance
+    + static EquationSolverFactory Instance { get; }
+    + IEquationSolver CreateEquationSolver(EquationProjectMerge mergeProject, VariableProvider varProvider)
+    + IEquationSolver CreateEquationSolver(string equationProjectAsJson, VariableProvider varProvider)
+    + IEquationSolver CreateEquationSolver(EquationProject equationProject, VariableProvider varProvider)
+    + static Variable SolveExpression(string expression, VariableProvider varProvider)
+    + static Variable SolveForX(string expression, string variableName)
+  }
+
+  class DecimalExpressionSolver {
+    + void Resolve(string input, VariableProvider variableProvider)
+    + void SolveForX(string input, VariableProvider variableProvider, string variableName)
+  }
+
+  class DoubleExpressionSolver {
+    + void Resolve(string input, VariableProvider variableProvider)
+    + void SolveForX(string input, VariableProvider variableProvider, string variableName)
+  }
+
+  class VariableProvider {
+    - Dictionary<string, VariableTableRow> _variables
+    - Dictionary<string, VariableTable> _tables
+    + VariableTableRow this[string name] { get; }
+    + void SetVariable(string name, string value)
+    + bool HasVariable(string name)
+    + void StartTable(string tableName, int columnCount)
+    + void StartTable(string tableName, string[] columnLabels)
+    + bool HasTable(string tableName)
+    + void SetColumnLabel(string tableName, int columnIndex, string label)
+    + void MakeRowInTable(string tableName, string rowLabel)
+    + void SetValueInTable(string tableName, int columnIndex, int rowIndex, string value)
+    + event Action<string> VariableValueChanged
+  }
+
+  package "Dto" {
+    class EquationProject {
+      + string Title
+      + SolverSettings Settings
+      + AuditInfo Audit
+      + List<Variable> Variables
+      + List<Equation> Equations
+      + List<Function> Functions
+      + List<Table> Tables
+    }
+
+    class Equation {
+      + string Name
+      + string Trigger
+      + string UseExpression
+      + string Expression
+      + int Iterate
+      + string Target
+      + List<Equation> MoreEquations
+    }
+
+    class Function {
+      + string Name
+      + string Description
+      + List<Argument> Arguments
+      + string Expression
+    }
+
+    class Variable {
+      + string Name
+      + string StringValue
+      + decimal DecimalValue
+      + double DoubleValue
+      + bool BoolValue
+    }
+
+    class Table {
+      + string Name
+      + Row RowHeader
+      + List<Row> Rows
+    }
+
+    class Row {
+      + string Label
+      + List<string> Columns
+    }
+  }
+
+  IEquationSolver <|.. EquationSolver
+  IExpressionSolver <|.. DecimalExpressionSolver
+  IExpressionSolver <|.. DoubleExpressionSolver
+  EquationSolver --> IExpressionSolver : uses
+  EquationSolver --> VariableProvider : uses
+  EquationSolverFactory ..> EquationSolver : creates
+  EquationSolverFactory ..> DecimalExpressionSolver : creates
+  EquationSolverFactory ..> DoubleExpressionSolver : creates
+}
+
+@enduml

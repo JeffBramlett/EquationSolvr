@@ -1,0 +1,100 @@
+@startuml EquationSolver Object Diagram
+
+skinparam objectBackgroundColor LightBlue
+skinparam objectBorderColor DarkBlue
+skinparam packageBackgroundColor WhiteSmoke
+
+package "Example Equation Project" {
+  object "project : EquationProject" as project {
+    Title = "Quadratic Formula Example"
+    Settings.CalculationMethod = Decimal
+  }
+  
+  object "var_a : Variable" as var_a {
+    Name = "a"
+    StringValue = "1"
+  }
+  
+  object "var_b : Variable" as var_b {
+    Name = "b"
+    StringValue = "5"
+  }
+  
+  object "var_c : Variable" as var_c {
+    Name = "c"
+    StringValue = "6"
+  }
+  
+  object "eq_discriminant : Equation" as eq_discriminant {
+    Name = "Calculate Discriminant"
+    UseExpression = "true"
+    Expression = "b^2 - 4*a*c"
+    Target = "discriminant"
+    Iterate = 1
+  }
+  
+  object "eq_solution1 : Equation" as eq_solution1 {
+    Name = "Solution 1"
+    UseExpression = "discriminant >= 0"
+    Expression = "(-b + sqrt(discriminant))/(2*a)"
+    Target = "x1"
+    Iterate = 1
+  }
+  
+  object "eq_solution2 : Equation" as eq_solution2 {
+    Name = "Solution 2"
+    UseExpression = "discriminant >= 0"
+    Expression = "(-b - sqrt(discriminant))/(2*a)"
+    Target = "x2"
+    Iterate = 1
+  }
+  
+  object "eq_no_solution : Equation" as eq_no_solution {
+    Name = "No Real Solutions"
+    UseExpression = "discriminant < 0"
+    Expression = "\"No real solutions\""
+    Target = "result"
+    Iterate = 1
+  }
+  
+  object "sqrt_function : Function" as sqrt_function {
+    Name = "sqrt"
+    Description = "Square root function"
+    Expression = "Math.Sqrt(x)"
+  }
+  
+  object "sqrt_arg : Argument" as sqrt_arg {
+    Name = "x"
+    Ordinal = 1
+    Default = "0"
+  }
+}
+
+project o-- var_a
+project o-- var_b
+project o-- var_c
+project o-- eq_discriminant
+project o-- eq_solution1
+project o-- eq_solution2
+project o-- eq_no_solution
+project o-- sqrt_function
+
+sqrt_function o-- sqrt_arg
+
+eq_discriminant ..> var_a : uses
+eq_discriminant ..> var_b : uses
+eq_discriminant ..> var_c : uses
+
+eq_solution1 ..> "discriminant" : uses
+eq_solution1 ..> var_a : uses
+eq_solution1 ..> var_b : uses
+eq_solution1 ..> sqrt_function : uses
+
+eq_solution2 ..> "discriminant" : uses
+eq_solution2 ..> var_a : uses
+eq_solution2 ..> var_b : uses
+eq_solution2 ..> sqrt_function : uses
+
+eq_no_solution ..> "discriminant" : uses
+
+@enduml

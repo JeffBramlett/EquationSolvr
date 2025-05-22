@@ -1,0 +1,65 @@
+@startuml EquationSolver Activity Diagram
+
+skinparam activityBackgroundColor LightBlue
+skinparam activityBorderColor DarkBlue
+skinparam activityDiamondBackgroundColor LightYellow
+skinparam activityDiamondBorderColor DarkOrange
+
+start
+
+:Create EquationProject;
+note right
+  Define Variables, Equations,
+  Functions, and Tables
+end note
+
+:Set CalculationMethod;
+note right
+  Decimal or Double precision
+end note
+
+:Create EquationSolver using Factory;
+
+partition "Equation Solving Process" {
+  :Get List of Equations;
+  
+  while (More Equations?) is (yes)
+    :Get Next Equation;
+    
+    repeat
+      :Evaluate UseExpression;
+      
+      if (UseExpression == true?) then (yes)
+        :Evaluate Expression;
+        
+        :Check if Target is Table Reference;
+        
+        if (Is Table Reference?) then (yes)
+          :Set Value in Table;
+        else (no)
+          :Set Variable Value;
+          note right
+            This may trigger other
+            equations via triggers
+          end note
+        endif
+        
+        if (Has More Equations?) then (yes)
+          :Process Child Equations;
+          note right
+            Recursive process for
+            nested equations
+          end note
+        endif
+      endif
+      
+      :Decrement Iteration Counter;
+    repeat while (Iteration Counter > 0?) is (yes)
+  endwhile (no)
+}
+
+:Return Solver with Results;
+
+stop
+
+@enduml

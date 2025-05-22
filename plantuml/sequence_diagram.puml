@@ -1,0 +1,87 @@
+@startuml EquationSolver Sequence Diagram
+
+skinparam sequenceArrowThickness 2
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceLifeLineBorderColor blue
+skinparam sequenceLifeLineBackgroundColor lightblue
+
+actor Client
+participant "EquationSolverFactory" as Factory
+participant "EquationSolver" as Solver
+participant "IExpressionSolver" as ExprSolver
+participant "VariableProvider" as VarProvider
+
+Client -> Factory : CreateEquationSolver(equationProject)
+activate Factory
+
+Factory -> Factory : ValidateEquations(equationProject)
+Factory -> Factory : ValidateTablesInProject(equationProject)
+
+Factory -> VarProvider : new VariableProvider()
+activate VarProvider
+
+loop for each Variable in equationProject.Variables
+    Factory -> VarProvider : SetVariable(variable.Name, variable.StringValue)
+end
+
+alt equationProject.Settings.CalculationMethod == CalculationMethods.Double
+    Factory -> ExprSolver : new DoubleExpressionSolver()
+else
+    Factory -> ExprSolver : new DecimalExpressionSolver()
+end
+activate ExprSolver
+
+loop for each Table in equationProject.Tables
+    Factory -> VarProvider : StartTable(table.Name, table.RowHeader.Columns)
+    loop for each Column in table.RowHeader.Columns
+        Factory -> VarProvider : SetColumnLabel(table.Name, i, header)
+    end
+end
+
+Factory -> Solver : new EquationSolver(expressionSolver, varProvider)
+activate Solver
+
+Factory -> Solver : AddEquations(equationProject.Equations)
+Factory -> Solver : AddFunctions(equationProject.Functions)
+Factory -> Solver : AddTables(equationProject.Tables)
+
+Factory --> Client : return solver
+deactivate Factory
+
+Client -> Solver : SolveEquations()
+
+loop for each equation in Equations
+    loop for i = 0 to equation.Iterate
+        Solver -> Solver : ExecuteEquation(equation)
+        activate Solver #DarkSalmon
+        
+        Solver -> ExprSolver : Resolve(equation.UseExpression, VariableProvider)
+        ExprSolver --> Solver : BoolResult
+        
+        alt BoolResult == true
+            Solver -> ExprSolver : Resolve(equation.Expression, VariableProvider)
+            ExprSolver --> Solver : StringResult
+            
+            Solver -> Solver : HandleTargetForTable(equation.Target, Solver.StringResult)
+            
+            alt HandleTargetForTable returns false
+                Solver -> VarProvider : SetVariable(equation.Target, Solver.StringResult)
+                VarProvider -> VarProvider : VariableValueChanged event
+                VarProvider --> Solver
+            end
+            
+            loop for each moreEquation in equation.MoreEquations
+                Solver -> Solver : ExecuteEquation(moreEquation)
+            end
+        end
+        
+        deactivate Solver
+    end
+end
+
+Solver --> Client : return this
+deactivate Solver
+deactivate ExprSolver
+deactivate VarProvider
+
+@enduml
