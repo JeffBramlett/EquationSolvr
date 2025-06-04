@@ -33,7 +33,7 @@ To use the library:
 
 ## Parts of an Equation
 
-* **UseExpression** - A string expression that must evaluate to a true or false. If this UseExpression evaluates to true, then the equation and the inner equations are executed.
+* **Activation** - A string expression that must evaluate to a true or false. If this Activation expression evaluates to true, then the equation and the inner equations are executed.
 
 * **Expression** - A string that produces a value (number, boolean, or text). The value is then assigned to the variable named in Target.
 
@@ -51,7 +51,7 @@ EquationProject project = new EquationProject()
     {
         new Equation()
         {
-            UseExpression = "true",
+            Activation = "true",
             Expression = "2 * 1",
             Target = "T1"
         }
