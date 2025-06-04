@@ -33,38 +33,38 @@ namespace EquationSolver.Unit.Tests
 
             Equation subTotal = new Equation()
             {
-                UseExpression = "quantity > 0",
+                Activation = "quantity > 0",
                 Expression = "price * quantity",
                 Target = "subtotal",
                 MoreEquations = new List<Equation>()
                 {
                     new Equation()
                     {
-                        UseExpression = "subtotal < 500 and customerlevel < 5",
+                        Activation = "subtotal < 500 and customerlevel < 5",
                         Expression = "90",
                         Target = "price"
                     },
                     new Equation()
                     {
-                        UseExpression = "subtotal < 500 and customerlevel < 10 and customerlevel >= 5",
+                        Activation = "subtotal < 500 and customerlevel < 10 and customerlevel >= 5",
                         Expression = "80",
                         Target = "price"
                     },
                     new Equation()
                     {
-                        UseExpression = "subtotal > 500",
+                        Activation = "subtotal > 500",
                         Expression = "70",
                         Target = "price"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "price * quantity",
                         Target = "subtotal"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "min(10, 100)",
                         Target = "minCheck"
                     }

@@ -356,7 +356,7 @@ namespace EquationSolver.Dto {
         
         private string triggerField;
         
-        private string useExpressionField;
+        private string activationField;
         
         private string expressionField;
         
@@ -407,20 +407,20 @@ namespace EquationSolver.Dto {
             }
         }
         
-        public string UseExpression {
+        public string Activation {
             get {
-                return this.useExpressionField;
+                return this.activationField;
             }
             set {
-                if ((this.useExpressionField != null)) {
-                    if ((useExpressionField.Equals(value) != true)) {
-                        this.useExpressionField = value;
-                        this.OnPropertyChanged("UseExpression");
+                if ((this.activationField != null)) {
+                    if ((activationField.Equals(value) != true)) {
+                        this.activationField = value;
+                        this.OnPropertyChanged("Activation");
                     }
                 }
                 else {
-                    this.useExpressionField = value;
-                    this.OnPropertyChanged("UseExpression");
+                    this.activationField = value;
+                    this.OnPropertyChanged("Activation");
                 }
             }
         }

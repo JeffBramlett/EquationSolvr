@@ -29,7 +29,7 @@ namespace EquationSolver.Dto
         /// <returns>a number for sorting</returns>
         public int CompareTo(Equation other)
         {
-            int hasUse = UseExpression.Contains(other.Target) ? 1 : 0;
+            int hasUse = Activation.Contains(other.Target) ? 1 : 0;
             int hasExp = Expression.Contains(other.Target) ? 1 : 0;
 
             return hasUse + hasExp;

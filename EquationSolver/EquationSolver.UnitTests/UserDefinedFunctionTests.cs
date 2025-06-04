@@ -81,14 +81,14 @@ namespace EquationSolver.Unit.Tests
 
             var negativeXquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "quadraticMinus(1, 3, -4)",
                 Target = "X1"
             };
 
             var positiveXEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "quadraticPlus(1, 3, -4)",
                 Target = "X2"
             };

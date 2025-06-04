@@ -18,14 +18,14 @@ namespace EquationSolver.Unit.Tests
 
             Equation sinEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "sin(30)",
                 Target = "sin"
             };
 
             Equation cosEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "cos(30)",
                 Target = "cos"
             };
@@ -53,14 +53,14 @@ namespace EquationSolver.Unit.Tests
 
             Equation sinEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "asin(.5)",
                 Target = "asin"
             };
 
             Equation cosEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "acos(.5)",
                 Target = "acos"
             };
@@ -88,14 +88,14 @@ namespace EquationSolver.Unit.Tests
 
             Equation sinEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "sinh(.5)",
                 Target = "sinh"
             };
 
             Equation cosEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "cosh(.5)",
                 Target = "cosh"
             };
@@ -123,21 +123,21 @@ namespace EquationSolver.Unit.Tests
 
             Equation tanEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "tan(30)",
                 Target = "tan"
             };
 
             Equation aTanEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "atan(.5)",
                 Target = "atan"
             };
 
             Equation tanhEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "tanh(.5)",
                 Target = "tanh"
             };

@@ -29,7 +29,7 @@ namespace EquationSolver.Unit.Tests
 
             Equation plotSinAndCos = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "row + 1",
                 Iterate = 5,
                 Target = "row",
@@ -37,19 +37,19 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "angle + 5",
                         Target = "angle"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "sin(angle)",
                         Target = "Test(row,0)"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "cos(angle)",
                         Target = "Test(row,1)"
                     }
@@ -231,7 +231,7 @@ namespace EquationSolver.Unit.Tests
 
             var iterateEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "row + 1",
                 Iterate = 5,
                 Target = "row",
@@ -239,19 +239,19 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "a + 1",
                         Target = "a"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "quadraticMinus(a, b, c)",
                         Target = "QuadTable(row,0)"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "quadraticPlus(a, b, c)",
                         Target = "QuadTable(row,1)"
                     }
@@ -365,28 +365,28 @@ namespace EquationSolver.Unit.Tests
             // Define Equations
             var quoteEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "0",
                 Target = "check",
                 MoreEquations = new System.Collections.Generic.List<Equation>()
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "Quantity * 100",
                         Target = "SubTotal",
 
                     },
                    new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "SubTotal * lookup(RateTable, Rate2, Rate1 is .05)",
                         Target = "Tax",
 
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "SubTotal + Tax",
                         Target = "Total",
                     }

@@ -19,7 +19,7 @@ namespace EquationSolver.Unit.Tests
 
                 Equation sinEquation = new Equation()
                 {
-                    UseExpression = "true",
+                    Activation = "true",
                     Expression = "notfound * 2",  /// missing closing parenthesis
                     Target = "T1"
                 };
@@ -59,7 +59,7 @@ namespace EquationSolver.Unit.Tests
 
                 Equation sinEquation = new Equation()
                 {
-                    UseExpression = "true",
+                    Activation = "true",
                     Expression = "10/0",  /// missing closing parenthesis
                     Target = "T1"
                 };
@@ -105,7 +105,7 @@ namespace EquationSolver.Unit.Tests
 
                 Equation sinEquation = new Equation()
                 {
-                    UseExpression = "true",
+                    Activation = "true",
                     Expression = "asin(.5",  /// missing closing parenthesis
                     Target = "asin"
                 };
@@ -134,7 +134,7 @@ namespace EquationSolver.Unit.Tests
 
                 Equation sinEquation = new Equation()
                 {
-                    UseExpression = "true",
+                    Activation = "true",
                     Expression = "   ",  /// missing closing parenthesis
                     Target = "asin"
                 };

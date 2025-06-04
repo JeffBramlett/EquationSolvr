@@ -214,7 +214,7 @@ namespace EquationSolver
 
         private void ExecuteEquation(Equation equation)
         {
-            Solver.Resolve(equation.UseExpression, VariableProvider);
+            Solver.Resolve(equation.Activation, VariableProvider);
             if (Solver.BoolResult)
             {
                 Solver.Resolve(equation.Expression, VariableProvider);

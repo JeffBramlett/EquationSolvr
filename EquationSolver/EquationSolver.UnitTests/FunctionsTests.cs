@@ -25,7 +25,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "exp(10)",
                         Target = "T1"
                     },
@@ -57,7 +57,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "log(10)",
                         Target = "T1"
                     },
@@ -89,7 +89,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "log10(10)",
                         Target = "T1"
                     },
@@ -121,7 +121,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "sqrt(10)",
                         Target = "T1"
                     },
@@ -153,7 +153,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "floor(10.56789)",
                         Target = "T1"
                     },
@@ -185,7 +185,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "ceil(10.56789)",
                         Target = "T1"
                     },
@@ -217,7 +217,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "abs(-10.56789)",
                         Target = "T1"
                     },
@@ -249,7 +249,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "deg(1.5)",
                         Target = "T1"
                     },
@@ -281,7 +281,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "rad(90)",
                         Target = "T1"
                     },
@@ -313,7 +313,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "min(0, 10, 7, 8, 3)",
                         Target = "T1"
                     },
@@ -345,7 +345,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "max(0, 10, 7, 8, 9)",
                         Target = "T1"
                     },
@@ -370,7 +370,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "round(123.456789, 2)",
                         Target = "T1"
                     },
@@ -393,7 +393,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(sum(1, 2, 3, 4)*4)/4",
                         Target = "T1"
                     },
@@ -416,7 +416,7 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(avg(1, 2, 3, 4)*4)/4",
                         Target = "T1"
                     },

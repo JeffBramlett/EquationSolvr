@@ -19,25 +19,25 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "1 + 1",
                         Target = "T1"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "4 - 2",
                         Target = "T2"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(2 + 2) - (1 + 1)",
                         Target = "T3"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(3 - 2) + (7 - 6)",
                         Target = "T4"
                     }
@@ -63,25 +63,25 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "2 * 1",
                         Target = "T1"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "4 / 2",
                         Target = "T2"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(2 * 2) - (4 / 2)",
                         Target = "T3"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(2 * 4) / (2 * 2)",
                         Target = "T4"
                     }
@@ -113,25 +113,25 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "Two * One",
                         Target = "T1"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "Four / Two",
                         Target = "T2"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(Two * Two) - (Four / Two)",
                         Target = "T3"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(Two * Four) / (Two * Two)",
                         Target = "T4"
                     }
@@ -161,7 +161,7 @@ namespace EquationSolver.Unit.Tests
 
             var minEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "min(a, b)",
                 Target = "TheMin"
             };
@@ -169,7 +169,7 @@ namespace EquationSolver.Unit.Tests
 
             var maxEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "max(a, b)",
                 Target = "TheMax"
             };
@@ -197,14 +197,14 @@ namespace EquationSolver.Unit.Tests
 
             var negativeXquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "((b*-1) - sqrt(b^2 - 4*a*c))/(2*a)",
                 Target = "X1"
             };
 
             var positiveXEquation = new Equation()
             {
-                UseExpression = "true",
+                Activation = "true",
                 Expression = "((b*-1) + sqrt(b^2 - 4*a*c))/(2*a)",
                 Target = "X2"
             };

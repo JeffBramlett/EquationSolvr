@@ -206,8 +206,8 @@ namespace EquationSolver
 
         private IEnumerable<string> ValidateEquation(Equation equation)
         {
-            if (!ValidateExpression(equation.UseExpression))
-                yield return "UseExpression is invalid";
+            if (!ValidateExpression(equation.Activation))
+                yield return "Activation is invalid";
             if (!ValidateExpression(equation.Expression))
                 yield return "Expression is invalid";
 

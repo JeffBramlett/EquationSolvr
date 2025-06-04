@@ -24,25 +24,25 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "true",
                         Target = "T1"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "false",
                         Target = "T2"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "Two > One",
                         Target = "T3"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "Two < One",
                         Target = "T4"
                     }
@@ -72,13 +72,13 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "One = Two",
                         Target = "T1"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "One != Two",
                         Target = "T2"
                     }
@@ -109,25 +109,25 @@ namespace EquationSolver.Unit.Tests
                 {
                     new Equation()
                     {
-                        UseExpression = "1=One",
+                        Activation = "1=One",
                         Expression = "Two > One and One < Four",
                         Target = "T1"
                     },
                     new Equation()
                     {
-                        UseExpression = "Two>1",
+                        Activation = "Two>1",
                         Expression = "Four / Two >= Two AND One > 2",
                         Target = "T2"
                     },
                     new Equation()
                     {
-                        UseExpression = "Two > One",
+                        Activation = "Two > One",
                         Expression = "(Two * Two) = 4 oR (Four / Two) = 2",
                         Target = "T3"
                     },
                     new Equation()
                     {
-                        UseExpression = "true",
+                        Activation = "true",
                         Expression = "(Two * Two) != 4 oR (Four / Two) != 2",
                         Target = "T4"
                     }
