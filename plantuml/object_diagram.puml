@@ -27,7 +27,7 @@ package "Example Equation Project" {
   
   object "eq_discriminant : Equation" as eq_discriminant {
     Name = "Calculate Discriminant"
-    UseExpression = "true"
+    Activation = "true"
     Expression = "b^2 - 4*a*c"
     Target = "discriminant"
     Iterate = 1
@@ -35,7 +35,7 @@ package "Example Equation Project" {
   
   object "eq_solution1 : Equation" as eq_solution1 {
     Name = "Solution 1"
-    UseExpression = "discriminant >= 0"
+    Activation = "discriminant >= 0"
     Expression = "(-b + sqrt(discriminant))/(2*a)"
     Target = "x1"
     Iterate = 1
@@ -43,7 +43,7 @@ package "Example Equation Project" {
   
   object "eq_solution2 : Equation" as eq_solution2 {
     Name = "Solution 2"
-    UseExpression = "discriminant >= 0"
+    Activation = "discriminant >= 0"
     Expression = "(-b - sqrt(discriminant))/(2*a)"
     Target = "x2"
     Iterate = 1
@@ -51,7 +51,7 @@ package "Example Equation Project" {
   
   object "eq_no_solution : Equation" as eq_no_solution {
     Name = "No Real Solutions"
-    UseExpression = "discriminant < 0"
+    Activation = "discriminant < 0"
     Expression = "\"No real solutions\""
     Target = "result"
     Iterate = 1

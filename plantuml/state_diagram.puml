@@ -22,9 +22,9 @@ state Ready {
 }
 
 state Evaluating {
-  [*] --> UseExpressionEvaluated : Evaluate UseExpression
-  UseExpressionEvaluated --> Skipped : UseExpression == false
-  UseExpressionEvaluated --> ExpressionEvaluated : UseExpression == true
+  [*] --> ActivationEvaluated : Evaluate Activation
+  ActivationEvaluated --> Skipped : Activation == false
+  ActivationEvaluated --> ExpressionEvaluated : Activation == true
   ExpressionEvaluated --> TargetAssigned : Assign result to target
   TargetAssigned --> ChildrenProcessing : Process child equations
   ChildrenProcessing --> Completed : All children processed

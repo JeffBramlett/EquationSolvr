@@ -18,6 +18,10 @@ This directory contains PlantUML diagrams that document the EquationSolver proje
 
 7. **Object Diagram** (`object_diagram.puml`): Provides an example of an equation project for solving a quadratic equation.
 
+8. **Package Diagram** (`package_diagram.puml`): Shows the organization of packages in the system.
+
+9. **Entity-Relationship Diagram** (`entity_relationship_diagram.puml`): Focuses on the data model aspects of the system.
+
 ## How to View These Diagrams
 
 You can view these PlantUML diagrams using:
@@ -56,3 +60,9 @@ The state diagram shows the different states an equation can be in during its li
 
 ### Object Diagram
 The object diagram provides a concrete example of an equation project for solving a quadratic equation. It shows the objects and their relationships in a specific scenario.
+
+### Package Diagram
+The package diagram shows the organization of packages in the system, illustrating how the code is structured into logical groups and the dependencies between these groups.
+
+### Entity-Relationship Diagram
+The entity-relationship diagram focuses on the data model aspects of the system, showing the main entities (like EquationProject, Equation, Variable, etc.) and their relationships.
