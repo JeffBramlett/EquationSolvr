@@ -27,9 +27,9 @@ partition "Equation Solving Process" {
     :Get Next Equation;
     
     repeat
-      :Evaluate UseExpression;
+      :Evaluate Activation;
       
-      if (UseExpression == true?) then (yes)
+      if (Activation == true?) then (yes)
         :Evaluate Expression;
         
         :Check if Target is Table Reference;

@@ -1,0 +1,85 @@
+@startuml EquationSolver Entity Relationship Diagram
+
+skinparam entityBackgroundColor LightBlue
+skinparam entityBorderColor DarkBlue
+skinparam linetype ortho
+
+entity "EquationProject" as project {
+  * Title : string
+  --
+  * Settings : SolverSettings
+  * Audit : AuditInfo
+}
+
+entity "SolverSettings" as settings {
+  * CalculationMethod : CalculationMethods
+}
+
+entity "AuditInfo" as audit {
+  * Created : DateTime
+  * Modified : DateTime
+  * Author : string
+  * Version : string
+}
+
+entity "Equation" as equation {
+  * Name : string
+  * Expression : string
+  * Target : string
+  --
+  * Activation : string
+  * Trigger : string
+  * Iterate : int
+}
+
+entity "Function" as function {
+  * Name : string
+  * Expression : string
+  --
+  * Description : string
+}
+
+entity "Argument" as argument {
+  * Name : string
+  * Ordinal : int
+  --
+  * Default : string
+}
+
+entity "Variable" as variable {
+  * Name : string
+  * StringValue : string
+  --
+  * DecimalValue : decimal
+  * DoubleValue : double
+  * BoolValue : bool
+}
+
+entity "Table" as table {
+  * Name : string
+}
+
+entity "Row" as row {
+  * Label : string
+}
+
+entity "Column" as column {
+  * Value : string
+}
+
+project ||--o{ equation : contains
+project ||--o{ function : contains
+project ||--o{ variable : contains
+project ||--o{ table : contains
+project ||--|| settings : has
+project ||--|| audit : has
+
+function ||--o{ argument : has
+
+equation }o--o{ equation : nested equations
+
+table ||--|| row : header
+table ||--o{ row : data rows
+row ||--o{ column : contains
+
+@enduml

@@ -1,0 +1,68 @@
+@startuml EquationSolver Package Diagram
+
+skinparam packageStyle rectangle
+skinparam packageBackgroundColor LightBlue
+skinparam packageBorderColor DarkBlue
+
+package "EquationSolver" {
+  package "Core" {
+    [IEquationSolver]
+    [IExpressionSolver]
+    [IVariableProvider]
+    [EquationSolver]
+    [EquationSolverFactory]
+    [DecimalExpressionSolver]
+    [DoubleExpressionSolver]
+    [VariableProvider]
+    [VariableTable]
+    [VariableTableRow]
+    [EquationAlgebra]
+    [Utilities]
+  }
+  
+  package "Dto" {
+    [EquationProject]
+    [EquationProjectMerge]
+    [Equation]
+    [Function]
+    [Argument]
+    [Variable]
+    [Table]
+    [Row]
+    [SolverSettings]
+    [AuditInfo]
+  }
+  
+  package "Events" {
+    [ExceptionEventArgs]
+    [VariableNotFoundEventArgs]
+  }
+  
+  package "Enums" {
+    [ResultType]
+    [CalculationMethods]
+  }
+}
+
+package "EquationSolver.Unit.Tests" {
+  [SimpleMathExpressionTests]
+  [BranchingTests]
+  [FunctionsTests]
+  [LogicalTests]
+  [MultiStepTests]
+  [TrigonometryTests]
+  [UserDefinedFunctionTests]
+  [VariableTableTests]
+  [ErrorsTests]
+  [TriggerTests]
+  [StaticExpressionTests]
+  [Helpers]
+}
+
+"Core" ..> "Dto" : uses
+"Core" ..> "Events" : uses
+"Core" ..> "Enums" : uses
+"EquationSolver.Unit.Tests" ..> "Core" : tests
+"EquationSolver.Unit.Tests" ..> "Dto" : uses
+
+@enduml

@@ -92,7 +92,7 @@ package "EquationSolver" {
     class Equation {
       + string Name
       + string Trigger
-      + string UseExpression
+      + string Activation
       + string Expression
       + int Iterate
       + string Target

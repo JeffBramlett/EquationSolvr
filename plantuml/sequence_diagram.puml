@@ -55,7 +55,7 @@ loop for each equation in Equations
         Solver -> Solver : ExecuteEquation(equation)
         activate Solver #DarkSalmon
         
-        Solver -> ExprSolver : Resolve(equation.UseExpression, VariableProvider)
+        Solver -> ExprSolver : Resolve(equation.Activation, VariableProvider)
         ExprSolver --> Solver : BoolResult
         
         alt BoolResult == true

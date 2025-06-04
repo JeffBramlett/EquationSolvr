@@ -55,7 +55,7 @@ end note
 
 note right of UC7
   Equations are solved in order,
-  with branching based on UseExpression
+  with branching based on Activation
 end note
 
 note right of UC9
